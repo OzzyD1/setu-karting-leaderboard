@@ -1,20 +1,13 @@
-import cup from "./icons/cup.svg";
 import "./App.css";
 import "semantic-ui-css/semantic.min.css";
 import { Cup } from "./icons/Cup";
 import {
   CardMeta,
   CardHeader,
-  CardGroup,
   CardDescription,
   CardContent,
-  Button,
   Card,
   Image,
-  Container,
-  GridRow,
-  GridColumn,
-  Grid,
 } from "semantic-ui-react";
 
 const leaderboard = [
