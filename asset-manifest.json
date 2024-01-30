@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/setu-karting-leaderboard/static/css/main.0bea3456.css",
+    "main.css": "/setu-karting-leaderboard/static/css/main.ab972234.css",
     "main.js": "/setu-karting-leaderboard/static/js/main.ed570fbf.js",
     "static/js/787.819f1838.chunk.js": "/setu-karting-leaderboard/static/js/787.819f1838.chunk.js",
     "static/media/brand-icons.svg": "/setu-karting-leaderboard/static/media/brand-icons.6729d29753e000c17489.svg",
@@ -20,12 +20,12 @@
     "static/media/outline-icons.woff": "/setu-karting-leaderboard/static/media/outline-icons.ddae9b1ba9b0b42f5880.woff",
     "static/media/outline-icons.woff2": "/setu-karting-leaderboard/static/media/outline-icons.687a4990ea22bb1a49d4.woff2",
     "index.html": "/setu-karting-leaderboard/index.html",
-    "main.0bea3456.css.map": "/setu-karting-leaderboard/static/css/main.0bea3456.css.map",
+    "main.ab972234.css.map": "/setu-karting-leaderboard/static/css/main.ab972234.css.map",
     "main.ed570fbf.js.map": "/setu-karting-leaderboard/static/js/main.ed570fbf.js.map",
     "787.819f1838.chunk.js.map": "/setu-karting-leaderboard/static/js/787.819f1838.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0bea3456.css",
+    "static/css/main.ab972234.css",
     "static/js/main.ed570fbf.js"
   ]
 }
