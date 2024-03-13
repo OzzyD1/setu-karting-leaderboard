@@ -4,5 +4,7 @@ This is a React app to display a simple leaderboard whhich automatically adds st
 
 ## Target Features
 
-- Leaderboard split into 3 categories
-- Database to store students and their times
+-   Leaderboard split into 3 categories
+-   Authentication to allow certain users to update leaderboards
+-   NodeJS and Express for backend
+-   MongoDB database to store students and their times
