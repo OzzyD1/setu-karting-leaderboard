@@ -13,7 +13,7 @@ import "@fontsource/roboto/700.css";
 const getStudentClass = (student) => {
     if (student.time < 22) {
         return "gold";
-    } else if (student.time < 24) {
+    } else if (student.time < 23) {
         return "silver";
     } else {
         return "peru";
@@ -49,7 +49,7 @@ function App() {
                 alignItems: "center",
             }}
         >
-            <Paper sx={{ margin: "1em", padding: ".5em", color: "#4d4d4d" }}>
+            <Paper sx={{ margin: "1em", padding: "0.5em" }}>
                 <Typography variant="h2">SETU Karting Leaderboard</Typography>
             </Paper>
 
@@ -67,6 +67,22 @@ function App() {
                         ]}
                     />
                 </div>
+            </Paper>
+
+            <Paper sx={{ margin: "1em", padding: "1em" }}>
+                <Typography variant="h5">Note</Typography>
+                <Typography variant="body1">
+                    Cups are divided as follows:
+                    <ul>
+                        <li>Gold: Under 22 Seconds</li>
+                        <li>Silver: 22-23 seconds</li>
+                        <li>Bronze: 23+ seconds</li>
+                    </ul>
+                </Typography>
+                <Typography variant="body1">
+                    This website is still a work in progress and cup times are
+                    not final, and the system is temporary.
+                </Typography>
             </Paper>
         </Container>
     );
