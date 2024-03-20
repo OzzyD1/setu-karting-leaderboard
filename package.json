@@ -2,7 +2,7 @@
     "name": "setu-karting-leaderboard",
     "version": "0.1.0",
     "private": true,
-    "homepage": "http://www.ozzyd.me/setu-karting-leaderboard/",
+    "homepage": "https://setukarting.xyz",
     "dependencies": {
         "@emotion/react": "^11.11.4",
         "@emotion/styled": "^11.11.0",
