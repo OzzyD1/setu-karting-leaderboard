@@ -43,6 +43,11 @@ function App() {
                         This website is still a work in progress and cup times
                         are not final, and the system is temporary.
                     </Typography>
+                    <br />
+                    <Typography variant="body1">
+                        If you have any feedback please email me at
+                        20068200@mail.wit.ie
+                    </Typography>
                 </Paper>
             </Container>
         </>
