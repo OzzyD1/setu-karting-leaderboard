@@ -3,9 +3,12 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import logo from "../icons/logo.png";
 
 const NavBar = () => {
+    const isMobile = useMediaQuery("(max-width:600px)");
+
     return (
         <AppBar position="fixed" sx={{ backgroundColor: "#FDD154" }}>
             <Toolbar>
@@ -17,7 +20,7 @@ const NavBar = () => {
                     />
                 </IconButton>
                 <Typography
-                    variant="h3"
+                    variant={isMobile ? "h6" : "h3"}
                     sx={{
                         flexGrow: 1,
                         paddingLeft: ".2em",
