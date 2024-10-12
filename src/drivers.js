@@ -23,8 +23,8 @@ const drivers = [
     { student_id: 22, name: "Niko Wisniewski", time: 22.938 },
     { student_id: 23, name: "Jack Gear", time: 22.531 },
     { student_id: 24, name: "Ryan Price", time: 24.694 },
-    { student_id: 25, name: "Harry Watkins", time: 23.510 },
-    { student_id: 26, name: "Adam Crales", time: 25.925 },
+    { student_id: 25, name: "Harry Watkins", time: 23.51 },
+    { student_id: 26, name: "Adam Crales", time: 24.553 },
     { student_id: 27, name: "Patryk Pawlak", time: 24.576 },
     { student_id: 28, name: "Cillian O'Connor", time: 22.482 },
     { student_id: 29, name: "Simon Harte", time: 23.004 },
@@ -34,8 +34,6 @@ const drivers = [
     { student_id: 33, name: "Josh Murphy", time: 23.842 },
     { student_id: 34, name: "Evan O'Neill", time: 22.998 },
     { student_id: 35, name: "Ryan Hodge", time: 24.159 },
-    // Is this Adam Crales?
-    { student_id: 36, name: "Adam Raher", time: 24.553 },
 ];
 
 export default drivers;
