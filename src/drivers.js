@@ -9,7 +9,7 @@ const drivers = [
     { student_id: 8, name: "Justin Malins", time: 22.574 },
     { student_id: 9, name: "Eoghan Dowling", time: 23.566 },
     { student_id: 10, name: "Darragh Whitney", time: 22.464 },
-    { student_id: 11, name: "Dylan Shupe", time: 22.827 },
+    { student_id: 11, name: "Dylan Shupe", time: 22.755 },
     { student_id: 12, name: "Ronan Duggan", time: 23.008 },
     { student_id: 13, name: "Laura Moroso", time: 25.416 },
     { student_id: 14, name: "Sam Boyle", time: 22.382 },
@@ -20,10 +20,10 @@ const drivers = [
     { student_id: 19, name: "Jamie Halloran", time: 22.764 },
     { student_id: 20, name: "Dylan Rockett", time: 23.035 },
     { student_id: 21, name: "Dean Horgan", time: 25.29 },
-    { student_id: 22, name: "Niko Wisniewski", time: 22.938 },
+    { student_id: 22, name: "Niko Wisniewski", time: 22.912 },
     { student_id: 23, name: "Jack Gear", time: 22.375 },
     { student_id: 25, name: "Harry Watkin", time: 23.51 },
-    { student_id: 26, name: "Adam Crales", time: 23.979 },
+    { student_id: 26, name: "Adam Crales", time: 23.323 },
     { student_id: 27, name: "Patryk Pawlak", time: 24.576 },
     { student_id: 28, name: "Cillian O'Connor", time: 22.395 },
     { student_id: 29, name: "Simon Harte", time: 22.772 },
@@ -40,6 +40,7 @@ const drivers = [
     { student_id: 40, name: "Jack Downey", time: 23.242 },
     { student_id: 41, name: "Ciara Lennox", time: 25.035 },
     { student_id: 42, name: "Simone", time: 29.588 },
+    { student_id: 43, name: "James Walker", time: 23.849 },
 ];
 
 export default drivers;
