@@ -21,7 +21,7 @@ const drivers = [
     { student_id: 20, name: "Dylan Rockett", time: 23.035 },
     { student_id: 21, name: "Dean Horgan", time: 25.29 },
     { student_id: 22, name: "Niko Wisniewski", time: 22.863 },
-    { student_id: 23, name: "Jack Gear", time: 22.078 },
+    { student_id: 23, name: "Jack Gear", time: 21.953 },
     { student_id: 25, name: "Harry Watkin", time: 22.941 },
     { student_id: 26, name: "Adam Crales", time: 23.323 },
     { student_id: 27, name: "Patryk Pawlak", time: 23.795 },
