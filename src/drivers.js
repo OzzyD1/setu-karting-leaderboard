@@ -3,7 +3,7 @@ const drivers = [
     { student_id: 2, name: "Jamie Doyle", time: 22.094 },
     { student_id: 3, name: "Rian Doyle", time: 22.168 },
     { student_id: 4, name: "Peter Stanev", time: 22.341 },
-    { student_id: 5, name: "Jamie Tobin", time: 22.733 },
+    { student_id: 5, name: "Jamie Tobin", time: 22.733},
     { student_id: 6, name: "Hannah O'Connor", time: 22.395 },
     { student_id: 7, name: "Nathan McNamara", time: 24.325 },
     { student_id: 8, name: "Justin Malins", time: 22.574 },
