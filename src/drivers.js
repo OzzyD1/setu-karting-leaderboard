@@ -23,15 +23,15 @@ const drivers = [
     { student_id: 22, name: "Niko Wisniewski", time: 22.591 },
     { student_id: 23, name: "Jack Gear", time: 21.953 },
     { student_id: 25, name: "Harry Watkin", time: 22.941 },
-    { student_id: 26, name: "Adam Crales", time: 23.323 },
+    { student_id: 26, name: "Adam Raher", time: 23.323 },
     { student_id: 27, name: "Patryk Pawlak", time: 23.795 },
     { student_id: 28, name: "Cillian O'Connor", time: 22.395 },
-    { student_id: 29, name: "Simon Harte", time: 22.482 },
+    { student_id: 29, name: "Simon Harte", time: 22.452 },
     { student_id: 30, name: "Leon Wallis", time: 22.989 },
     { student_id: 31, name: "Ryan Price", time: 23.282 },
     { student_id: 32, name: "Nathan Fitzgerald", time: 22.736 },
     { student_id: 33, name: "Josh Murphy", time: 22.561 },
-    { student_id: 34, name: "Evan O'Neill", time: 22.985 },
+    { student_id: 34, name: "Evan O'Neill", time: 22.981 },
     { student_id: 35, name: "Ryan Hodge", time: 24.159 },
     { student_id: 36, name: "Tomas Guiney", time: 23.465 },
     { student_id: 37, name: "Sarah Niedermayr", time: 26.236 },
@@ -43,7 +43,7 @@ const drivers = [
     { student_id: 43, name: "James Walker", time: 23.849 },
     { student_id: 44, name: "Archy Sergefjs", time: 22.525 },
     { student_id: 45, name: "Cillian O'Brien", time: 23.962 },
-    { student_id: 46, name: "Noah Gibbons", time: 23.584 },
+    { student_id: 46, name: "Noah Gibbons", time: 23.385 },
     { student_id: 47, name: "Liam Kenny", time: 24.886 },
     { student_id: 48, name: "Jack Mackey", time: 25.131 },
     { student_id: 49, name: "Marcus Wearen", time: 26.827 },
@@ -54,8 +54,9 @@ const drivers = [
     { student_id: 55, name: "Rostyslav Norman", time: 25.178 },
     { student_id: 56, name: "Chris Bolger", time: 24.384 },
     { student_id: 57, name: "Haziq Khurshid", time: 27.732 },
-
-
+    { student_id: 58, name: "Taras", time: 26.603 },
+    { student_id: 59, name: "Maks", time: 24.090 },
+    { student_id: 60, name: "Kieran O'Neill", time: 23.661},
 ];
 
 export default drivers;
