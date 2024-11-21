@@ -41,13 +41,21 @@ const drivers = [
     { student_id: 41, name: "Ciara Lennox", time: 25.035 },
     { student_id: 42, name: "Simone", time: 29.588 },
     { student_id: 43, name: "James Walker", time: 23.849 },
-    { student_id: 44, name: "Archy Sergejs", time: 22.525 },
+    { student_id: 44, name: "Archy Sergefjs", time: 22.525 },
     { student_id: 45, name: "Cillian O'Brien", time: 23.962 },
     { student_id: 46, name: "Noah Gibbons", time: 23.584 },
     { student_id: 47, name: "Liam Kenny", time: 24.886 },
     { student_id: 48, name: "Jack Mackey", time: 25.131 },
     { student_id: 49, name: "Marcus Wearen", time: 26.827 },
     { student_id: 50, name: "Rosanne Coe", time: 28.554 },
+    { student_id: 51, name: "Usama Khan", time: 30.062 },
+    { student_id: 52, name: "Grzegorz Brzeczyszczykiewicz", time: 25.832 },
+    { student_id: 54, name: "Namra Fatima", time: 25.641},
+    { student_id: 55, name: "Rostyslav Norman", time: 25.178 },
+    { student_id: 56, name: "Chris Bolger", time: 24.384 },
+    { student_id: 57, name: "Haziq Khurshid", time: 27.732 },
+
+
 ];
 
 export default drivers;
