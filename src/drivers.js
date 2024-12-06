@@ -31,7 +31,7 @@ const drivers = [
     { student_id: 31, name: "Ryan Price", time: 23.282 },
     { student_id: 32, name: "Nathan Fitzgerald", time: 22.736 },
     { student_id: 33, name: "Josh Murphy", time: 22.561 },
-    { student_id: 34, name: "Evan O'Neill", time: 22.981 },
+    { student_id: 34, name: "Evan O'Neill", time: 22.811 },
     { student_id: 35, name: "Ryan Hodge", time: 24.159 },
     { student_id: 36, name: "Tomas Guiney", time: 23.465 },
     { student_id: 37, name: "Sarah Niedermayr", time: 26.236 },
@@ -50,13 +50,14 @@ const drivers = [
     { student_id: 50, name: "Rosanne Coe", time: 26.605 },
     { student_id: 51, name: "Usama Khan", time: 30.062 },
     { student_id: 52, name: "Grzegorz Brzeczyszczykiewicz", time: 25.832 },
-    { student_id: 54, name: "Namra Fatima", time: 25.641},
+    { student_id: 54, name: "Namra Fatima", time: 24.527},
     { student_id: 55, name: "Rostyslav Norman", time: 25.178 },
     { student_id: 56, name: "Chris Bolger", time: 24.384 },
     { student_id: 57, name: "Haziq Khurshid", time: 27.732 },
     { student_id: 58, name: "Taras", time: 26.603 },
     { student_id: 59, name: "Maks", time: 24.090 },
     { student_id: 60, name: "Kieran O'Neill", time: 23.661},
+    { student_id: 61, name: "Xavier", time: 24.930},
 ];
 
 export default drivers;
