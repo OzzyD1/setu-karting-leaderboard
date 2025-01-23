@@ -58,6 +58,7 @@ const drivers = [
     { student_id: 59, name: "Maks", time: 24.090 },
     { student_id: 60, name: "Kieran O'Neill", time: 23.661},
     { student_id: 61, name: "Xavier", time: 24.930},
+    { student_id: 62, name: "Colm Power Pierce", time: 22.950},
 ];
 
 export default drivers;
