@@ -28,27 +28,6 @@ function App() {
                 <Paper sx={{ margin: "1em", width: "85%" }}>
                     <Leaderboard />
                 </Paper>
-
-                <Paper sx={{ margin: "1em", padding: "1em" }}>
-                    <Typography variant="h4">NOTE</Typography>
-                    <Typography variant="body1">
-                        Cups are divided as follows:
-                        <ul>
-                            <li>Gold: Under 22 Seconds</li>
-                            <li>Silver: 22-23 seconds</li>
-                            <li>Bronze: 23+ seconds</li>
-                        </ul>
-                    </Typography>
-                    <Typography variant="body1">
-                        This website is still a work in progress and cup times
-                        are not final, and the system is temporary.
-                    </Typography>
-                    <br />
-                    <Typography variant="body1">
-                        If you have any feedback please email me at
-                        20068200@mail.wit.ie
-                    </Typography>
-                </Paper>
             </Container>
         </>
     );
