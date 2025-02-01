@@ -1,6 +1,6 @@
 import React from "react";
 import { Cup } from "../icons/Cup";
-import drivers from "../drivers.js";
+import drivers from "../data/drivers2425";
 import { DataGrid } from "@mui/x-data-grid";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
