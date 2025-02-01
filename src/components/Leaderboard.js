@@ -40,6 +40,8 @@ const Leaderboard = () => {
                     driverMap.set(driver.student_id, driver);
                 });
                 break;
+            default: // Handle unexpected tab values
+                return [];
         }
         return Array.from(driverMap.values());
     };
