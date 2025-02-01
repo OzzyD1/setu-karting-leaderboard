@@ -16,7 +16,7 @@ const NavBar = () => {
                     <img
                         src={logo}
                         alt="Karting Logo"
-                        style={{ maxHeight: "45px" }}
+                        style={{ maxHeight: "50px" }}
                     />
                 </IconButton>
                 <Typography
