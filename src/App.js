@@ -7,10 +7,13 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import Leaderboard from "./components/Leaderboard";
 import NavBar from "./components/NavBar";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 import "./index.css";
 
 function App() {
+    const isMobile = useMediaQuery("(max-width:600px)");
+
     return (
         <>
             <NavBar />
@@ -18,13 +21,15 @@ function App() {
             <Container
                 maxWidth="md"
                 sx={{
-                    marginTop: "6em",
+                    marginTop: isMobile ? "4.5em" : "6em",
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
                 }}
             >
-                <Paper sx={{ margin: "1em", width: "85%" }}>
+                <Paper
+                    sx={{ margin: ".5em", width: isMobile ? "100%" : "85%" }}
+                >
                     <Leaderboard />
                 </Paper>
             </Container>

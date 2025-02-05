@@ -77,22 +77,26 @@ const Leaderboard = () => {
         {
             field: "cup",
             headerName: "Cup",
-            width: isMobile ? 80 : 160,
+            width: isMobile ? 60 : 160,
             renderCell: (params) => <Cup fill={params.row.cup} />,
         },
         { field: "rank", headerName: "Rank", width: isMobile ? 20 : 80 },
-        { field: "name", headerName: "Name", width: isMobile ? 150 : 250 },
+        { field: "name", headerName: "Name", width: isMobile ? 140 : 250 },
         {
             field: "lapTime",
             headerName: "Lap Time",
-            width: isMobile ? 90 : 120,
+            width: isMobile ? 70 : 120,
         },
     ];
 
     return (
         <div>
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-                <Tabs value={tabValue} onChange={handleTabChange}>
+                <Tabs
+                    value={tabValue}
+                    onChange={handleTabChange}
+                    variant="fullWidth"
+                >
                     <Tab label="Overall" />
                     <Tab label="Semester 1" />
                     <Tab label="Semester 2" />
