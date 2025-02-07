@@ -21,7 +21,7 @@ export const drivers_sem2 = [
     { student_id: 69, name: "Daniel Seve", time: 26.844 },
     { student_id: 70, name: "Taisce Ryan", time: 28.901},
     { student_id: 71, name: "Patrick Whelan", time: 22.822 },
-    { student_id: 72, name: "Niall Doherty", time: 22.604 },
+    { student_id: 72, name: "Niall Doherty", time: 23.157 },
     { student_id: 73, name: "Scott Bowdren", time: 22.748 },
     { student_id: 74, name: "Ryan Kelly", time: 23.385 },
     { student_id: 75, name: "Jack Murphy", time: 23.394 },
@@ -38,5 +38,6 @@ export const drivers_sem2 = [
     { student_id: 12, name: "Ronan Duggan", time: 22.492 },
     { student_id: 85, name: "Colin Kelly", time: 22.203 },
     { student_id: 1, name: "Ozzy Domarkas", time: 22.283 },
+    { student_id: 86, name: "Niall O'Brien", time: 22.604 },
 ];
 export default drivers_sem2;
