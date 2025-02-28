@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import "@fontsource/roboto/300.css";
@@ -13,10 +13,19 @@ import "./index.css";
 
 function App() {
     const isMobile = useMediaQuery("(max-width:600px)");
+    const [showGroups, setShowGroups] = useState(false);
+    const [selectedStudents, setSelectedStudents] = useState([]);
+
+    const handleGroupToggle = (e) => {
+        setShowGroups(e.target.checked);
+        if (!e.target.checked) {
+            setSelectedStudents([]);
+        }
+    };
 
     return (
         <>
-            <NavBar />
+            <NavBar showGroups={showGroups} onGroupToggle={handleGroupToggle} />
 
             <Container
                 maxWidth="md"
@@ -30,7 +39,11 @@ function App() {
                 <Paper
                     sx={{ margin: ".5em", width: isMobile ? "100%" : "85%" }}
                 >
-                    <Leaderboard />
+                    <Leaderboard
+                        showGroups={showGroups}
+                        selectedStudents={selectedStudents}
+                        setSelectedStudents={setSelectedStudents}
+                    />
                 </Paper>
             </Container>
         </>

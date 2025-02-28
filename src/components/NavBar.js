@@ -5,13 +5,14 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import logo from "../icons/logo.png";
+import { FormControlLabel, Switch } from "@mui/material";
 
-const NavBar = () => {
+const NavBar = ({ showGroups, onGroupToggle }) => {
     const isMobile = useMediaQuery("(max-width:600px)");
 
     return (
         <AppBar position="fixed" sx={{ backgroundColor: "#FDD154" }}>
-            <Toolbar>
+            <Toolbar sx={{ justifyContent: "space-between" }}>
                 <IconButton>
                     <img
                         src={logo}
@@ -30,6 +31,17 @@ const NavBar = () => {
                 >
                     SETU Karting Leaderboard
                 </Typography>
+                <FormControlLabel
+                    control={
+                        <Switch
+                            checked={showGroups}
+                            onChange={onGroupToggle}
+                            sx={{ color: "white" }}
+                        />
+                    }
+                    label="Group Generator"
+                    sx={{ color: "black" }}
+                />
             </Toolbar>
         </AppBar>
     );
