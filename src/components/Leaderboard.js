@@ -4,56 +4,46 @@ import drivers_sem1 from "../data/sem_1";
 import drivers_sem2 from "../data/sem_2";
 import { DataGrid } from "@mui/x-data-grid";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { Tabs, Tab, Box } from "@mui/material";
+import { Tabs, Tab, Box, List, ListItem, Typography } from "@mui/material";
 
 const Leaderboard = () => {
     const isMobile = useMediaQuery("(max-width:600px)");
     const [tabValue, setTabValue] = useState(0);
+    const [selectedStudents, setSelectedStudents] = useState([]);
 
     const handleTabChange = (event, newValue) => {
         setTabValue(newValue);
     };
 
     const getCurrentDrivers = () => {
-        // Create map to store fastest time per student
         const driverMap = new Map();
-
         switch (tabValue) {
-            case 0: // Overall
-                // Combine both semesters, keeping best time per student
+            case 0:
                 [...drivers_sem1, ...drivers_sem2].forEach((driver) => {
-                    if (
-                        !driverMap.has(driver.student_id) ||
-                        driverMap.get(driver.student_id).time > driver.time
-                    ) {
+                    if (!driverMap.has(driver.student_id) || driverMap.get(driver.student_id).time > driver.time) {
                         driverMap.set(driver.student_id, driver);
                     }
                 });
                 break;
-            case 1: // Semester 1
+            case 1:
                 drivers_sem1.forEach((driver) => {
                     driverMap.set(driver.student_id, driver);
                 });
                 break;
-            case 2: // Semester 2
+            case 2:
                 drivers_sem2.forEach((driver) => {
                     driverMap.set(driver.student_id, driver);
                 });
                 break;
-            default: // Handle unexpected tab values
+            default:
                 return [];
         }
         return Array.from(driverMap.values());
     };
 
     const currentDrivers = getCurrentDrivers();
-    // Create stable sort for drivers
     const sortedDrivers = [...currentDrivers].sort((a, b) => a.time - b.time);
-
-    // Create ranks based on sorted array
-    const ranks = new Map(
-        sortedDrivers.map((driver, index) => [driver.student_id, index + 1])
-    );
+    const ranks = new Map(sortedDrivers.map((driver, index) => [driver.student_id, index + 1]));
 
     const getStudentClass = (student) => {
         if (student.time < 22) {
@@ -82,21 +72,25 @@ const Leaderboard = () => {
         },
         { field: "rank", headerName: "Rank", width: isMobile ? 20 : 80 },
         { field: "name", headerName: "Name", width: isMobile ? 140 : 250 },
-        {
-            field: "lapTime",
-            headerName: "Lap Time",
-            width: isMobile ? 70 : 120,
-        },
+        { field: "lapTime", headerName: "Lap Time", width: isMobile ? 70 : 120 },
     ];
+
+    const handleSelection = (selection) => {
+        const selected = sortedDrivers.filter((student) => selection.includes(student.student_id));
+        setSelectedStudents(selected);
+    };
+
+    const groupedStudents = selectedStudents.reduce((acc, student, index) => {
+        const groupIndex = Math.floor(index / 7);
+        if (!acc[groupIndex]) acc[groupIndex] = [];
+        acc[groupIndex].push(student);
+        return acc;
+    }, []);
 
     return (
         <div>
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-                <Tabs
-                    value={tabValue}
-                    onChange={handleTabChange}
-                    variant="fullWidth"
-                >
+                <Tabs value={tabValue} onChange={handleTabChange} variant="fullWidth">
                     <Tab label="Overall" />
                     <Tab label="Semester 1" />
                     <Tab label="Semester 2" />
@@ -108,7 +102,24 @@ const Leaderboard = () => {
                 columns={columns}
                 sortModel={[{ field: "lapTime", sort: "asc" }]}
                 sx={isMobile ? null : { fontSize: "1.2em" }}
+                checkboxSelection
+                onRowSelectionModelChange={(newSelection) => handleSelection(newSelection)}
             />
+            <Box sx={{ marginTop: 2 }}>
+                <Typography variant="h6">Selected Students - Grouped by 7</Typography>
+                {groupedStudents.map((group, index) => (
+                    <Box key={index} sx={{ marginBottom: 2 }}>
+                        <Typography variant="subtitle1">Group {index + 1}</Typography>
+                        <List>
+                            {group.map((student) => (
+                                <ListItem key={student.student_id}>
+                                    {student.name} - {student.time}s
+                                </ListItem>
+                            ))}
+                        </List>
+                    </Box>
+                ))}
+            </Box>
         </div>
     );
 };
