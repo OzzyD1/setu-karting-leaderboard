@@ -4,16 +4,7 @@ import drivers_sem1 from "../data/sem_1";
 import drivers_sem2 from "../data/sem_2";
 import { DataGrid } from "@mui/x-data-grid";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import {
-    Tabs,
-    Tab,
-    Box,
-    List,
-    ListItem,
-    Typography,
-    Paper,
-    Grid,
-} from "@mui/material";
+import { Tabs, Tab, Box, Typography, Paper, Grid } from "@mui/material";
 
 const Leaderboard = ({ showGroups, selectedStudents, setSelectedStudents }) => {
     const isMobile = useMediaQuery("(max-width:600px)");
