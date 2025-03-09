@@ -1,17 +1,17 @@
 export const drivers_sem2 = [
     { student_id: 2, name: "Jamie Doyle", time: 22.017 },
     { student_id: 3, name: "Rian Doyle", time: 22.177 },
-    { student_id: 6, name: "Hannah O'Connor", time: 22.351 },
+    { student_id: 6, name: "Hannah O'Connor", time: 22.311 },
     { student_id: 14, name: "Sam Boyle", time: 21.906 },
     { student_id: 16, name: "Ryan Sexton", time: 22.529 },
-    { student_id: 17, name: "Richie Murphy", time: 21.787 },
+    { student_id: 17, name: "Richie Murphy", time: 21.763 },
     { student_id: 18, name: "Ellen Donnelly", time: 22.476 },
-    { student_id: 23, name: "Jack Gear", time: 21.859 },
+    { student_id: 23, name: "Jack Gear", time: 21.857 },
     { student_id: 28, name: "Cillian O'Connor", time: 21.917 },
     { student_id: 29, name: "Simon Harte", time: 22.178 },
     { student_id: 32, name: "Nathan Fitzgerald", time: 22.314 },
     { student_id: 34, name: "Evan O'Neill", time: 22.615 },
-    { student_id: 62, name: "Colm Power Pierce", time: 22.137 },
+    { student_id: 62, name: "Colm Power Pierce", time: 22.108 },
     { student_id: 63, name: "Jamie Malone", time: 23.234 },
     { student_id: 64, name: "Jessica Flynn", time: 22.627 },
     { student_id: 65, name: "Niamh O'Keeffe", time: 25.166 },
@@ -30,8 +30,8 @@ export const drivers_sem2 = [
     { student_id: 79, name: "Megan        ", time: 25.688 }, //surname
     { student_id: 80, name: "Becky        ", time: 27.321 }, //surname
     { student_id: 81, name: "Shane Nolan", time: 23.781 },
-    { student_id: 82, name: "Aine Whelan", time: 26.048 },
-    { student_id: 83, name: "Jasmine O'Shea Rush", time: 26.049 },
+    { student_id: 82, name: "Aine Whelan", time: 25.652 },
+    { student_id: 83, name: "Jasmine O'Shea Rush", time: 25.052 },
     { student_id: 26, name: "Adam Raher", time: 23.762 },
     { student_id: 84, name: "Daniel Greany", time: 27.179 },
     { student_id: 10, name: "Darragh Whitney", time: 22.314 },
@@ -40,12 +40,17 @@ export const drivers_sem2 = [
     { student_id: 1, name: "Ozzy Domarkas", time: 22.123 },
     { student_id: 86, name: "Niall O'Brien", time: 22.604 },
     { student_id: 87, name: "Stephan Price", time: 26.898 },
-    { student_id: 88, name: "Ciara Burke", time: 27.172 },
+    { student_id: 88, name: "Ciara Burke", time: 24.762 },
     { student_id: 89, name: "Ava Carr", time: 32.217 },
-    { student_id: 50, name: "Rosanne Coe", time: 25.642 },
+    { student_id: 50, name: "Rosanne Coe", time: 24.970 },
     { student_id: 7, name: "Nathan McNamara", time: 25.742},
     { student_id: 90, name: "Michael Corr", time: 24.545 },
-
+    { student_id: 19, name: "Jamie Halloran", time: 22.294 },
+    { student_id: 90, name: "Ben Cheal", time: 22.610 },
+    { student_id: 25, name: "Harry Watkin", time: 23.199 },
+    { student_id: 93, name: "Cara Mackey", time: 24.536 },
+    { student_id: 27, name: "Patryk Pawlak", time: 24.336 },
+    { student_id: 94, name: "Stefan Price", time: 25.238 },
 
 ];
 export default drivers_sem2;
