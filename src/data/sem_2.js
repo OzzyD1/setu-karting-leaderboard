@@ -48,7 +48,7 @@ export const drivers_sem2 = [
     { student_id: 19, name: "Jamie Halloran", time: 22.294 },
     { student_id: 90, name: "Ben Cheal", time: 22.610 },
     { student_id: 25, name: "Harry Watkin", time: 23.199 },
-    { student_id: 93, name: "Cara Mackey", time: 24.536 },
+    { student_id: 93, name: "Caragh Mackey", time: 24.536 },
     { student_id: 27, name: "Patryk Pawlak", time: 24.336 },
     { student_id: 94, name: "Stefan Price", time: 25.238 },
 
