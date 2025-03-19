@@ -18,7 +18,7 @@ export const drivers_sem2 = [
     { student_id: 66, name: "Leah O'Donoghue", time: 23.866 },
     { student_id: 67, name: "Shannon Bennett", time: 24.842 },
     { student_id: 68, name: "Ayo", time: 25.317 },
-    { student_id: 69, name: "Daniel Sevenster", time: 25.103 },
+    { student_id: 69, name: "Daniel Sevenster", time: 24.560 },
     { student_id: 70, name: "Taisce Ryan", time: 28.901 },
     { student_id: 71, name: "Patrick Whelan", time: 22.822 },
     { student_id: 72, name: "Niall Doherty", time: 22.554 },
@@ -29,9 +29,9 @@ export const drivers_sem2 = [
     { student_id: 77, name: "Justin Whelan", time: 24.555 },
     { student_id: 79, name: "Megan        ", time: 25.688 }, //surname
     { student_id: 80, name: "Becky        ", time: 27.321 }, //surname
-    { student_id: 81, name: "Shane Nolan", time: 23.781 },
+    { student_id: 81, name: "Shane Nolan", time: 23.593 },
     { student_id: 82, name: "Aine Whelan", time: 25.652 },
-    { student_id: 83, name: "Jasmine O'Shea Rush", time: 25.052 },
+    { student_id: 83, name: "Jasmine O'Shea Rush", time: 24.858 },
     { student_id: 26, name: "Adam Raher", time: 23.762 },
     { student_id: 84, name: "Daniel Greany", time: 27.179 },
     { student_id: 10, name: "Darragh Whitney", time: 22.314 },
@@ -40,8 +40,8 @@ export const drivers_sem2 = [
     { student_id: 1, name: "Ozzy Domarkas", time: 22.123 },
     { student_id: 86, name: "Niall O'Brien", time: 22.604 },
     { student_id: 87, name: "Stephan Price", time: 26.898 },
-    { student_id: 88, name: "Ciara Burke", time: 24.762 },
-    { student_id: 89, name: "Ava Carr", time: 32.217 },
+    { student_id: 88, name: "Ciara Burke", time: 24.413 },
+    { student_id: 89, name: "Ava Carr", time: 25.875 },
     { student_id: 50, name: "Rosanne Coe", time: 24.970 },
     { student_id: 7, name: "Nathan McNamara", time: 25.742},
     { student_id: 90, name: "Michael Corr", time: 24.545 },
@@ -50,7 +50,8 @@ export const drivers_sem2 = [
     { student_id: 25, name: "Harry Watkin", time: 23.199 },
     { student_id: 93, name: "Caragh Mackey", time: 24.536 },
     { student_id: 27, name: "Patryk Pawlak", time: 24.336 },
-    { student_id: 94, name: "Stefan Price", time: 25.238 },
+    { student_id: 94, name: "Stefan Price", time: 25.092 },
+    { student_id: 95, name: "Conor Nolan", time: 22.440 },
 
 ];
 export default drivers_sem2;
