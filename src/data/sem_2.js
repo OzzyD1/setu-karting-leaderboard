@@ -1,7 +1,7 @@
 export const drivers_sem2 = [
     { student_id: 2, name: "Jamie Doyle", time: 22.017 },
     { student_id: 3, name: "Rian Doyle", time: 22.177 },
-    { student_id: 6, name: "Hannah O'Connor", time: 22.311 },
+    { student_id: 6, name: "Hannah O'Connor", time: 22.282 },
     { student_id: 14, name: "Sam Boyle", time: 21.906 },
     { student_id: 16, name: "Ryan Sexton", time: 22.529 },
     { student_id: 17, name: "Richard Murphy", time: 21.763 },
@@ -11,7 +11,7 @@ export const drivers_sem2 = [
     { student_id: 29, name: "Simon Harte", time: 22.178 },
     { student_id: 32, name: "Nathan Fitzgerald", time: 22.314 },
     { student_id: 34, name: "Evan O'Neill", time: 22.609 },
-    { student_id: 62, name: "Colm Power Pierce", time: 22.037 },
+    { student_id: 62, name: "Colm Power Pierce", time: 21.996 },
     { student_id: 63, name: "Jamie Malone", time: 22.630 },
     { student_id: 64, name: "Jessica Flynn", time: 22.627 },
     { student_id: 65, name: "Niamh O'Keeffe", time: 25.166 },
@@ -31,7 +31,7 @@ export const drivers_sem2 = [
     { student_id: 80, name: "Becky        ", time: 27.321 }, //surname
     { student_id: 81, name: "Shane Nolan", time: 23.537 },
     { student_id: 82, name: "Aine Whelan", time: 24.686 },
-    { student_id: 83, name: "Jasmine O'Shea Rush", time: 23.993 },
+    { student_id: 83, name: "Jasmine O'Shea Rush", time: 23.704 },
     { student_id: 26, name: "Adam Raher", time: 23.762 },
     { student_id: 84, name: "Daniel Greany", time: 27.179 },
     { student_id: 10, name: "Darragh Whitney", time: 22.314 },
@@ -51,8 +51,8 @@ export const drivers_sem2 = [
     { student_id: 93, name: "Caragh Mackey", time: 23.128 },
     { student_id: 27, name: "Patryk Pawlak", time: 24.336 },
     { student_id: 94, name: "Stefan Price", time: 25.092 },
-    { student_id: 95, name: "Conor Nolan", time: 22.440 },
+    { student_id: 95, name: "Conor Nolan", time: 22.355 },
     { student_id: 96, name: "Liam Walsh", time: 22.475 },
-
+    { student_id: 97, name: "Eric Butler", time: 22.436 },
 ];
 export default drivers_sem2;
