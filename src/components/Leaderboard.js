@@ -74,7 +74,7 @@ const Leaderboard = ({ showGroups, selectedStudents, setSelectedStudents }) => {
             width: isMobile ? 60 : 160,
             renderCell: (params) => <Cup fill={params.row.cup} />,
         },
-        { field: "rank", headerName: "Rank", width: isMobile ? 20 : 80 },
+        { field: "rank", headerName: "Rank", width: isMobile ? 20 : 80 }, //might change to "Pos"
         { field: "name", headerName: "Name", width: isMobile ? 140 : 250 },
         {
             field: "lapTime",

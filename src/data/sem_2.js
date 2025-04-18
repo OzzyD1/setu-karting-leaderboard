@@ -11,7 +11,7 @@ export const drivers_sem2 = [
     { student_id: 29, name: "Simon Harte", time: 22.178 },
     { student_id: 32, name: "Nathan Fitzgerald", time: 22.314 },
     { student_id: 34, name: "Evan O'Neill", time: 22.609 },
-    { student_id: 62, name: "Colm Power Pierce", time: 21.996 },
+    { student_id: 62, name: "Colm Power Pierce", time: 21.979 },
     { student_id: 63, name: "Jamie Malone", time: 22.630 },
     { student_id: 64, name: "Jessica Flynn", time: 22.627 },
     { student_id: 65, name: "Niamh O'Keeffe", time: 25.166 },
@@ -51,7 +51,7 @@ export const drivers_sem2 = [
     { student_id: 93, name: "Caragh Mackey", time: 23.128 },
     { student_id: 27, name: "Patryk Pawlak", time: 24.336 },
     { student_id: 94, name: "Stefan Price", time: 25.092 },
-    { student_id: 95, name: "Conor Nolan", time: 22.355 },
+    { student_id: 95, name: "Conor Nolan", time: 22.245 },
     { student_id: 96, name: "Liam Walsh", time: 22.475 },
     { student_id: 97, name: "Eric Butler", time: 22.436 },
 
