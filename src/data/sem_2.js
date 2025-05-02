@@ -28,7 +28,7 @@ export const drivers_sem2 = [
     { student_id: 76, name: "Peter Murphy", time: 24.147 },
     { student_id: 77, name: "Justin Whelan", time: 24.555 },
     { student_id: 79, name: "Megan        ", time: 25.688 }, //surname
-    { student_id: 80, name: "Becky        ", time: 27.321 }, //surnames
+    { student_id: 80, name: "Becky        ", time: 27.321 }, //surname
     { student_id: 81, name: "Shane Nolan", time: 23.353 },
     { student_id: 82, name: "Aine Whelan", time: 23.988 },
     { student_id: 83, name: "Jasmine O'Shea Rush", time: 23.507 },
