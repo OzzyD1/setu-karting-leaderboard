@@ -1,6 +1,6 @@
 export const drivers_sem2 = [
     { student_id: 2, name: "Jamie Doyle", time: 22.017 },
-    { student_id: 3, name: "Rian Doyle", time: 22.176 },
+    { student_id: 3, name: "Rian Doyle", time: 21.982 },
     { student_id: 6, name: "Hannah O'Connor", time: 22.244 },
     { student_id: 14, name: "Sam Boyle", time: 21.878 },
     { student_id: 16, name: "Ryan Sexton", time: 22.529 },
@@ -29,7 +29,7 @@ export const drivers_sem2 = [
     { student_id: 77, name: "Justin Whelan", time: 24.555 },
     { student_id: 79, name: "Megan        ", time: 25.688 }, //surname
     { student_id: 80, name: "Becky        ", time: 27.321 }, //surname
-    { student_id: 81, name: "Shane Nolan", time: 23.353 },
+    { student_id: 81, name: "Shane Nolan", time: 23.147 },
     { student_id: 82, name: "Aine Whelan", time: 23.988 },
     { student_id: 83, name: "Jasmine O'Shea Rush", time: 23.507 },
     { student_id: 26, name: "Adam Raher", time: 23.762 },
