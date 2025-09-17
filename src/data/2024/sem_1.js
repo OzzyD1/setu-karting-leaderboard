@@ -1,4 +1,4 @@
-export const drivers_sem1 = [
+export const drivers_sem1_2024 = [
     { student_id: 1, name: "Ozzy Domarkas", time: 22.204 },
     { student_id: 2, name: "Jamie Doyle", time: 22.059 },
     { student_id: 3, name: "Rian Doyle", time: 22.168 },
@@ -60,4 +60,4 @@ export const drivers_sem1 = [
     { student_id: 61, name: "Xavier", time: 24.93 },
 ];
 
-export default drivers_sem1;
+export default drivers_sem1_2024;

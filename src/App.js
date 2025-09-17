@@ -9,6 +9,7 @@ import Leaderboard from "./components/Leaderboard";
 import GroupGenerator from "./components/GroupGenerator";
 import NavBar from "./components/NavBar";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { getCurrentAcademicYear } from "./data/getCurrentYear";
 
 import "./index.css";
 
@@ -16,6 +17,7 @@ function App() {
     const isMobile = useMediaQuery("(max-width:600px)");
     const [showGroups, setShowGroups] = useState(false);
     const [selectedStudents, setSelectedStudents] = useState([]);
+    const [selectedYear, setSelectedYear] = useState(getCurrentAcademicYear());
 
     const handleGroupToggle = (e) => {
         setShowGroups(e.target.checked);
@@ -24,9 +26,19 @@ function App() {
         }
     };
 
+    const handleYearChange = (year) => {
+        setSelectedYear(year);
+        setSelectedStudents([]); // Clear selections when year changes
+    };
+
     return (
         <>
-            <NavBar showGroups={showGroups} onGroupToggle={handleGroupToggle} />
+            <NavBar
+                showGroups={showGroups}
+                onGroupToggle={handleGroupToggle}
+                selectedYear={selectedYear}
+                onYearChange={handleYearChange}
+            />
             <Container
                 maxWidth="md"
                 sx={{
@@ -43,6 +55,7 @@ function App() {
                         showGroups={showGroups}
                         selectedStudents={selectedStudents}
                         setSelectedStudents={setSelectedStudents}
+                        selectedYear={selectedYear}
                     />
                     <GroupGenerator
                         showGroups={showGroups}

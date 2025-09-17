@@ -1,13 +1,21 @@
-import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import logo from "../icons/logo.png";
-import { FormControlLabel, Switch } from "@mui/material";
+import {
+    FormControlLabel,
+    Switch,
+    Select,
+    MenuItem,
+    FormControl,
+    InputLabel,
+    Box,
+} from "@mui/material";
+import { academicYears } from "../data/getCurrentYear";
 
-const NavBar = ({ showGroups, onGroupToggle }) => {
+const NavBar = ({ showGroups, onGroupToggle, selectedYear, onYearChange }) => {
     const isMobile = useMediaQuery("(max-width:600px)");
 
     return (
@@ -31,17 +39,41 @@ const NavBar = ({ showGroups, onGroupToggle }) => {
                 >
                     SETU Karting Leaderboard
                 </Typography>
-                <FormControlLabel
-                    control={
-                        <Switch
-                            checked={showGroups}
-                            onChange={onGroupToggle}
-                            sx={{ color: "white" }}
-                        />
-                    }
-                    label="Group Generator"
-                    sx={{ color: "black" }}
-                />
+
+                <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                    {/* Academic Year Selector */}
+                    <FormControl size="small" sx={{ minWidth: 120 }}>
+                        <Select
+                            value={selectedYear}
+                            onChange={(e) => onYearChange(e.target.value)}
+                            sx={{
+                                color: "black",
+                                "& .MuiOutlinedInput-notchedOutline": {
+                                    borderColor: "black",
+                                },
+                            }}
+                        >
+                            {Object.keys(academicYears).map((year) => (
+                                <MenuItem key={year} value={year}>
+                                    {academicYears[year].label}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+
+                    {/* Group Generator Toggle */}
+                    <FormControlLabel
+                        control={
+                            <Switch
+                                checked={showGroups}
+                                onChange={onGroupToggle}
+                                sx={{ color: "white" }}
+                            />
+                        }
+                        label="Group Generator"
+                        sx={{ color: "black" }}
+                    />
+                </Box>
             </Toolbar>
         </AppBar>
     );

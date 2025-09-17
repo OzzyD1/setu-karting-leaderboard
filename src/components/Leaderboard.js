@@ -15,13 +15,18 @@
 
 import { useState } from "react";
 import { Cup } from "../icons/Cup";
-import drivers_sem1 from "../data/sem_1";
-import drivers_sem2 from "../data/sem_2";
 import { DataGrid } from "@mui/x-data-grid";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Tabs, Tab, Box } from "@mui/material";
+import { academicYears } from "../data/getCurrentYear";
 
-const Leaderboard = ({ showGroups, selectedStudents, setSelectedStudents }) => {
+const Leaderboard = ({
+    showGroups,
+    selectedStudents,
+    setSelectedStudents,
+    selectedYear,
+    setSelectedYear,
+}) => {
     // Detect mobile screen size for responsive layout
     const isMobile = useMediaQuery("(max-width:600px)");
 
@@ -60,6 +65,12 @@ const Leaderboard = ({ showGroups, selectedStudents, setSelectedStudents }) => {
      * For individual semesters: returns only that semester's data
      */
     const getCurrentDrivers = () => {
+        const yearData = academicYears[selectedYear];
+        if (!yearData) return [];
+
+        const drivers_sem1 = yearData.sem1 || [];
+        const drivers_sem2 = yearData.sem2 || [];
+
         const driverMap = new Map();
         switch (tabValue) {
             case 0: // Overall - combine both semesters, keep best time per student
