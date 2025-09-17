@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import "@fontsource/roboto/300.css";
@@ -6,6 +6,7 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import Leaderboard from "./components/Leaderboard";
+import GroupGenerator from "./components/GroupGenerator";
 import NavBar from "./components/NavBar";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
@@ -26,7 +27,6 @@ function App() {
     return (
         <>
             <NavBar showGroups={showGroups} onGroupToggle={handleGroupToggle} />
-
             <Container
                 maxWidth="md"
                 sx={{
@@ -37,12 +37,16 @@ function App() {
                 }}
             >
                 <Paper
-                    sx={{ margin: ".5em", width: isMobile ? "100%" : "85%" }}
+                    sx={{ margin: ".5em", width: isMobile ? "100%" : "100%" }}
                 >
                     <Leaderboard
                         showGroups={showGroups}
                         selectedStudents={selectedStudents}
                         setSelectedStudents={setSelectedStudents}
+                    />
+                    <GroupGenerator
+                        showGroups={showGroups}
+                        selectedStudents={selectedStudents}
                     />
                 </Paper>
             </Container>
