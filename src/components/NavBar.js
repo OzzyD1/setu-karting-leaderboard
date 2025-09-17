@@ -10,7 +10,6 @@ import {
     Select,
     MenuItem,
     FormControl,
-    InputLabel,
     Box,
 } from "@mui/material";
 import { academicYears } from "../data/getCurrentYear";
