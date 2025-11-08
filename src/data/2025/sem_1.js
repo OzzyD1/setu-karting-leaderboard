@@ -15,7 +15,7 @@ export const drivers_sem1_2025 = [
     {student_id: 14, name: "Sam Boyle", time: 21.845 },
 //  {student_id: 15, name: "Ben Power", time:  },
 //  {student_id: 16, name: "Ryan Sexton", time:  },
-    {student_id: 17, name: "Richie Murphy", time: 21.658 },
+    {student_id: 17, name: "Richard Murphy", time: 21.658 },
     {student_id: 18, name: "Ellen Donnelly", time: 22.078 },
 //  {student_id: 19, name: "Jamie Halloran", time:  },
     {student_id: 20, name: "Dylan Rockett", time: 22.739 },

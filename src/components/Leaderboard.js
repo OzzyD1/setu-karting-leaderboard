@@ -140,18 +140,18 @@ const Leaderboard = ({
      * Responsive widths based on screen size
      */
     const columns = [
-        {
+       /* {
             field: "cup",
             headerName: "", //hidden
             width: isMobile ? 30 : 60,
             renderCell: (params) => <Cup fill={params.row.cup} />, // Custom cup icon
-        },
+        }, */
         { field: "rank", headerName: "Pos", width: isMobile ? 20 : 80 },
-        { field: "name", headerName: "Name", width: isMobile ? 120 : 300 },
+        { field: "name", headerName: "Name", width: isMobile ? 170 : 550 },
         {
             field: "lapTime",
             headerName: "Time",
-            width: isMobile ? 70 : 120,
+            width: isMobile ? 100 : 120,
         },
     ];
 

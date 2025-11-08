@@ -28,7 +28,7 @@ const NavBar = ({ showGroups, onGroupToggle, selectedYear, onYearChange }) => {
                     />
                 </IconButton>
                 <Typography
-                    variant={isMobile ? "h6" : "h3"}
+                    variant={isMobile ? "h9" : "h4"}
                     sx={{
                         flexGrow: 1,
                         paddingLeft: ".2em",
@@ -36,7 +36,7 @@ const NavBar = ({ showGroups, onGroupToggle, selectedYear, onYearChange }) => {
                         color: "#414042",
                     }}
                 >
-                    SETU Karting Leaderboard
+                    SETU Waterford Karting Leaderboard
                 </Typography>
 
                 <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
