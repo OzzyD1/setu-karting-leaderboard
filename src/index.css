@@ -1,3 +1,42 @@
+/*
+ * ====================================================================
+ * 1. DEFINE THE FONT (@font-face)
+ * This path is correct relative to the index.css file inside the src/ folder.
+ * ====================================================================
+ */
+@font-face {
+    /* This name must match exactly what you use in 'font-family' */
+    font-family: 'Formula1-Regular';
+    font-style: normal;
+    font-weight: 400;
+    /* Path to font file: src/fonts/Formula1/Formula1-Regular_web_0.ttf */
+    src: url('./fonts/Formula1/Formula1-Bold_web_0.ttf') format('truetype');
+}
+
+/*
+ * ====================================================================
+ * 2. GLOBAL STYLES AND FONT APPLICATION
+ * Applying the font to both the <body> and the #root container (where React renders)
+ * ensures it takes precedence over MUI's default styles.
+ * ====================================================================
+ */
+
 body {
     background-color: #435465;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* * Apply the custom font aggressively to win the CSS conflict:
+ * 1. body and #root for the main document structure
+ * 2. .MuiTypography-root for all text rendered by Material UI components
+ */
+body, #root, .MuiTypography-root {
+    font-family: 'Formula1-Regular', Arial, sans-serif;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
 }

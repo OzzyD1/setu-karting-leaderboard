@@ -18,7 +18,7 @@ const NavBar = ({ showGroups, onGroupToggle, selectedYear, onYearChange }) => {
     const isMobile = useMediaQuery("(max-width:600px)");
 
     return (
-        <AppBar position="fixed" sx={{ backgroundColor: "#FDD154" }}>
+        <AppBar position="fixed" sx={{ backgroundColor: "#2cc5f4" }}>
             <Toolbar sx={{ justifyContent: "space-between" }}>
                 <IconButton>
                     <img

@@ -141,7 +141,7 @@ export const drivers_sem1_2025 = [
     {student_id: 141, name: "Emile Binet", time: 24.603},
     {student_id: 142, name: "Ashir Jehangir", time: 24.320},
     {student_id: 143, name: "Serine Louai", time: 26.038},
-    {student_id: 144, name: "Denis Lamber", time: 21.819}, //not a member, check spelling
+//  {student_id: 144, name: "Denis Lamber", time: 21.819}, //not a member, check spelling
     {student_id: 145, name: "Berkay Eren", time: 22.756 },
     {student_id: 146, name: "Luke McGrath", time: 24.320},
     {student_id: 147, name: "Dawid Sumera", time: 25.193},

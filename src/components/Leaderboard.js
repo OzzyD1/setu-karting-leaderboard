@@ -142,15 +142,15 @@ const Leaderboard = ({
     const columns = [
         {
             field: "cup",
-            headerName: "Cup",
+            headerName: "", //hidden
             width: isMobile ? 30 : 60,
             renderCell: (params) => <Cup fill={params.row.cup} />, // Custom cup icon
         },
-        { field: "rank", headerName: "Rank", width: isMobile ? 20 : 80 },
+        { field: "rank", headerName: "Pos", width: isMobile ? 20 : 80 },
         { field: "name", headerName: "Name", width: isMobile ? 120 : 300 },
         {
             field: "lapTime",
-            headerName: "Lap Time",
+            headerName: "Time",
             width: isMobile ? 70 : 120,
         },
     ];
