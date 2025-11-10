@@ -17,39 +17,63 @@ import { academicYears } from "../data/getCurrentYear";
 const NavBar = ({ showGroups, onGroupToggle, selectedYear, onYearChange }) => {
     const isMobile = useMediaQuery("(max-width:600px)");
 
+    // Determine the content based on screen size
+    const titleContent = isMobile ? (
+        <>
+            SETU Waterford
+            <br />
+            {/* The span uses a CSS class defined in index.css to be smaller */}
+            <span className="mobile-subtitle">Karting Leaderboard</span>
+        </>
+    ) : (
+        "SETU Waterford - Karting Leaderboard"
+    );
+
+
     return (
-        <AppBar position="fixed" sx={{ backgroundColor: "#2cc5f4" }}>
+        <AppBar position="fixed" sx={{ backgroundColor: "#f8f9fa", borderBottom: '1px solid #dee2e6' }}>
             <Toolbar sx={{ justifyContent: "space-between" }}>
                 <IconButton>
                     <img
                         src={logo}
                         alt="Karting Logo"
-                        style={{ maxHeight: isMobile ? "35px" : "50px" }}
+                        // SLIGHTLY SMALLER LOGO ON MOBILE
+                        style={{ maxHeight: isMobile ? "30px" : "50px" }}
                     />
                 </IconButton>
                 <Typography
                     variant={isMobile ? "h9" : "h4"}
+                    // Using the established mobile class for the overall text block
+                    className={isMobile ? "nav-text-mobile" : ""}
                     sx={{
                         flexGrow: 1,
-                        paddingLeft: ".2em",
-                        margin: "0.1em",
-                        color: "#414042",
+                        // Reduced padding left on mobile
+                        paddingLeft: isMobile ? "0.1em" : ".2em",
+                        margin: 0,
+                        color: "#333333",
+                        lineHeight: isMobile ? 1.1 : 'inherit', // Adjust line height for stacked text
                     }}
                 >
-                    SETU Waterford Karting Leaderboard
+                    {titleContent}
                 </Typography>
 
-                <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                <Box sx={{ display: "flex", alignItems: "center", gap: isMobile ? 1 : 2 }}>
                     {/* Academic Year Selector */}
-                    <FormControl size="small" sx={{ minWidth: 120 }}>
+                    <FormControl size="small" sx={{
+                        // REDUCED MIN WIDTH ON MOBILE
+                        minWidth: isMobile ? 60 : 120
+                    }}>
                         <Select
                             value={selectedYear}
                             onChange={(e) => onYearChange(e.target.value)}
                             sx={{
-                                color: "black",
+                                color: "#333333",
+                                backgroundColor: "#e9ecef",
+                                '.MuiSelect-icon': { color: '#333333' },
                                 "& .MuiOutlinedInput-notchedOutline": {
-                                    borderColor: "black",
+                                    borderColor: "#e9ecef",
                                 },
+                                fontSize: isMobile ? '0.7em' : '1em'
                             }}
                         >
                             {Object.keys(academicYears).map((year) => (
@@ -60,17 +84,27 @@ const NavBar = ({ showGroups, onGroupToggle, selectedYear, onYearChange }) => {
                         </Select>
                     </FormControl>
 
-                    {/* Group Generator Toggle */}
+                    {/* Group Generator Toggle (TEXT REMOVED) */}
                     <FormControlLabel
                         control={
                             <Switch
                                 checked={showGroups}
                                 onChange={onGroupToggle}
-                                sx={{ color: "white" }}
+                                sx={{
+                                    margin: 0,
+                                    '& .MuiSwitch-thumb': {
+                                        color: showGroups ? '#007bff' : '#ffffff',
+                                        width: isMobile ? 12 : 15,
+                                        height: isMobile ? 12 : 15
+                                    },
+                                    '& .MuiSwitch-track': { backgroundColor: showGroups ? 'rgba(0, 123, 255, 0.5)' : '#adb5bd' },
+                                    '& .MuiSwitch-switchBase': { padding: isMobile ? 2 : 4 },
+                                }}
                             />
                         }
-                        label="Group Generator"
-                        sx={{ color: "black" }}
+                        // EMPTY LABEL - Text is removed, only the toggle remains
+                        label={<span style={{ display: 'none' }}>Group Generator</span>}
+                        sx={{ color: "#333333", margin: isMobile ? '0 4px 0 0' : '0 8px 0 0' }}
                     />
                 </Box>
             </Toolbar>

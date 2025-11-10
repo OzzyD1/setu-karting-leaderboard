@@ -1,37 +1,29 @@
 /*
  * ====================================================================
  * 1. DEFINE THE FONT (@font-face)
- * This path is correct relative to the index.css file inside the src/ folder.
  * ====================================================================
  */
 @font-face {
-    /* This name must match exactly what you use in 'font-family' */
     font-family: 'Formula1-Regular';
     font-style: normal;
     font-weight: 400;
-    /* Path to font file: src/fonts/Formula1/Formula1-Regular_web_0.ttf */
     src: url('./fonts/f1bold.ttf') format('truetype');
 }
 
 /*
  * ====================================================================
  * 2. GLOBAL STYLES AND FONT APPLICATION
- * Applying the font to both the <body> and the #root container (where React renders)
- * ensures it takes precedence over MUI's default styles.
  * ====================================================================
  */
 
 body {
-    background-color: #435465;
+    background-color: #f0f0f0; /* Lighter outside background */
     margin: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* * Apply the custom font aggressively to win the CSS conflict:
- * 1. body and #root for the main document structure
- * 2. .MuiTypography-root for all text rendered by Material UI components
- */
+/* Apply the custom font aggressively */
 body, #root, .MuiTypography-root {
     font-family: 'Formula1-Regular', Arial, sans-serif;
 }
@@ -39,4 +31,154 @@ body, #root, .MuiTypography-root {
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* Define the new primary accent color */
+:root {
+    --accent-blue: #007bff; /* Bright, standard blue */
+    --light-bg: #ffffff;    /* Pure white background */
+    --dark-text: #000000;   /* Black text for maximum contrast */
+    --muted-text: #6c757d;  /* Muted dark gray for non-critical info */
+    --mid-gray: #e9ecef;    /* Light gray for separation/hover */
+    --pos-bg: #f8f9fa;      /* Very light gray for position cells */
+}
+
+/*
+ * ====================================================================
+ * 3. LEADERBOARD STYLING (LIGHT THEME)
+ * ====================================================================
+ */
+
+/* Remove border/shadow from the Paper component wrapper */
+.MuiPaper-root {
+    box-shadow: none !important;
+    background-color: transparent !important;
+}
+
+/* --- DataGrid Global Styles --- */
+.f1-datagrid-minimal, .f1-tabs-container {
+    background-color: var(--light-bg) !important; /* White background */
+    color: var(--dark-text) !important;           /* Dark text */
+}
+
+/* Header Styles: Muted Top Bar with blue accent */
+.f1-datagrid-minimal .MuiDataGrid-columnHeaders {
+    background-color: var(--light-bg);
+    color: var(--dark-text);
+    font-size: 1em;
+    border-bottom: 2px solid var(--accent-blue); /* Blue bottom border for header */
+}
+
+.f1-datagrid-minimal .MuiDataGrid-columnHeaderTitle {
+    font-weight: bold;
+    color: var(--dark-text);
+}
+
+/* Row/Cell Styles */
+.f1-datagrid-minimal .MuiDataGrid-row {
+    border-bottom: 1px solid var(--mid-gray); /* Light gray row divider */
+}
+
+.f1-datagrid-minimal .MuiDataGrid-cell {
+    color: var(--dark-text); /* Enforce dark text default */
+    padding: 0;
+    background-color: transparent !important;
+    line-height: normal;
+}
+
+/* Alternate row shading for better readability (Subtle gray difference) */
+.f1-datagrid-minimal .MuiDataGrid-row:nth-of-type(odd) {
+    background-color: var(--light-bg); /* White */
+}
+
+.f1-datagrid-minimal .MuiDataGrid-row:nth-of-type(even) {
+    background-color: var(--mid-gray); /* Very light gray */
+}
+
+/* --- Position Cell Styling (Uniform Gray) --- */
+.pos-cell {
+    background-color: var(--pos-bg) !important; /* Very light gray block for position */
+    color: var(--dark-text) !important;
+}
+
+/* REMOVE special colors for pos-1, pos-2, pos-3 */
+.pos-1, .pos-2, .pos-3 {
+    /* Revert to default pos-cell style */
+    background-color: var(--pos-bg) !important;
+    color: var(--dark-text) !important;
+}
+
+
+/* --- Lap Time Cell Styling --- */
+/* Best Lap Time Cell: Blue Text */
+.best-lap {
+    color: var(--accent-blue) !important; /* Blue text for best time */
+    font-weight: bold;
+}
+
+/* Ensure the full width of the data grid is used */
+.MuiDataGrid-root {
+    width: 100% !important;
+}
+
+/* --- Tab Styles --- */
+.f1-tabs-container {
+    background-color: var(--light-bg) !important;
+    border-bottom: 2px solid var(--accent-blue) !important; /* Blue indicator base */
+}
+
+.f1-tab {
+    color: var(--dark-text) !important;
+    font-weight: bold !important;
+    min-height: 40px !important;
+    text-transform: uppercase !important;
+}
+
+/* Styles for the active tab */
+.f1-tab.Mui-selected {
+    color: var(--accent-blue) !important; /* Blue text for the active tab */
+    background-color: var(--mid-gray) !important; /* Light gray background for active tab */
+}
+
+/* Indicator for the active tab */
+.f1-indicator {
+    background-color: var(--accent-blue) !important;
+    height: 4px !important;
+}
+
+/*
+ * ====================================================================
+ * 4. MOBILE SPECIFIC OVERRIDES (Max Width: 600px)
+ * ====================================================================
+ */
+@media (max-width: 600px) {
+    .f1-datagrid-minimal .MuiDataGrid-columnHeaderTitle {
+        font-size: 0.7em;
+    }
+
+    /* Tabs (Overall, Semester 1, etc.) */
+    .f1-tab .MuiTab-wrapper {
+        font-size: 0.65em;
+    }
+
+    .f1-datagrid-minimal .MuiDataGrid-cell--checkbox {
+        width: 30px !important;
+    }
+
+    /* Navigation/App Bar Title and Controls */
+    /* This applies to the main line (SETU Waterford) */
+    .nav-text-mobile {
+        font-size: 0.85em !important;
+    }
+
+    /* NEW: Applies to the stacked subtitle (Karting Leaderboard) */
+    .mobile-subtitle {
+        font-size: 0.65em; /* Smaller size for the second line */
+        font-weight: normal; /* Less bold than the main line */
+        opacity: 0.9; /* Slightly faded */
+    }
+
+    .nav-control-label-mobile {
+        font-size: 0.7em !important;
+    }
 }

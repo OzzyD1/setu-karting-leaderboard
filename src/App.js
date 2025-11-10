@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
-import { ThemeProvider, createTheme } from '@mui/material/styles'; // <-- NEW THEME IMPORTS
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 // Removed all conflicting: import "@fontsource/roboto/X.css";
 
 import Leaderboard from "./components/Leaderboard";
@@ -61,6 +61,7 @@ function App() {
                 }}
             >
                 <Paper
+                    // The Paper is now transparent due to the CSS changes
                     sx={{ margin: ".5em", width: isMobile ? "100%" : "100%" }}
                 >
                     <Leaderboard

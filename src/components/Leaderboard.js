@@ -7,36 +7,35 @@
  * - Semester 2: Only semester 2 times
  *
  * Features:
- * - Responsive design for mobile and desktop
- * - Color-coded performance tiers (gold, silver, bronze)
- * - Optional group selection for race organization
- * - Automatic ranking based on lap times
+ * - Clean, minimalist light theme layout
+ * - Responsive design
+ * - Sorting ability REMOVED from all columns
  */
 
 import { useState } from "react";
-// import { Cup } from "../icons/Cup";
 import { DataGrid } from "@mui/x-data-grid";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { Tabs, Tab, Box } from "@mui/material";
+import { Tabs, Tab, Box, Typography } from "@mui/material";
 import { academicYears } from "../data/getCurrentYear";
 
+// Helper to format the time to three decimal places
+const formatTime = (time) => {
+    if (typeof time !== 'number' || isNaN(time)) return '';
+    return time.toFixed(3);
+};
+
 const Leaderboard = ({
-    showGroups,
-    selectedStudents,
-    setSelectedStudents,
-    selectedYear,
-    setSelectedYear,
-}) => {
+                         showGroups,
+                         selectedStudents,
+                         setSelectedStudents,
+                         selectedYear,
+                     }) => {
     // Detect mobile screen size for responsive layout
     const isMobile = useMediaQuery("(max-width:600px)");
 
     // Tab state: 0=Overall, 1=Semester 1, 2=Semester 2
     const [tabValue, setTabValue] = useState(0);
 
-    /**
-     * Handle row selection for group generation
-     * Only active when showGroups prop is true
-     */
     const handleSelection = (selection) => {
         if (!showGroups) return;
         const selected = sortedDrivers.filter((student) =>
@@ -45,25 +44,14 @@ const Leaderboard = ({
         setSelectedStudents(selected);
     };
 
-    /**
-     * Temporary placeholder for groups - will be moved to GroupSelector
-     */
     const renderGroups = () => {
-        return null; // Groups will be handled by GroupSelector component
+        return null;
     };
 
-    /**
-     * Handle tab switching between different time period views
-     */
     const handleTabChange = (event, newValue) => {
         setTabValue(newValue);
     };
 
-    /**
-     * Get drivers data based on selected tab
-     * For Overall tab: combines both semesters and keeps best time per student
-     * For individual semesters: returns only that semester's data
-     */
     const getCurrentDrivers = () => {
         const yearData = academicYears[selectedYear];
         if (!yearData) return [];
@@ -73,7 +61,7 @@ const Leaderboard = ({
 
         const driverMap = new Map();
         switch (tabValue) {
-            case 0: // Overall - combine both semesters, keep best time per student
+            case 0: // Overall
                 [...drivers_sem1, ...drivers_sem2].forEach((driver) => {
                     if (
                         !driverMap.has(driver.student_id) ||
@@ -103,71 +91,165 @@ const Leaderboard = ({
     const currentDrivers = getCurrentDrivers();
     const sortedDrivers = [...currentDrivers].sort((a, b) => a.time - b.time);
 
+    // Get the best time (Lap Time of the leader)
+    const bestTime = sortedDrivers.length > 0 ? sortedDrivers[0].time : 0;
+    const formattedBestTime = formatTime(bestTime);
+
     // Create rank mapping: student_id -> rank position (1-based)
     const ranks = new Map(
         sortedDrivers.map((driver, index) => [driver.student_id, index + 1])
     );
 
-    /**
-     * Determine performance tier based on lap time
-     * @param {Object} student - Student with time property
-     * @returns {string} - Color class: 'gold', 'silver', or 'peru' (bronze)
-     */
     const getStudentClass = (student) => {
         if (student.time < 22) {
-            return "gold"; // Fastest tier: under 22 seconds
+            return "gold";
         } else if (student.time < 23) {
-            return "silver"; // Middle tier: 22-23 seconds
+            return "silver";
         } else {
-            return "peru"; // Slower tier: 23+ seconds
+            return "peru";
         }
     };
 
     /**
      * Transform driver data into DataGrid row format
-     * Each row contains: id, cup color, rank, name, and lap time
      */
     const rows = currentDrivers.map((student) => ({
         id: student.student_id,
-        cup: getStudentClass(student),
         rank: ranks.get(student.student_id),
         name: student.name,
-        lapTime: student.time,
+        lapTime: formatTime(student.time),
+        // Calculate gap: blank for the leader, otherwise +[difference]
+        gap: (student.time - bestTime) > 0.001
+            ? `+${formatTime(student.time - bestTime)}`
+            : '',
     }));
 
     /**
      * DataGrid column configuration
-     * Responsive widths based on screen size
      */
     const columns = [
-       /* {
-            field: "cup",
-            headerName: "", //hidden
-            width: isMobile ? 30 : 60,
-            renderCell: (params) => <Cup fill={params.row.cup} />, // Custom cup icon
-        }, */
-        { field: "rank", headerName: "Pos", width: isMobile ? 20 : 80 },
-        { field: "name", headerName: "Name", width: isMobile ? 170 : 550 },
+        // Pos column
+        {
+            field: "rank",
+            headerName: "Pos",
+            width: isMobile ? 40 : 60,
+            sortable: false, // Set to false
+            headerAlign: 'center',
+            align: 'center',
+            renderCell: (params) => (
+                <Typography
+                    variant="body2"
+                    className={`pos-cell pos-${params.value}`}
+                    sx={{
+                        fontSize: isMobile ? '0.85em' : '1em',
+                        fontWeight: 'bold',
+                        color: '#000000',
+                        width: '100%',
+                        height: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        backgroundColor: '#2b2e3a',
+                    }}
+                >
+                    {params.value}
+                </Typography>
+            ),
+        },
+        // Name column
+        {
+            field: "name",
+            headerName: "Driver Name",
+            width: isMobile ? 180 : 400,
+            flex: isMobile ? null : 1,
+            sortable: false, // Set to false
+            renderCell: (params) => (
+                <Typography
+                    variant="body2"
+                    sx={{
+                        color: '#000000',
+                        fontSize: isMobile ? '0.85em' : '1em',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
+                        paddingLeft: '8px'
+                    }}
+                >
+                    {params.value}
+                </Typography>
+            ),
+        },
+        // Lap Time column
         {
             field: "lapTime",
             headerName: "Time",
-            width: isMobile ? 100 : 120,
+            width: isMobile ? 75 : 120,
+            sortable: false, // Set to false
+            headerAlign: 'right',
+            align: 'right',
+            renderCell: (params) => (
+                <Typography
+                    variant="body2"
+                    className={params.value === formattedBestTime ? "best-lap" : ""}
+                    sx={{
+                        width: '100%',
+                        height: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'flex-end',
+                        paddingRight: '8px',
+                        fontSize: isMobile ? '0.85em' : '1em',
+                        fontWeight: 'bold',
+                        color: '#000000'
+                    }}
+                >
+                    {params.value}
+                </Typography>
+            ),
+        },
+        // Gap column
+        {
+            field: "gap",
+            headerName: "Gap",
+            width: isMobile ? 65 : 120,
+            sortable: false, // Set to false
+            headerAlign: 'right',
+            align: 'right',
+            renderCell: (params) => (
+                <Typography
+                    variant="body2"
+                    sx={{
+                        width: '100%',
+                        height: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'flex-end',
+                        paddingRight: '8px',
+                        fontSize: isMobile ? '0.8em' : '0.9em',
+                        color: params.value === '' ? '#6c757d' : '#000000',
+                    }}
+                >
+                    {params.value === '' ? '--' : params.value}
+                </Typography>
+            ),
         },
     ];
 
     // Main component render
     return (
-        <Box sx={{ p: 3 }}>
-            {/* Tab navigation for different time periods */}
-            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+        <Box sx={{ p: isMobile ? 0 : 3 }}>
+            {/* Tab navigation */}
+            <Box sx={{ borderBottom: 1, borderColor: "divider" }} className="f1-tabs-container">
                 <Tabs
                     value={tabValue}
                     onChange={handleTabChange}
-                    variant="fullWidth"
+                    variant={isMobile ? "scrollable" : "fullWidth"}
+                    scrollButtons="auto"
+                    TabIndicatorProps={{ className: 'f1-indicator' }}
                 >
-                    <Tab label="Overall" />
-                    <Tab label="Semester 1" />
-                    <Tab label="Semester 2" />
+                    <Tab label="OVERALL" className="f1-tab" />
+                    <Tab label="SEMESTER 1" className="f1-tab" />
+                    <Tab label="SEMESTER 2" className="f1-tab" />
                 </Tabs>
             </Box>
 
@@ -176,12 +258,21 @@ const Leaderboard = ({
                 autoHeight
                 rows={rows}
                 columns={columns}
-                sortModel={[{ field: "lapTime", sort: "asc" }]} // Default sort by lap time
-                sx={isMobile ? null : { fontSize: "1.2em" }} // Larger font on desktop
-                checkboxSelection={showGroups} // Enable selection only for group mode
+                // Initial sort ensures the ranking is correct on load
+                initialState={{
+                    sorting: {
+                        sortModel: [{ field: 'lapTime', sort: 'asc' }],
+                    },
+                }}
+                rowHeight={isMobile ? 35 : 50}
+                className="f1-datagrid-minimal"
+                checkboxSelection={showGroups}
                 onRowSelectionModelChange={(newSelection) =>
                     handleSelection(newSelection)
                 }
+                disableColumnMenu
+                disableColumnSelector
+                disableDensitySelector
             />
 
             {/* Racing groups section (conditional) */}
