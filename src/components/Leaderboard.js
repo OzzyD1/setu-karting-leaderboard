@@ -26,7 +26,7 @@ const formatTime = (time) => {
 
 const Leaderboard = ({
                          showGroups,
-                         selectedStudents,
+                     //    selectedStudents,
                          setSelectedStudents,
                          selectedYear,
                      }) => {
@@ -100,7 +100,7 @@ const Leaderboard = ({
         sortedDrivers.map((driver, index) => [driver.student_id, index + 1])
     );
 
-    const getStudentClass = (student) => {
+   /* const getStudentClass = (student) => {
         if (student.time < 22) {
             return "gold";
         } else if (student.time < 23) {
@@ -108,7 +108,7 @@ const Leaderboard = ({
         } else {
             return "peru";
         }
-    };
+    };*/
 
     /**
      * Transform driver data into DataGrid row format
