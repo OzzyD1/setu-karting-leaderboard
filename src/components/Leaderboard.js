@@ -1,15 +1,6 @@
 /**
  * Leaderboard Component
- *
- * Displays karting lap times in a tabbed interface with three views:
- * - Overall: Combined best times from both semesters
- * - Semester 1: Only semester 1 times
- * - Semester 2: Only semester 2 times
- *
- * Features:
- * - Clean, minimalist light theme layout
- * - Responsive design
- * - Sorting ability REMOVED from all columns
+ * (Updated alignment for Time and Gap columns to 'center')
  */
 
 import { useState } from "react";
@@ -26,7 +17,7 @@ const formatTime = (time) => {
 
 const Leaderboard = ({
                          showGroups,
-                     //    selectedStudents,
+                         //selectedStudents,
                          setSelectedStudents,
                          selectedYear,
                      }) => {
@@ -100,16 +91,6 @@ const Leaderboard = ({
         sortedDrivers.map((driver, index) => [driver.student_id, index + 1])
     );
 
-   /* const getStudentClass = (student) => {
-        if (student.time < 22) {
-            return "gold";
-        } else if (student.time < 23) {
-            return "silver";
-        } else {
-            return "peru";
-        }
-    };*/
-
     /**
      * Transform driver data into DataGrid row format
      */
@@ -133,7 +114,7 @@ const Leaderboard = ({
             field: "rank",
             headerName: "Pos",
             width: isMobile ? 40 : 60,
-            sortable: false, // Set to false
+            sortable: false,
             headerAlign: 'center',
             align: 'center',
             renderCell: (params) => (
@@ -160,9 +141,9 @@ const Leaderboard = ({
         {
             field: "name",
             headerName: "Driver Name",
-            width: isMobile ? 180 : 400,
+            width: isMobile ? 170 : 400,
             flex: isMobile ? null : 1,
-            sortable: false, // Set to false
+            sortable: false,
             renderCell: (params) => (
                 <Typography
                     variant="body2"
@@ -184,9 +165,9 @@ const Leaderboard = ({
             field: "lapTime",
             headerName: "Time",
             width: isMobile ? 75 : 120,
-            sortable: false, // Set to false
-            headerAlign: 'right',
-            align: 'right',
+            sortable: false,
+            headerAlign: 'center', // <-- Changed to center
+            align: 'center',     // <-- Changed to center
             renderCell: (params) => (
                 <Typography
                     variant="body2"
@@ -196,8 +177,10 @@ const Leaderboard = ({
                         height: '100%',
                         display: 'flex',
                         alignItems: 'center',
-                        justifyContent: 'flex-end',
-                        paddingRight: '8px',
+                        // Changed justification to center
+                        justifyContent: 'center',
+                        // Padding removed/defaulted since we are centering
+                        paddingRight: 0,
                         fontSize: isMobile ? '0.85em' : '1em',
                         fontWeight: 'bold',
                         color: '#000000'
@@ -212,9 +195,9 @@ const Leaderboard = ({
             field: "gap",
             headerName: "Gap",
             width: isMobile ? 65 : 120,
-            sortable: false, // Set to false
-            headerAlign: 'right',
-            align: 'right',
+            sortable: false,
+            headerAlign: 'center', // <-- Changed to center
+            align: 'center',     // <-- Changed to center
             renderCell: (params) => (
                 <Typography
                     variant="body2"
@@ -223,8 +206,10 @@ const Leaderboard = ({
                         height: '100%',
                         display: 'flex',
                         alignItems: 'center',
-                        justifyContent: 'flex-end',
-                        paddingRight: '8px',
+                        // Changed justification to center
+                        justifyContent: 'center',
+                        // Padding removed/defaulted since we are centering
+                        paddingRight: 0,
                         fontSize: isMobile ? '0.8em' : '0.9em',
                         color: params.value === '' ? '#6c757d' : '#000000',
                     }}

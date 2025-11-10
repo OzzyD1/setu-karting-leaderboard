@@ -84,7 +84,7 @@ const NavBar = ({ showGroups, onGroupToggle, selectedYear, onYearChange }) => {
                         </Select>
                     </FormControl>
 
-                    {/* Group Generator Toggle (TEXT REMOVED) */}
+                    {/* Group Generator Toggle (FIXED HOVER EFFECT) */}
                     <FormControlLabel
                         control={
                             <Switch
@@ -102,9 +102,26 @@ const NavBar = ({ showGroups, onGroupToggle, selectedYear, onYearChange }) => {
                                 }}
                             />
                         }
-                        // EMPTY LABEL - Text is removed, only the toggle remains
+                        // EMPTY LABEL - Text is removed
                         label={<span style={{ display: 'none' }}>Group Generator</span>}
-                        sx={{ color: "#333333", margin: isMobile ? '0 4px 0 0' : '0 8px 0 0' }}
+                        sx={{
+                            color: "#333333",
+                            margin: isMobile ? '0 4px 0 0' : '0 8px 0 0',
+                            // --- FIX FOR DESKTOP HOVER MISALIGNMENT ---
+                            '&:hover': {
+                                backgroundColor: 'transparent', // Remove the gray hover background
+                                cursor: 'pointer',             // Keep the pointer cursor
+                            },
+                            // Target the inner component that handles the ripple/focus state
+                            '& .MuiButtonBase-root': {
+                                padding: 0,
+                                margin: 0,
+                                '&:hover': {
+                                    backgroundColor: 'transparent', // Ensure button base is also transparent on hover
+                                },
+                            }
+                            // ------------------------------------------
+                        }}
                     />
                 </Box>
             </Toolbar>
