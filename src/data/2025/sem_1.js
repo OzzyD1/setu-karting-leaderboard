@@ -1,6 +1,6 @@
 export const drivers_sem1_2025 = [
-    {student_id: 1, name: "Ozzy Domarkas", time: 22.026 },
-    {student_id: 2, name: "Jamie Doyle", time: 21.862 },
+    {student_id: 1, name: "Ozzy Domarkas", time: 21.862},
+    {student_id: 2, name: "Jamie Doyle", time: 21.971 },
     {student_id: 3, name: "Rian Doyle", time: 21.812 },
 //  {student_id: 4, name: "Peter Stanev", time:  },
 //  {student_id: 5, name: "Jamie Tobin", time:  },
