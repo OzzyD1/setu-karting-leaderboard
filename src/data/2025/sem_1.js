@@ -60,7 +60,7 @@ export const drivers_sem1_2025 = [
 //  {student_id: 59, name: "Maks", time: 24.09 },
 //  {student_id: 60, name: "Kieran O'Neill", time: 23.661 },
 //  {student_id: 61, name: "Xavier", time: 24.93 },
-    {student_id: 62, name: "Colm Power Pierce", time: 21.674 },
+    {student_id: 62, name: "Colm Power Pierce", time: 21.653 },
 //  {student_id: 63, name: "Jamie Malone", time: 22.63 },
 //  {student_id: 64, name: "Jessica Flynn", time: 22.627 },
 //  {student_id: 65, name: "Niamh O'Keeffe", time: 25.166 },
@@ -80,7 +80,7 @@ export const drivers_sem1_2025 = [
 //  {student_id: 80, name: "Becky        ", time: 27.321 }, //surname
     {student_id: 81, name: "Shane Nolan", time: 22.275 },
     {student_id: 82, name: "Aine Whelan", time: 23.394 },
-    {student_id: 83, name: "Jasmine O'Shea Rush", time: 23.167},
+    {student_id: 83, name: "Jasmine O'Shea Rush", time: 23.045},
 //  {student_id: 84, name: "Daniel Greany", time: 27.179 },
 //  {student_id: 85, name: "Colin Kelly", time: 22.14 },
 //  {student_id: 86, name: "Niall O'Brien", time: 22.604 },
@@ -95,7 +95,7 @@ export const drivers_sem1_2025 = [
 //  {student_id: 95, name: "Conor Nolan", time: 22.245 },
 //  {student_id: 96, name: "Liam Walsh", time: 22.475 },
 //  {student_id: 97, name: "Eric Butler", time: 22.436 },
-    {student_id: 98, name: "Jason Walsh", time: 21.994 },
+    {student_id: 98, name: "Jason Walsh", time: 21.955 },
     {student_id: 99, name: "Hayden English", time: 22.107 },
     {student_id: 100, name: "Alex Dunne", time: 22.530 },
     {student_id: 101, name: "Dylan Agnew", time: 22.275},
@@ -151,6 +151,8 @@ export const drivers_sem1_2025 = [
     {student_id: 151, name: "Florian Nizon", time: 22.813},
     {student_id: 152, name: "Victor Idowu", time: 28.889},
     {student_id: 153, name: "Amandine Carlier", time: 23.267},
+    {student_id: 154, name: "Ben O'Gorman", time: 22.697},
+    {student_id: 155, name: "Jake Kirwan", time: 23.379},
 
 
     ];
