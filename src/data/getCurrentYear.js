@@ -1,6 +1,7 @@
 import drivers_sem1_2024 from "./2024/sem_1";
 import drivers_sem2_2024 from "./2024/sem_2";
 import drivers_sem1_2025 from "./2025/sem_1";
+import drivers_sem2_2025 from "./2025/sem_2";
 
 export const academicYears = {
     "2024-2025": {
@@ -11,7 +12,7 @@ export const academicYears = {
     "2025-2026": {
         label: "2025-2026",
         sem1: drivers_sem1_2025,
-        // sem2: drivers_sem2_2025
+        sem2: drivers_sem2_2025,
     },
 };
 
