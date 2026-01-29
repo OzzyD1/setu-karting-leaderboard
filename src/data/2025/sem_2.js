@@ -1,10 +1,10 @@
 export const drivers_sem2_2025 = [
 //  {student_id: 1, name: "Ozzy Domarkas", time: }
     {student_id: 2, name: "Jamie Doyle", time: 22.533 },
-    {student_id: 3, name: "Rian Doyle", time: 21.755 },
+    {student_id: 3, name: "Rian Doyle", time: 21.745 },
 //  {student_id: 4, name: "Peter Stanev", time:  },
 //  {student_id: 5, name: "Jamie Tobin", time:  },
-//  {student_id: 6, name: "Hannah O'Connor", time:  },
+    {student_id: 6, name: "Hannah O'Connor", time: 22.862 },
 //  {student_id: 7, name: "Nathan McNamara", time: },
 //  {student_id: 8, name: "Justin Malins", time:  },
 //  {student_id: 9, name: "Eoghan Dowling", time:  },
@@ -21,7 +21,7 @@ export const drivers_sem2_2025 = [
 //  {student_id: 20, name: "Dylan Rockett", time:  },
 //  {student_id: 21, name: "Dean Horgan", time:  },
 //  {student_id: 22, name: "Niko Wisniewski", time:  },
-    {student_id: 23, name: "Jack Gear", time: 22.243 },
+    {student_id: 23, name: "Jack Gear", time: 21.797 },
 //  {student_id: 24, name: "", time: },
 //  {student_id: 25, name: "Harry Watkin", time:  },
 //  {student_id: 26, name: "Adam Raher", time:  },
@@ -97,7 +97,7 @@ export const drivers_sem2_2025 = [
 //  {student_id: 97, name: "Eric Butler", time:  },
     {student_id: 98, name: "Jason Walsh", time: 22.213 },
 //  {student_id: 99, name: "Hayden English", time:  },
-    {student_id: 100, name: "Alex Dunne", time: 22.749 },
+    {student_id: 100, name: "Alex Dunne", time: 22.685 },
 //  {student_id: 101, name: "Dylan Agnew", time: },
 //  {student_id: 102, name: "Dan Fagan", time: },
     {student_id: 103, name: "Luke Kenny", time: 23.502},
@@ -151,10 +151,11 @@ export const drivers_sem2_2025 = [
 //  {student_id: 151, name: "Florian Nizon", time: },
 //  {student_id: 152, name: "Victor Idowu", time: },
 //  {student_id: 153, name: "Amandine Carlier", time: },
-//  {student_id: 154, name: "Ben O'Gorman", time: },
-//  {student_id: 155, name: "Jake Kirwan", time: },
+    {student_id: 154, name: "Ben O'Gorman", time: 23.187 },
+    {student_id: 155, name: "Jake Kirwan", time: 22.995 },
 //  {student_id: 156, name: "Ivo",time: 24.480}, //not a member?
 //  {student_id: 157, name: "Lana", time:36.379},
+    {student_id: 158, name: "Kieran Macaraeg", time: 26.734},
 
 
 ];
