@@ -1,6 +1,6 @@
 export const drivers_sem2_2025 = [
 //  {student_id: 1, name: "Ozzy Domarkas", time: }
-    {student_id: 2, name: "Jamie Doyle", time: 22.533 },
+    {student_id: 2, name: "Jamie Doyle", time: 22.345 },
     {student_id: 3, name: "Rian Doyle", time: 21.745 },
 //  {student_id: 4, name: "Peter Stanev", time:  },
 //  {student_id: 5, name: "Jamie Tobin", time:  },
@@ -21,7 +21,7 @@ export const drivers_sem2_2025 = [
 //  {student_id: 20, name: "Dylan Rockett", time:  },
 //  {student_id: 21, name: "Dean Horgan", time:  },
 //  {student_id: 22, name: "Niko Wisniewski", time:  },
-    {student_id: 23, name: "Jack Gear", time: 21.797 },
+    {student_id: 23, name: "Jack Gear", time: 21.667 },
 //  {student_id: 24, name: "", time: },
     {student_id: 25, name: "Harry Watkin", time: 22.923 },
 //  {student_id: 26, name: "Adam Raher", time:  },
@@ -71,7 +71,7 @@ export const drivers_sem2_2025 = [
 //  {student_id: 70, name: "Taisce Ryan", time:  },
 //  {student_id: 71, name: "Patrick Whelan", time:  },
 //  {student_id: 72, name: "Niall Doherty", time:  },
-    {student_id: 73, name: "Scott Bowdren", time: 22.175 },
+    {student_id: 73, name: "Scott Bowdren", time: 21.782 },
 //  {student_id: 74, name: "Ryan Kelly", time:  },
 //  {student_id: 75, name: "Jack Murphy", time:  },
 //  {student_id: 76, name: "Peter Murphy", time:  },
@@ -87,7 +87,7 @@ export const drivers_sem2_2025 = [
 //  {student_id: 87, name: "Stephan Price", time:  },
 //  {student_id: 88, name: "Ciara Burke", time:  },
 //  {student_id: 89, name: "Ava Carr", time:  },
-//  {student_id: 90, name: "Ben Cheal", time:  },
+    {student_id: 90, name: "Ben Cheal", time: 22.315 },
 //  {student_id: 91,name: "",time: },
 //  {student_id: 92,name: "",time: },
 //  {student_id: 93, name: "Caragh Mackey", time:  },
@@ -97,8 +97,8 @@ export const drivers_sem2_2025 = [
 //  {student_id: 97, name: "Eric Butler", time:  },
     {student_id: 98, name: "Jason Walsh", time: 22.213 },
     {student_id: 99, name: "Hayden English", time: 22.291 },
-    {student_id: 100, name: "Alex Dunne", time: 22.685 },
-//  {student_id: 101, name: "Dylan Agnew", time: },
+    {student_id: 100, name: "Alex Dunne", time: 22.453 },
+    {student_id: 101, name: "Dylan Agnew", time: 22.787},
 //  {student_id: 102, name: "Dan Fagan", time: },
     {student_id: 103, name: "Luke Kenny", time: 23.502},
 //  {student_id: 104, name: "Henry Thompson", time: },
@@ -113,7 +113,7 @@ export const drivers_sem2_2025 = [
 //  {student_id: 113, name: "Berkay Eren", time: },
 //  {student_id: 114, name: "Josh Maher", time: },
 //  {student_id: 115, name: "Olivier Grzywaczewski", time: },
-    {student_id: 116, name: "Joshua Fourie", time: 22.381 },
+    {student_id: 116, name: "Joshua Fourie", time: 22.176 },
 //  {student_id: 117, name: "Umar Usman", time: },
     {student_id: 118, name: "Lee Flynn", time: 21.679 },
 //  {student_id: 119, name: "Ronan Dove", time: },
@@ -133,7 +133,7 @@ export const drivers_sem2_2025 = [
 //  {student_id: 133, name: "John Wade", time: },
 //  {student_id: 134, name: "Cody Doran", time: },
 //  {student_id: 135, name: "Tiarnan Malone", time: },
-//  {student_id: 136, name: "Dillon Huberty", time: },
+    {student_id: 136, name: "Dillon Huberty", time: 22.928 },
 //  {student_id: 137, name: "Luke Corcoran", time: },
 //  {student_id: 138, name: "Maksim Karakulin", time: },
 //  {student_id: 139, name: "Thomas Carlier", time: },
@@ -155,8 +155,12 @@ export const drivers_sem2_2025 = [
     {student_id: 155, name: "Jake Kirwan", time: 22.995 },
 //  {student_id: 156, name: "Ivo",time: 24.480}, //not a member?
 //  {student_id: 157, name: "Lana", time:36.379},
-    {student_id: 158, name: "Kieran Macaraeg", time: 24.537},
-
+    {student_id: 158, name: "Kieran Macaraeg", time: 24.302 },
+//  {student_id: 159, name: "Ryan Murphy", time: 23.573}, not a member?
+    {student_id: 160, name: "Szymon Magulla", time: 23.870},
+    {student_id: 161, name: "Adam O'Connor", time: 24.109},
+//  {student_id: 162, name: "A Grandemange", time: 24.186}, not a member
+//  {student_id: 163, name: "Mathew Palac", time: 22.690,
 
 ];
 export default drivers_sem2_2025;
