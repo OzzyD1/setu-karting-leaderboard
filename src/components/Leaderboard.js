@@ -1,143 +1,89 @@
-/**
- * Leaderboard Component
- * (Updated alignment for Time and Gap columns to 'center')
- */
-
 import { useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Tabs, Tab, Box, Typography } from "@mui/material";
 import { academicYears } from "../data/getCurrentYear";
 
-// Helper to format the time to three decimal places
-const formatTime = (time) => {
-    if (typeof time !== 'number' || isNaN(time)) return '';
-    return time.toFixed(3);
+const formatTime = (time) => time.toFixed(3);
+
+const byTime = (list) => [...list].sort((a, b) => a.time - b.time);
+
+// Drivers for the chosen tab (0 = Overall, 1 = Semester 1, 2 = Semester 2), fastest first
+const getDrivers = (yearData, tab) => {
+    const sem1 = yearData?.sem1 ?? [];
+    const sem2 = yearData?.sem2 ?? [];
+
+    if (tab === 1) return byTime(sem1);
+    if (tab === 2) return byTime(sem2);
+
+    // Overall: keep each person's best time across both semesters
+    const best = new Map();
+    [...sem1, ...sem2].forEach((d) => {
+        if (!best.has(d.name) || best.get(d.name).time > d.time) {
+            best.set(d.name, d);
+        }
+    });
+    return byTime([...best.values()]);
 };
 
-const Leaderboard = ({
-                         showGroups,
-                         //selectedStudents,
-                         setSelectedStudents,
-                         selectedYear,
-                     }) => {
-    // Detect mobile screen size for responsive layout
-    const isMobile = useMediaQuery("(max-width:600px)");
+// Shared look for a centred cell
+const cellSx = (isMobile, extra = {}) => ({
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: isMobile ? "0.85em" : "1em",
+    color: "#000000",
+    ...extra,
+});
 
-    // Tab state: 0=Overall, 1=Semester 1, 2=Semester 2
-    const [tabValue, setTabValue] = useState(0);
+const Leaderboard = ({ showGroups, setSelectedStudents, selectedYear }) => {
+    const isMobile = useMediaQuery("(max-width:600px)");
+    const [tab, setTab] = useState(0);
+
+    const drivers = getDrivers(academicYears[selectedYear], tab);
+    const bestTime = drivers.length > 0 ? drivers[0].time : 0;
+
+    // Rows are already sorted, so rank is just the position in the list
+    const rows = drivers.map((driver, index) => ({
+        id: driver.name,
+        rank: index + 1,
+        name: driver.name,
+        lapTime: formatTime(driver.time),
+        gap:
+            driver.time - bestTime > 0.001
+                ? `+${formatTime(driver.time - bestTime)}`
+                : "",
+    }));
+    const formattedBestTime = rows.length > 0 ? rows[0].lapTime : "";
 
     const handleSelection = (selection) => {
         if (!showGroups) return;
-        const selected = sortedDrivers.filter((student) =>
-            selection.includes(student.student_id)
-        );
-        setSelectedStudents(selected);
+        setSelectedStudents(drivers.filter((d) => selection.includes(d.name)));
     };
 
-    const renderGroups = () => {
-        return null;
-    };
-
-    const handleTabChange = (event, newValue) => {
-        setTabValue(newValue);
-    };
-
-    const getCurrentDrivers = () => {
-        const yearData = academicYears[selectedYear];
-        if (!yearData) return [];
-
-        const drivers_sem1 = yearData.sem1 || [];
-        const drivers_sem2 = yearData.sem2 || [];
-
-        const driverMap = new Map();
-        switch (tabValue) {
-            case 0: // Overall
-                [...drivers_sem1, ...drivers_sem2].forEach((driver) => {
-                    if (
-                        !driverMap.has(driver.student_id) ||
-                        driverMap.get(driver.student_id).time > driver.time
-                    ) {
-                        driverMap.set(driver.student_id, driver);
-                    }
-                });
-                break;
-            case 1: // Semester 1 only
-                drivers_sem1.forEach((driver) => {
-                    driverMap.set(driver.student_id, driver);
-                });
-                break;
-            case 2: // Semester 2 only
-                drivers_sem2.forEach((driver) => {
-                    driverMap.set(driver.student_id, driver);
-                });
-                break;
-            default:
-                return [];
-        }
-        return Array.from(driverMap.values());
-    };
-
-    // Get current dataset and calculate rankings
-    const currentDrivers = getCurrentDrivers();
-    const sortedDrivers = [...currentDrivers].sort((a, b) => a.time - b.time);
-
-    // Get the best time (Lap Time of the leader)
-    const bestTime = sortedDrivers.length > 0 ? sortedDrivers[0].time : 0;
-    const formattedBestTime = formatTime(bestTime);
-
-    // Create rank mapping: student_id -> rank position (1-based)
-    const ranks = new Map(
-        sortedDrivers.map((driver, index) => [driver.student_id, index + 1])
-    );
-
-    /**
-     * Transform driver data into DataGrid row format
-     */
-    const rows = currentDrivers.map((student) => ({
-        id: student.student_id,
-        rank: ranks.get(student.student_id),
-        name: student.name,
-        lapTime: formatTime(student.time),
-        // Calculate gap: blank for the leader, otherwise +[difference]
-        gap: (student.time - bestTime) > 0.001
-            ? `+${formatTime(student.time - bestTime)}`
-            : '',
-    }));
-
-    /**
-     * DataGrid column configuration
-     */
     const columns = [
-        // Pos column
         {
             field: "rank",
             headerName: "Pos",
             width: isMobile ? 40 : 60,
             sortable: false,
-            headerAlign: 'center',
-            align: 'center',
+            headerAlign: "center",
+            align: "center",
             renderCell: (params) => (
                 <Typography
                     variant="body2"
                     className={`pos-cell pos-${params.value}`}
-                    sx={{
-                        fontSize: isMobile ? '0.85em' : '1em',
-                        fontWeight: 'bold',
-                        color: '#000000',
-                        width: '100%',
-                        height: '100%',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        backgroundColor: '#2b2e3a',
-                    }}
+                    sx={cellSx(isMobile, {
+                        fontWeight: "bold",
+                        backgroundColor: "#2b2e3a",
+                    })}
                 >
                     {params.value}
                 </Typography>
             ),
         },
-        // Name column
         {
             field: "name",
             headerName: "Driver Name",
@@ -148,89 +94,65 @@ const Leaderboard = ({
                 <Typography
                     variant="body2"
                     sx={{
-                        color: '#000000',
-                        fontSize: isMobile ? '0.85em' : '1em',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        whiteSpace: 'nowrap',
-                        paddingLeft: '8px'
+                        color: "#000000",
+                        fontSize: isMobile ? "0.85em" : "1em",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        whiteSpace: "nowrap",
+                        paddingLeft: "8px",
                     }}
                 >
                     {params.value}
                 </Typography>
             ),
         },
-        // Lap Time column
         {
             field: "lapTime",
             headerName: "Time",
             width: isMobile ? 75 : 120,
             sortable: false,
-            headerAlign: 'center', // <-- Changed to center
-            align: 'center',     // <-- Changed to center
+            headerAlign: "center",
+            align: "center",
             renderCell: (params) => (
                 <Typography
                     variant="body2"
                     className={params.value === formattedBestTime ? "best-lap" : ""}
-                    sx={{
-                        width: '100%',
-                        height: '100%',
-                        display: 'flex',
-                        alignItems: 'center',
-                        // Changed justification to center
-                        justifyContent: 'center',
-                        // Padding removed/defaulted since we are centering
-                        paddingRight: 0,
-                        fontSize: isMobile ? '0.85em' : '1em',
-                        fontWeight: 'bold',
-                        color: '#000000'
-                    }}
+                    sx={cellSx(isMobile, { fontWeight: "bold" })}
                 >
                     {params.value}
                 </Typography>
             ),
         },
-        // Gap column
         {
             field: "gap",
             headerName: "Gap",
             width: isMobile ? 65 : 120,
             sortable: false,
-            headerAlign: 'center', // <-- Changed to center
-            align: 'center',     // <-- Changed to center
+            headerAlign: "center",
+            align: "center",
             renderCell: (params) => (
                 <Typography
                     variant="body2"
-                    sx={{
-                        width: '100%',
-                        height: '100%',
-                        display: 'flex',
-                        alignItems: 'center',
-                        // Changed justification to center
-                        justifyContent: 'center',
-                        // Padding removed/defaulted since we are centering
-                        paddingRight: 0,
-                        fontSize: isMobile ? '0.8em' : '0.9em',
-                        color: params.value === '' ? '#6c757d' : '#000000',
-                    }}
+                    sx={cellSx(isMobile, {
+                        fontSize: isMobile ? "0.8em" : "0.9em",
+                        color: params.value === "" ? "#6c757d" : "#000000",
+                    })}
                 >
-                    {params.value === '' ? '--' : params.value}
+                    {params.value === "" ? "--" : params.value}
                 </Typography>
             ),
         },
     ];
 
-    // Main component render
     return (
         <Box sx={{ p: isMobile ? 0 : 3 }}>
-            {/* Tab navigation */}
             <Box sx={{ borderBottom: 1, borderColor: "divider" }} className="f1-tabs-container">
                 <Tabs
-                    value={tabValue}
-                    onChange={handleTabChange}
+                    value={tab}
+                    onChange={(event, newValue) => setTab(newValue)}
                     variant={isMobile ? "scrollable" : "fullWidth"}
                     scrollButtons="auto"
-                    TabIndicatorProps={{ className: 'f1-indicator' }}
+                    TabIndicatorProps={{ className: "f1-indicator" }}
                 >
                     <Tab label="OVERALL" className="f1-tab" />
                     <Tab label="SEMESTER 1" className="f1-tab" />
@@ -238,30 +160,18 @@ const Leaderboard = ({
                 </Tabs>
             </Box>
 
-            {/* Main leaderboard data grid */}
             <DataGrid
                 autoHeight
                 rows={rows}
                 columns={columns}
-                // Initial sort ensures the ranking is correct on load
-                initialState={{
-                    sorting: {
-                        sortModel: [{ field: 'lapTime', sort: 'asc' }],
-                    },
-                }}
                 rowHeight={isMobile ? 35 : 50}
                 className="f1-datagrid-minimal"
                 checkboxSelection={showGroups}
-                onRowSelectionModelChange={(newSelection) =>
-                    handleSelection(newSelection)
-                }
+                onRowSelectionModelChange={handleSelection}
                 disableColumnMenu
                 disableColumnSelector
                 disableDensitySelector
             />
-
-            {/* Racing groups section (conditional) */}
-            {renderGroups()}
         </Box>
     );
 };

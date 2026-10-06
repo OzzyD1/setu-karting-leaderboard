@@ -1,37 +1,26 @@
-import drivers_sem1_2024 from "./2024/sem_1";
-import drivers_sem2_2024 from "./2024/sem_2";
-import drivers_sem1_2025 from "./2025/sem_1";
-import drivers_sem2_2025 from "./2025/sem_2";
-import drivers_sem1_2026 from "./2026/sem_1";
-import drivers_sem2_2026 from "./2026/sem_2";
+import times from "./times.json";
 
-export const academicYears = {
-    "2024-2025": {
-        label: "2024-2025",
-        sem1: drivers_sem1_2024,
-        sem2: drivers_sem2_2024,
-    },
-    "2025-2026": {
-        label: "2025-2026",
-        sem1: drivers_sem1_2025,
-        sem2: drivers_sem2_2025,
-    },
-    "2026-2027": {
-        label: "2026-2027",
-        sem1: drivers_sem1_2026,
-        sem2: drivers_sem2_2026,
-    },
-};
+// times.json stores times like { "Jamie Doyle": 22.258 }.
+// The app wants a list like [{ name: "Jamie Doyle", time: 22.258 }].
+const toList = (semester = {}) =>
+    Object.entries(semester).map(([name, time]) => ({ name, time }));
+
+// Same shape as before: { "2026-2027": { label, sem1: [...], sem2: [...] } }
+export const academicYears = Object.fromEntries(
+    Object.entries(times).map(([year, sems]) => [
+        year,
+        { label: year, sem1: toList(sems.sem1), sem2: toList(sems.sem2) },
+    ])
+);
 
 export const getCurrentAcademicYear = () => {
     const now = new Date();
     const year = now.getFullYear();
-    const month = now.getMonth();
 
     // Academic year starts in September (month 8)
-    if (month >= 8) {
-        return `${year}-${year + 1}`;
-    } else {
-        return `${year - 1}-${year}`;
-    }
+    const current =
+        now.getMonth() >= 8 ? `${year}-${year + 1}` : `${year - 1}-${year}`;
+
+    // If that year isn't in times.json yet, show the newest year that is
+    return academicYears[current] ? current : Object.keys(academicYears).sort().pop();
 };

@@ -50,7 +50,7 @@ const GroupGenerator = ({ showGroups, selectedStudents }) => {
                             {/* Render each driver in the group */}
                             {group.map((driver, index) => (
                                 <Box
-                                    key={driver.id}
+                                    key={driver.name}
                                     sx={{
                                         p: 1,
                                         mb: 1,
