@@ -1,10 +1,10 @@
 export const drivers_sem1_2026 = [
 //  {student_id: 1, name: "Ozzy Domarkas", time: }
-    {student_id: 2, name: "Jamie Doyle", time: 22.549 },
+    {student_id: 2, name: "Jamie Doyle", time: 22.258 },
     {student_id: 3, name: "Rian Doyle", time: 22.108 },
 //  {student_id: 4, name: "Peter Stanev", time:  },
 //  {student_id: 5, name: "Jamie Tobin", time:  },
-//  {student_id: 6, name: "Hannah O'Connor", time: }
+    {student_id: 6, name: "Hannah O'Connor", time: 22.221},
     {student_id: 7, name: "Nathan McNamara", time: 23.220},
 //  {student_id: 8, name: "Justin Malins", time:  },
 //  {student_id: 9, name: "Eoghan Dowling", time:  },
@@ -95,8 +95,8 @@ export const drivers_sem1_2026 = [
 //  {student_id: 95, name: "Conor Nolan", time:  },
 //  {student_id: 96, name: "Liam Walsh", time:  },
 //  {student_id: 97, name: "Eric Butler", time:  },
-//  {student_id: 98, name: "Jason Walsh", time: }
-    {student_id: 99, name: "Hayden English", time: 22.819 },
+    {student_id: 98, name: "Jason Walsh", time:22.268 },
+    {student_id: 99, name: "Hayden English", time: 22.207 },
 //  {student_id: 100, name: "Alex Dunne", time: }
 //  {student_id: 101, name: "Dylan Agnew", time: }
 //  {student_id: 102, name: "Dan Fagan", time: },
@@ -107,13 +107,13 @@ export const drivers_sem1_2026 = [
 //  {student_id: 107, name: "Kash Khan", time:  },
 //  {student_id: 108, name: "Ciara O'Riordan", time: },
 //  {student_id: 109, name: "Ruben Barrasa", time: }
-//  {student_id: 110, name: "James Martin", time: }
+    {student_id: 110, name: "James Martin", time: 22.656 },
 //  {student_id: 111, name: "Szymon Kondratowicz", time: },
 //  {student_id: 112, name: "Anna Tupalska", time: },
 //  {student_id: 113, name: "Berkay Eren", time: },
     {student_id: 114, name: "Josh Maher", time: 23.749 },
 //  {student_id: 115, name: "Olivier Grzywaczewski", time: },
-    {student_id: 116, name: "Joshua Fourie", time: 22.114 },
+    {student_id: 116, name: "Joshua Fourie", time: 21.989 },
 //  {student_id: 117, name: "Umar Usman", time: },
 //  {student_id: 118, name: "Lee Flynn", time: }
     {student_id: 119, name: "Ronan Dove", time: 22.595},
@@ -131,7 +131,6 @@ export const drivers_sem1_2026 = [
 //  {student_id: 131, name: "Conor O'Sullivan", time: },
 //  {student_id: 132, name: "Paddy Walsh", time: },
 //  {student_id: 133, name: "John Wade", time: },
-//  {student_id: 134, name: "Cody Doran", time: },
 //  {student_id: 135, name: "Tiarnan Malone", time: },
 //  {student_id: 136, name: "Dillon Huberty", time: }
 //  {student_id: 137, name: "Luke Corcoran", time: },
@@ -146,7 +145,7 @@ export const drivers_sem1_2026 = [
 //  {student_id: 146, name: "Luke McGrath", time: }
 //  {student_id: 147, name: "Dawid Sumera", time: },
 //  {student_id: 148, name: "George-Cristoph Burghelea", time:  },
-//  {student_id: 149, name: "Annabel Allenden", time: }
+    {student_id: 149, name: "Annabel Allenden", time: 24.187 },
 //  {student_id: 150, name: "Finley Power", time:  },
 //  {student_id: 151, name: "Florian Nizon", time: },
 //  {student_id: 152, name: "Victor Idowu", time: },
@@ -157,8 +156,8 @@ export const drivers_sem1_2026 = [
 //  {student_id: 157, name: "Lana", time: }
 //  {student_id: 158, name: "Kieran Macaraeg", time: }
 //  {student_id: 159, name: "Ryan Murphy", time: } not a member?
-    {student_id: 160, name: "Szymon Magulla", time: 23.040 },
-    {student_id: 161, name: "Adam O'Connor", time: 23.765 },
+    {student_id: 160, name: "Szymon Magulla", time: 22.860 },
+    {student_id: 161, name: "Adam O'Connor", time: 23.409 },
 //  {student_id: 162, name: "A Grandemange", time: } not a member
 //  {student_id: 163, name: "Mathew Palac", time: }
 //  {student_id: 164, name: "James McDonald", time: } not a member
@@ -174,7 +173,7 @@ export const drivers_sem1_2026 = [
 //  {student_id: 174, name: "Timmy Shittu", time: } not a member
 //  {student_id: 175, name: "Brayan Mani", time: } not a member
 //  {student_id: 176, name: "Donal Doherty", time: }
-//  {student_id: 177, name: "Samuel Domorad", time: } not a member
+ //   {student_id: 177, name: "Samuel Domorad", time: 23.013 } //not a member
 //  {student_id: 178, name: "Patrick Walsh", time: }
 //  {student_id: 179, name: "Evan Hopkins", time: } not a member
 //  {student_id: 180, name: "Sean Kelly", time: }
@@ -184,27 +183,49 @@ export const drivers_sem1_2026 = [
 //  {student_id: 184, name: "Oliwia Spolnik", time: }
 //  {student_id: 185, name: "Shanmuga Priya Vijaya Baskar", time: }
 //  {student_id: 186, name: "Arianna Kaleniuk", time: }
-    {student_id: 187, name: "Warren Russell", time: 22.551},
+    {student_id: 187, name: "Warren Russell", time: 21.951},
     {student_id: 188, name: "Luke Kelly", time: 23.106},
     {student_id: 189, name: "Vicky Novytska", time: 26.030},
     {student_id: 190, name: "Jevon Somers", time: 22.543 },
     {student_id: 191, name: "Conor Kwinkelenberg", time: 22.768 },
-    {student_id: 192, name: "Conor Kelly", time: 22.959},
+    {student_id: 192, name: "Conor Kelly", time: 22.648},
     {student_id: 193, name: "Caleb Walsh", time: 22.991},
-    {student_id: 194, name: "Valentin Martin", time: 23.586},
+    {student_id: 194, name: "Valentin Martin", time: 22.549},
     {student_id: 195, name: "Darragh Clewes", time: 24.045},
-    {student_id: 196, name: "Shaun Maaliw", time: 26.227},
-    {student_id: 197, name: "Muireann Reardon", time: 23.378},
-    {student_id: 198, name: "John Brunnock", time: 23.611},
-    {student_id: 199, name: "Max McInerney", time: 24.225},
-    {student_id: 200, name: "Robbert O'Brien", time: 24.317},
-    {student_id: 201, name: "Daragh Blackmore", time: 28.479},
-    {student_id: 202, name: "Hassan Khan", time: 23.485},
+    {student_id: 196, name: "Shaun Maaliw", time: 23.309},
+    {student_id: 197, name: "Muireann Reardon", time: 23.150},
+    {student_id: 198, name: "John Brunnock", time: 23.067},
+    {student_id: 199, name: "Max McInerney", time: 23.777},
+    {student_id: 200, name: "Robbert O'Brien", time: 23.829},
+    {student_id: 201, name: "Daragh Blackmore", time: 25.225},
+    {student_id: 202, name: "Hassan Khan", time: 22.553},
     {student_id: 203, name: "Isaac Da Silva", time: 23.555},
    // {student_id: 204, name: "Lee Monahan"}                    //different name on list?
-    {student_id: 204, name: "Shane Harkin", time: 24.737},
-    {student_id: 205, name: "Fred Power", time: 25.961},
+    {student_id: 204, name: "Shane Harkin", time: 23.693},
+    {student_id: 205, name: "Fred Power", time: 25.120 },
     {student_id: 206, name: "Andreja Kasperaviciute", time: 26.923},
     {student_id: 207, name: "Patryk Geppert", time: 28.406},
+    {student_id: 208, name: "Jake Farragher", time: 24.409},
+    {student_id: 209, name: "Keelan Veerasoo", time: 23.507},
+ //   {student_id: 210, name: "Connor Mallett", time:24.329}, not a member?
+    {student_id: 211, name: "Ciaran Duggan", time: 25.299},
+    {student_id: 212, name: "Shayla Crotty", time: 25.611},
+    {student_id: 213, name: "Willow Kearney", time: 28.036},
+    {student_id: 214, name: "Molly Walsh", time: 28.345},
+    {student_id: 215, name: "Cody Heffernan", time: 23.850},
+    {student_id: 216, name: "Éanna Power", time: 23.954},
+    {student_id: 217, name: "Dawid Reyer", time: 24.994},
+    {student_id: 218, name: "Zoe Brady", time: 25.174},
+    {student_id: 219, name: "Roksana Oszynska", time: 26.362},
+    {student_id: 220, name: "Suzuto Sakamoto", time: 25.057},
+    {student_id: 221, name: "Gallo de la Corte", time: 25.302},
+    {student_id: 222, name: "Fionn Mac Cann", time: 23.904},
+    {student_id: 223, name: "Kajetan Kuczek", time: 24.015},
+    {student_id: 224, name: "Kenneth Barnes", time: 24.019},
+    {student_id: 225, name: "Roman Pankowski", time: 25.022},
+    {student_id: 226, name: "Donnie Sibbald", time: 27.400},
+    {student_id: 227, name: "Zoe Ward", time: 28.056},
+//    {student_id: 228, name: "Bertrand Clement", time: 23.861} //not a member
+
 ];
 export default drivers_sem1_2026;
