@@ -225,7 +225,7 @@ export const drivers_sem1_2026 = [
     {student_id: 225, name: "Roman Pankowski", time: 25.022},
     {student_id: 226, name: "Donnie Sibbald", time: 27.400},
     {student_id: 227, name: "Zoe Ward", time: 28.056},
-//    {student_id: 228, name: "Bertrand Clement", time: 23.861} //not a member
+//    {student_id: 228, name: "Bertrand Clement", time: 23.861} //not a member,
 
 ];
 export default drivers_sem1_2026;
