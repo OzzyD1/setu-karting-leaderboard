@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Group builder</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 1100px; margin: 1.5rem auto; padding: 0 1rem; color: #222; }
+  button, select, input { font: inherit; padding: .45rem .6rem; }
+  button { cursor: pointer; }
+  .bar { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: .6rem 0; }
+  #msg { margin: .5rem 0; color: #555; }
+  #boards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: .8rem; margin-top: 1rem; }
+  .box { border: 1px solid #ccc; border-radius: 8px; padding: .5rem; min-height: 90px; background: #fafafa; }
+  .box.over { background: #e8f0ff; }
+  .box.pool { border-color: #e0a000; background: #fff8e6; }
+  .box h3 { margin: .1rem 0 .5rem; font-size: 1rem; display: flex; justify-content: space-between; }
+  .full { color: #c00; }
+  .chip { display: flex; justify-content: space-between; gap: .5rem; background: #fff; border: 1px solid #ddd;
+          border-radius: 6px; padding: .35rem .5rem; margin-bottom: .35rem; cursor: grab; }
+  .chip small { color: #666; white-space: nowrap; }
+  .chip button { border: 0; background: none; padding: 0 .2rem; color: #999; }
+  .chip label { display: flex; gap: .4rem; align-items: center; cursor: pointer; flex: 1; }
+  .chip.picked { outline: 2px solid #1a73e8; }
+  .chip.here { background: #e3f7e3; border-color: #5cb85c; }
+  @media print { .bar, #msg { display: none; } .box { break-inside: avoid; } }
+</style>
+</head>
+<body>
+<h1>Group builder</h1>
+<p>Choose this week's signup sheet. It is read in your browser only: nothing is uploaded, and phone numbers are ignored.</p>
+
+<div class="bar">
+  <button id="pickSheet">Choose signup sheet (.xlsx)</button>
+  <button id="pickTimes" hidden>Choose times.json</button>
+  <select id="year" title="Leaderboard year"></select>
+  <select id="source" title="Which times to use">
+    <option value="all">Overall (best of both semesters)</option>
+    <option value="sem1">Semester 1</option>
+    <option value="sem2">Semester 2</option>
+  </select>
+  <select id="session" hidden></select>
+</div>
+<div id="msg"></div>
+
+<div class="bar">
+  <input id="addName" list="names" placeholder="Add a name" autocomplete="off">
+  <datalist id="names"></datalist>
+  <button id="add">Add</button>
+  <button id="addGroup">Add empty group</button>
+  <button id="copy">Copy groups as text</button>
+  <button id="print">Print</button>
+</div>
+<div id="boards"></div>
+
+<script>
+  const $ = (id) => document.getElementById(id);
+  const MAX = 7;
+  let times = null, sheet = null;
+  let groups = [], pool = [], nextId = 1, dragId = null, pickedId = null;
+  const arrivedNames = new Set(); // remembered by name, so ticks survive changing a dropdown
+
+  const say = (t) => { $("msg").textContent = t; };
+  // Lowercase, drop accents, apostrophes, spaces: "Adam O Connor" and "Adam O'Connor" both become "adamoconnor"
+  const norm = (s) => String(s ?? "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z]/g, "");
+
+  function lev(a, b) {
+    const d = Array.from({ length: a.length + 1 }, (_, i) => [i]);
+    for (let j = 1; j <= b.length; j++) d[0][j] = j;
+    for (let i = 1; i <= a.length; i++)
+      for (let j = 1; j <= b.length; j++)
+        d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    return d[a.length][b.length];
+  }
+
+  // ---- leaderboard names and times for the chosen year / source ----
+  function leaderboard() {
+    const sems = times[$("year").value] || {};
+    const use = $("source").value === "all" ? ["sem1", "sem2"] : [$("source").value];
+    const best = new Map();
+    use.forEach((s) => Object.entries(sems[s] || {}).forEach(([name, t]) => {
+      if (!best.has(name) || best.get(name) > t) best.set(name, t);
+    }));
+    return [...best].map(([name, time]) => {
+      const [first, ...rest] = name.split(" ");
+      return { name, time, key: norm(name), first: norm(first), last: norm(rest.join(" ")) };
+    });
+  }
+
+  // Try an exact match first, then progressively looser ones (loose ones get a "~" flag)
+  function match(first, last, lb) {
+    const key = norm(first + last), f = norm(first), l = norm(last);
+    let hit = lb.find((p) => p.key === key);
+    if (hit) return { hit, fuzzy: false };
+    if (!l) {
+      const c = lb.filter((p) => p.key.startsWith(f));
+      return c.length === 1 ? { hit: c[0], fuzzy: true } : {};
+    }
+    hit = lb.find((p) => p.last === l && f.slice(0, 3) === p.first.slice(0, 3));
+    if (hit) return { hit, fuzzy: true };
+    let best = null, bd = 99;
+    lb.forEach((p) => { const d = lev(p.key, key); if (d < bd) { bd = d; best = p; } });
+    return bd <= 2 ? { hit: best, fuzzy: true } : {};
+  }
+
+  // ---- build the groups: slowest first (Group 1 goes out first), as even as possible, max 7 each ----
+  function build() {
+    if (!times || !sheet) return;
+    const lb = leaderboard(), session = $("session").value;
+    $("names").innerHTML = lb.map((p) => `<option value="${p.name.replace(/"/g, "&quot;")}">`).join("");
+    const seen = new Set(), known = [];
+    pool = [];
+    sheet.rows.filter((r) => !session || r.choice === session).forEach((r) => {
+      const display = `${r.first} ${r.last}`.trim().replace(/\s+/g, " ");
+      if (!display) return;
+      const { hit, fuzzy } = match(r.first, r.last, lb);
+      const name = hit ? hit.name : display;
+      if (seen.has(norm(name))) return;
+      seen.add(norm(name));
+      const p = { id: nextId++, name, time: hit ? hit.time : null, note: fuzzy ? `Signed up as "${display}"` : "", arrived: arrivedNames.has(name) };
+      (hit ? known : pool).push(p);
+    });
+    known.sort((a, b) => b.time - a.time); // slowest first, so Group 1 goes out first
+
+    const count = Math.ceil(known.length / MAX);
+    groups = [];
+    let i = 0;
+    for (let k = 0; k < count; k++) {
+      const size = Math.floor(known.length / count) + (k < known.length % count ? 1 : 0);
+      groups.push(known.slice(i, i + size));
+      i += size;
+    }
+    say(`${known.length} people grouped. ${pool.length ? pool.length + " could not be matched to a time (yellow box). " : ""}Names marked ~ were matched loosely, so double-check them.`);
+    render();
+  }
+
+  // ---- drawing and drag and drop ----
+  function render() {
+    $("boards").innerHTML = "";
+    [pool, ...groups].forEach((list, idx) => {
+      const box = document.createElement("div");
+      box.className = "box" + (idx === 0 ? " pool" : "");
+      const h = document.createElement("h3");
+      h.innerHTML = `<span></span><span></span>`;
+      h.children[0].textContent = idx === 0 ? "Not placed (no time yet)" : `Group ${idx}`;
+      const here = list.filter((p) => p.arrived).length;
+      h.children[1].textContent = (idx === 0 ? list.length : `${list.length}/${MAX}`) + (here ? ` · ${here} here` : "");
+      if (idx > 0 && list.length > MAX) h.children[1].className = "full";
+      if (idx > 0 && list.length === 0) {
+        const del = document.createElement("button");
+        del.textContent = "×";
+        del.title = "Remove empty group";
+        del.onclick = () => { groups.splice(idx - 1, 1); render(); };
+        h.appendChild(del);
+      }
+      box.appendChild(h);
+
+      list.forEach((p) => {
+        const chip = document.createElement("div");
+        chip.className = "chip";
+        chip.draggable = true;
+        chip.title = p.note;
+        chip.ondragstart = () => { dragId = p.id; };
+        chip.classList.toggle("here", !!p.arrived);
+        chip.classList.toggle("picked", pickedId === p.id);
+        const name = document.createElement("label");
+        const tick = document.createElement("input");
+        tick.type = "checkbox";
+        tick.checked = !!p.arrived;
+        tick.onchange = () => {
+          p.arrived = tick.checked;
+          if (p.arrived) arrivedNames.add(p.name); else arrivedNames.delete(p.name);
+          render();
+        };
+        name.append(tick, document.createTextNode(p.name + (p.note ? " ~" : "")));
+        const right = document.createElement("small");
+        right.textContent = p.time == null ? "no time" : p.time.toFixed(3);
+        const mv = document.createElement("button");
+        mv.textContent = "⇄";
+        mv.title = "Tap this, then tap a group to move this name there";
+        mv.onclick = (e) => {
+          e.stopPropagation();
+          pickedId = pickedId === p.id ? null : p.id;
+          say(pickedId ? `Now tap a group's heading or empty space to move ${p.name} there.` : "");
+          render();
+        };
+        right.appendChild(mv);
+        const x = document.createElement("button");
+        x.textContent = "×";
+        x.title = "Remove";
+        x.onclick = () => { list.splice(list.indexOf(p), 1); render(); };
+        right.appendChild(x);
+        chip.append(name, right);
+        box.appendChild(chip);
+      });
+
+      box.onclick = (e) => {
+        if (pickedId === null || e.target.closest(".chip, button")) return;
+        const id = pickedId;
+        pickedId = null;
+        say("");
+        move(id, list, list.length);
+      };
+      box.ondragover = (e) => { e.preventDefault(); box.classList.add("over"); };
+      box.ondragleave = () => box.classList.remove("over");
+      box.ondrop = (e) => {
+        e.preventDefault();
+        const chips = [...box.querySelectorAll(".chip")];
+        const at = chips.filter((c) => { const r = c.getBoundingClientRect(); return r.top + r.height / 2 < e.clientY; }).length;
+        move(dragId, list, at);
+      };
+      $("boards").appendChild(box);
+    });
+  }
+
+  function move(id, toList, at) {
+    for (const l of [pool, ...groups]) {
+      const i = l.findIndex((p) => p.id === id);
+      if (i < 0) continue;
+      const [person] = l.splice(i, 1);
+      if (l === toList && i < at) at--;
+      toList.splice(at, 0, person);
+      break;
+    }
+    render();
+  }
+
+  function addPerson() {
+    if (!times) return say("Choose times.json first.");
+    const typed = $("addName").value.trim().replace(/\s+/g, " ");
+    if (!typed) return;
+    const [first, ...rest] = typed.split(" ");
+    const { hit } = match(first, rest.join(" "), leaderboard());
+    const p = { id: nextId++, name: hit ? hit.name : typed, time: hit ? hit.time : null, note: "" };
+    if (hit && groups.length) {
+      // put them in the group their time fits, in order
+      // groups run slowest to fastest, so find the first group whose fastest time is no faster than this person
+      let gi = groups.findIndex((g) => g.length && g[g.length - 1].time <= hit.time);
+      if (gi < 0) gi = Math.max(0, groups.map((g) => g.length > 0).lastIndexOf(true));
+      let at = groups[gi].findIndex((x) => x.time < hit.time);
+      if (at < 0) at = groups[gi].length;
+      groups[gi].splice(at, 0, p);
+    } else pool.push(p);
+    $("addName").value = "";
+    render();
+  }
+
+  // ---- loading files ----
+  const choose = (accept, onFile) => {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = accept;
+    input.onchange = () => input.files[0] && onFile(input.files[0]).catch((e) => say("Could not read file: " + e.message));
+    input.click();
+  };
+
+  async function loadTimes(file) {
+    setTimes(JSON.parse(await file.text()));
+  }
+
+  function setTimes(data) {
+    times = data;
+    const years = Object.keys(times).sort();
+    $("year").innerHTML = years.map((y) => `<option>${y}</option>`).join("");
+    $("year").value = years[years.length - 1];
+    say("Loaded times.json.");
+    build();
+  }
+
+  async function loadSheet(file) {
+    const wb = XLSX.read(await file.arrayBuffer());
+    const rows = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { header: 1, defval: "" });
+    const head = rows[0].map((h) => String(h).toLowerCase());
+    const col = (re, fallback) => { const i = head.findIndex((h) => re.test(h)); return i >= 0 ? i : fallback; };
+    const f = col(/first/, 0), l = col(/last|surname/, 1), c = col(/choice|session|date/, -1);
+    sheet = {
+      rows: rows.slice(1).map((r) => ({
+        first: String(r[f] ?? "").trim(),
+        last: String(r[l] ?? "").trim(),
+        choice: c >= 0 ? String(r[c]).trim() : "",
+      })),
+    };
+    // If people signed up for different sessions, let you pick one
+    const choices = [...new Set(sheet.rows.map((r) => r.choice).filter(Boolean))];
+    $("session").innerHTML = `<option value="">All sessions</option>` + choices.map((s) => `<option>${s}</option>`).join("");
+    $("session").hidden = choices.length < 2;
+    say("Loaded signup sheet.");
+    build();
+  }
+
+  // On the website, times.json sits next to this page and loads automatically
+  fetch("times.json", { cache: "no-store" })
+    .then((r) => (r.ok ? r.json() : Promise.reject()))
+    .then((data) => { setTimes(data); say("Loaded the latest times. Now choose the signup sheet."); })
+    .catch(() => { $("pickTimes").hidden = false; say("Could not load times automatically. Choose times.json."); });
+
+  $("pickTimes").onclick = () => choose(".json", loadTimes);
+  $("pickSheet").onclick = () => choose(".xlsx,.xls", loadSheet);
+  ["year", "source", "session"].forEach((id) => { $(id).onchange = build; });
+  $("add").onclick = addPerson;
+  $("addGroup").onclick = () => { groups.push([]); render(); };
+  $("addName").onkeydown = (e) => { if (e.key === "Enter") addPerson(); };
+  $("print").onclick = () => window.print();
+  $("copy").onclick = () => {
+    const text = groups.map((g, i) => `Group ${i + 1}\n` + g.map((p, j) => `${j + 1}. ${p.name}`).join("\n")).join("\n\n")
+      + (pool.length ? "\n\nNot placed\n" + pool.map((p) => p.name).join("\n") : "");
+    navigator.clipboard.writeText(text).then(() => say("Copied."));
+  };
+</script>
+</body>
+</html>
