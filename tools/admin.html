@@ -1,21 +1,30 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Leaderboard admin</title>
-<style>
-  body { font-family: system-ui, sans-serif; max-width: 560px; margin: 2rem auto; padding: 0 1rem; color: #222; }
-  label { display: block; margin: .8rem 0 .2rem; font-weight: 600; }
-  input, select, button { font: inherit; padding: .5rem; width: 100%; box-sizing: border-box; }
-  button { margin-top: .8rem; cursor: pointer; }
-  .row { display: flex; gap: .5rem; align-items: flex-end; }
-  .row > div { flex: 1; }
-  #msg { margin: 1rem 0; min-height: 1.4em; }
-  table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-  td { padding: .3rem; border-bottom: 1px solid #ddd; }
-  td:last-child { text-align: right; }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Leaderboard admin</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 560px; margin: 2rem auto; padding: 0 1rem; color: #222; }
+    label { display: block; margin: .8rem 0 .2rem; font-weight: 600; }
+    input, select, button { font: inherit; padding: .5rem; width: 100%; box-sizing: border-box; }
+    button { margin-top: .8rem; cursor: pointer; }
+    .row { display: flex; gap: .5rem; align-items: flex-end; }
+    .row > div { flex: 1; }
+    #msg { margin: 1rem 0; min-height: 1.4em; }
+    .warning-box {
+      margin: 1rem 0;
+      padding: .75rem 1rem;
+      background-color: #ffe6e6;
+      border: 1px solid #ff4d4d;
+      border-radius: 4px;
+      color: #990000;
+      font-weight: 600;
+    }
+    table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    td { padding: .3rem; border-bottom: 1px solid #ddd; }
+    td:last-child { text-align: right; }
+  </style>
 </head>
 <body>
 <h1>Leaderboard admin</h1>
@@ -38,6 +47,9 @@
   <input id="time" type="number" step="0.001" min="0">
 
   <button id="add">Add time</button>
+  <div id="new-member-warning" class="warning-box" hidden>
+    New member, check if they are registered on the Sports and Societies website
+  </div>
   <div id="msg" role="status"></div>
   <button id="save">Save times.json</button>
   <table id="list"></table>
@@ -49,6 +61,19 @@
   let fileHandle = null; // lets Chrome/Edge save straight back into the file
 
   const say = (text) => { $("msg").textContent = text; };
+
+  // Helper to retrieve all unique names present across all years and semesters
+  function getAllExistingNames() {
+    const names = new Set();
+    for (const yearObj of Object.values(data)) {
+      for (const semObj of Object.values(yearObj)) {
+        for (const name of Object.keys(semObj)) {
+          names.add(name);
+        }
+      }
+    }
+    return names;
+  }
 
   // Fallback file picker for browsers without showOpenFilePicker (e.g. Safari)
   const pickWithInput = () => new Promise((resolve) => {
@@ -75,20 +100,21 @@
 
   // Rebuild the year dropdown, the name suggestions and the table
   function refresh() {
-    const selected = $("year").value;
-    $("year").innerHTML = Object.keys(data).sort().map((y) => `<option>${y}</option>`).join("");
-    if (data[selected]) $("year").value = selected;
-    else $("year").value = Object.keys(data).sort().pop();
+    const yearEl = $("year");
+    const selected = yearEl.value;
 
-    const names = new Set();
-    Object.values(data).forEach((sems) => Object.values(sems).forEach((s) => Object.keys(s).forEach((n) => names.add(n))));
+    yearEl.innerHTML = Object.keys(data).sort().map((y) => `<option>${y}</option>`).join("");
+    if (data[selected]) yearEl.value = selected;
+    else yearEl.value = Object.keys(data).sort().pop();
+
+    const names = getAllExistingNames();
     $("names").innerHTML = [...names].sort().map((n) => `<option value="${n.replace(/"/g, "&quot;")}">`).join("");
 
-    const current = (data[$("year").value] || {})[$("sem").value] || {};
+    const current = (data[yearEl.value] || {})[$("sem").value] || {};
     $("list").innerHTML = Object.entries(current)
-      .sort((a, b) => a[1] - b[1])
-      .map(([n, t]) => `<tr><td></td><td>${t.toFixed(3)}</td></tr>`.replace("<td></td>", `<td>${n.replace(/</g, "&lt;")}</td>`))
-      .join("");
+            .sort((a, b) => a[1] - b[1])
+            .map(([n, t]) => `<tr><td></td><td>${t.toFixed(3)}</td></tr>`.replace("<td></td>", `<td>${n.replace(/</g, "&lt;")}</td>`))
+            .join("");
   }
 
   function addTime() {
@@ -96,11 +122,26 @@
     const name = $("name").value.trim(), time = parseFloat($("time").value);
     if (!name || !(time > 0)) return say("Enter a name and a lap time.");
 
-    data[year][sem] = data[year][sem] || {};
-    const existed = name in data[year][sem];
-    data[year][sem][name] = time;
+    // Check if the name exists anywhere in times.json prior to adding
+    const existingNames = getAllExistingNames();
+    const isNewMember = !existingNames.has(name);
 
-    say(`${existed ? "Updated" : "Added"} ${name}: ${time.toFixed(3)}. Click Save when you are done.`);
+    data[year][sem] = data[year][sem] || {};
+    const old = data[year][sem][name];
+
+    if (old !== undefined && time >= old) {
+      // Not faster, so keep the existing time
+      say(`${name} already has ${old.toFixed(3)}, which is faster or equal, so nothing changed.`);
+      $("new-member-warning").hidden = true;
+    } else {
+      data[year][sem][name] = time;
+      say(old === undefined
+              ? `Added ${name}: ${time.toFixed(3)}. Click Save when you are done.`
+              : `Updated ${name}: ${old.toFixed(3)} → ${time.toFixed(3)}. Click Save when you are done.`);
+
+      // Show/hide red warning box based on whether this was a brand-new member
+      $("new-member-warning").hidden = !isNewMember;
+    }
     $("name").value = "";
     $("time").value = "";
     refresh();
