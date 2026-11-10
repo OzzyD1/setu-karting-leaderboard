@@ -6,53 +6,72 @@
 <title>Group builder</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
-  body { font-family: system-ui, sans-serif; max-width: 1100px; margin: 1.5rem auto; padding: 0 1rem; color: #222; }
-  button, select, input { font: inherit; padding: .45rem .6rem; }
+  :root { --blue: #007bff; --line: #dee2e6; --muted: #6c757d; }
+  body { font-family: system-ui, sans-serif; margin: 0; background: #f0f0f0; color: #000; }
+  header { display: flex; align-items: center; gap: .8rem; padding: .6rem 1rem; background: #f8f9fa; border-bottom: 1px solid var(--line); }
+  header img { height: 40px; }
+  header h1 { flex: 1; margin: 0; font-size: 1.2rem; }
+  header a { color: var(--blue); font-weight: 600; text-decoration: none; white-space: nowrap; }
+  .banner { height: 150px; background: #222 url(karts.jpg) center 45% / cover; }
+  main { max-width: 1100px; margin: 1rem auto; padding: 0 1rem; }
+  .panel { background: #fff; border-bottom: 2px solid var(--blue); padding: .8rem 1rem; }
+  .panel p { margin: 0 0 .4rem; color: var(--muted); }
+  button, select, input { font: inherit; padding: .45rem .7rem; border: 1px solid #ced4da; border-radius: 6px; background: #fff; }
   button { cursor: pointer; }
+  button:hover { border-color: var(--blue); color: var(--blue); }
+  #pickSheet { background: var(--blue); border-color: var(--blue); color: #fff; font-weight: 600; }
   .bar { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: .6rem 0; }
-  #msg { margin: .5rem 0; color: #555; }
+  #msg { margin: .5rem 0 0; color: var(--muted); min-height: 1.3em; }
   #boards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: .8rem; margin-top: 1rem; }
-  .box { border: 1px solid #ccc; border-radius: 8px; padding: .5rem; min-height: 90px; background: #fafafa; }
+  .box { border-top: 3px solid var(--blue); border-radius: 0 0 8px 8px; padding: .6rem; min-height: 90px; background: #fff; }
   .box.over { background: #e8f0ff; }
-  .box.pool { border-color: #e0a000; background: #fff8e6; }
+  .box.pool { border-top-color: #e0a000; background: #fff8e6; }
   .box h3 { margin: .1rem 0 .5rem; font-size: 1rem; display: flex; justify-content: space-between; }
   .full { color: #c00; }
-  .chip { display: flex; justify-content: space-between; gap: .5rem; background: #fff; border: 1px solid #ddd;
+  .chip { display: flex; justify-content: space-between; gap: .5rem; background: #f8f9fa; border: 1px solid var(--line);
           border-radius: 6px; padding: .35rem .5rem; margin-bottom: .35rem; cursor: grab; }
-  .chip small { color: #666; white-space: nowrap; }
+  .chip small { color: var(--muted); white-space: nowrap; }
   .chip button { border: 0; background: none; padding: 0 .2rem; color: #999; }
+  .chip input { padding: 0; }
   .chip label { display: flex; gap: .4rem; align-items: center; cursor: pointer; flex: 1; }
-  .chip.picked { outline: 2px solid #1a73e8; }
+  .chip.picked { outline: 2px solid var(--blue); }
   .chip.here { background: #e3f7e3; border-color: #5cb85c; }
-  @media print { .bar, #msg { display: none; } .box { break-inside: avoid; } }
+  @media print { .banner, header a, .panel, #msg { display: none; } body { background: #fff; } .box { break-inside: avoid; border: 1px solid #999; } }
 </style>
 </head>
 <body>
-<h1>Group builder</h1>
-<p>Choose this week's signup sheet. It is read in your browser only: nothing is uploaded, and phone numbers are ignored.</p>
-
-<div class="bar">
-  <button id="pickSheet">Choose signup sheet (.xlsx)</button>
-  <button id="pickTimes" hidden>Choose times.json</button>
-  <select id="year" title="Leaderboard year"></select>
-  <select id="source" title="Which times to use">
-    <option value="all">Overall (best of both semesters)</option>
-    <option value="sem1">Semester 1</option>
-    <option value="sem2">Semester 2</option>
-  </select>
-  <select id="session" hidden></select>
-</div>
-<div id="msg"></div>
-
-<div class="bar">
-  <input id="addName" list="names" placeholder="Add a name" autocomplete="off">
-  <datalist id="names"></datalist>
-  <button id="add">Add</button>
-  <button id="addGroup">Add empty group</button>
-  <button id="copy">Copy groups as text</button>
-  <button id="print">Print</button>
+<header>
+  <img src="logo.png" alt="">
+  <h1>Group builder</h1>
+  <a href="./">← Leaderboard</a>
+</header>
+<div class="banner" role="img" aria-label="Karts lined up at the track"></div>
+<main>
+<div class="panel">
+  <p>Choose this week's signup sheet. It is read in your browser only: nothing is uploaded, and phone numbers are ignored.</p>
+  <div class="bar">
+    <button id="pickSheet">Choose signup sheet (.xlsx)</button>
+    <button id="pickTimes" hidden>Choose times.json</button>
+    <select id="year" title="Leaderboard year"></select>
+    <select id="source" title="Which times to use">
+      <option value="all">Overall (best of both semesters)</option>
+      <option value="sem1">Semester 1</option>
+      <option value="sem2">Semester 2</option>
+    </select>
+    <select id="session" hidden></select>
+  </div>
+  <div class="bar">
+    <input id="addName" list="names" placeholder="Add a name" autocomplete="off">
+    <datalist id="names"></datalist>
+    <button id="add">Add</button>
+    <button id="addGroup">Add empty group</button>
+    <button id="copy">Copy groups as text</button>
+    <button id="print">Print</button>
+  </div>
+  <div id="msg"></div>
 </div>
 <div id="boards"></div>
+</main>
 
 <script>
   const $ = (id) => document.getElementById(id);
