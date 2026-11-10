@@ -5,8 +5,8 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 // Removed all conflicting: import "@fontsource/roboto/X.css";
 
 import Leaderboard from "./components/Leaderboard";
-import GroupGenerator from "./components/GroupGenerator";
 import NavBar from "./components/NavBar";
+import Hero from "./components/Hero";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { getCurrentAcademicYear } from "./data/getCurrentYear";
 
@@ -26,35 +26,24 @@ const theme = createTheme({
 
 function App() {
     const isMobile = useMediaQuery("(max-width:600px)");
-    const [showGroups, setShowGroups] = useState(false);
-    const [selectedStudents, setSelectedStudents] = useState([]);
     const [selectedYear, setSelectedYear] = useState(getCurrentAcademicYear());
-
-    const handleGroupToggle = (e) => {
-        setShowGroups(e.target.checked);
-        if (!e.target.checked) {
-            setSelectedStudents([]);
-        }
-    };
 
     const handleYearChange = (year) => {
         setSelectedYear(year);
-        setSelectedStudents([]); // Clear selections when year changes
     };
 
     return (
         // 2. WRAP YOUR APP IN THE THEME PROVIDER
         <ThemeProvider theme={theme}>
             <NavBar
-                showGroups={showGroups}
-                onGroupToggle={handleGroupToggle}
                 selectedYear={selectedYear}
                 onYearChange={handleYearChange}
             />
+            <Hero year={selectedYear} />
             <Container
                 maxWidth="md"
                 sx={{
-                    marginTop: isMobile ? "4.5em" : "6em",
+                    marginTop: isMobile ? "0.5em" : "1em",
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
@@ -64,16 +53,7 @@ function App() {
                     // The Paper is now transparent due to the CSS changes
                     sx={{ margin: ".5em", width: isMobile ? "100%" : "100%" }}
                 >
-                    <Leaderboard
-                        showGroups={showGroups}
-                        selectedStudents={selectedStudents}
-                        setSelectedStudents={setSelectedStudents}
-                        selectedYear={selectedYear}
-                    />
-                    <GroupGenerator
-                        showGroups={showGroups}
-                        selectedStudents={selectedStudents}
-                    />
+                    <Leaderboard selectedYear={selectedYear} />
                 </Paper>
             </Container>
         </ThemeProvider>

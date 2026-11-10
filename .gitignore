@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# copied from src/data by npm start / npm run build
+/public/times.json

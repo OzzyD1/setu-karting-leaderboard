@@ -28,7 +28,8 @@
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "prestart": "cp src/data/times.json public/times.json",
-        "prebuild": "cp src/data/times.json public/times.json"
+        "prebuild": "cp src/data/times.json public/times.json",
+        "publish-times": "git add src/data/times.json && git commit -m \"update times.json\" && git push"
     },
     "eslintConfig": {
         "extends": [

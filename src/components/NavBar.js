@@ -4,9 +4,9 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import logo from "../icons/logo.png";
+import GroupsIcon from "@mui/icons-material/Groups";
 import {
-    FormControlLabel,
-    Switch,
+    Button,
     Select,
     MenuItem,
     FormControl,
@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import { academicYears } from "../data/getCurrentYear";
 
-const NavBar = ({ showGroups, onGroupToggle, selectedYear, onYearChange }) => {
+const NavBar = ({ selectedYear, onYearChange }) => {
     const isMobile = useMediaQuery("(max-width:600px)");
 
     // Determine the content based on screen size
@@ -84,45 +84,27 @@ const NavBar = ({ showGroups, onGroupToggle, selectedYear, onYearChange }) => {
                         </Select>
                     </FormControl>
 
-                    {/* Group Generator Toggle (FIXED HOVER EFFECT) */}
-                    <FormControlLabel
-                        control={
-                            <Switch
-                                checked={showGroups}
-                                onChange={onGroupToggle}
-                                sx={{
-                                    margin: 0,
-                                    '& .MuiSwitch-thumb': {
-                                        color: showGroups ? '#007bff' : '#ffffff',
-                                        width: isMobile ? 12 : 15,
-                                        height: isMobile ? 12 : 15
-                                    },
-                                    '& .MuiSwitch-track': { backgroundColor: showGroups ? 'rgba(0, 123, 255, 0.5)' : '#adb5bd' },
-                                    '& .MuiSwitch-switchBase': { padding: isMobile ? 2 : 4 },
-                                }}
-                            />
-                        }
-                        // EMPTY LABEL - Text is removed
-                        label={<span style={{ display: 'none' }}>Group Generator</span>}
-                        sx={{
-                            color: "#333333",
-                            margin: isMobile ? '0 4px 0 0' : '0 8px 0 0',
-                            // --- FIX FOR DESKTOP HOVER MISALIGNMENT ---
-                            '&:hover': {
-                                backgroundColor: 'transparent', // Remove the gray hover background
-                                cursor: 'pointer',             // Keep the pointer cursor
-                            },
-                            // Target the inner component that handles the ripple/focus state
-                            '& .MuiButtonBase-root': {
-                                padding: 0,
-                                margin: 0,
-                                '&:hover': {
-                                    backgroundColor: 'transparent', // Ensure button base is also transparent on hover
-                                },
-                            }
-                            // ------------------------------------------
-                        }}
-                    />
+                    {/* Link to the group builder page */}
+                    {isMobile ? (
+                        <IconButton
+                            component="a"
+                            href={`${process.env.PUBLIC_URL}/groups.html`}
+                            aria-label="Group builder"
+                            title="Group builder"
+                            sx={{ color: "#007bff" }}
+                        >
+                            <GroupsIcon />
+                        </IconButton>
+                    ) : (
+                        <Button
+                            component="a"
+                            href={`${process.env.PUBLIC_URL}/groups.html`}
+                            startIcon={<GroupsIcon />}
+                            sx={{ color: "#007bff", fontWeight: "bold" }}
+                        >
+                            Groups
+                        </Button>
+                    )}
                 </Box>
             </Toolbar>
         </AppBar>

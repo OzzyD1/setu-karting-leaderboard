@@ -3,32 +3,44 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Leaderboard admin</title>
+  <title>Session entry</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <style>
-    body { font-family: system-ui, sans-serif; max-width: 560px; margin: 2rem auto; padding: 0 1rem; color: #222; }
-    label { display: block; margin: .8rem 0 .2rem; font-weight: 600; }
-    input, select, button { font: inherit; padding: .5rem; width: 100%; box-sizing: border-box; }
-    button { margin-top: .8rem; cursor: pointer; }
-    .row { display: flex; gap: .5rem; align-items: flex-end; }
-    .row > div { flex: 1; }
-    #msg { margin: 1rem 0; min-height: 1.4em; }
-    .warning-box {
-      margin: 1rem 0;
-      padding: .75rem 1rem;
-      background-color: #ffe6e6;
-      border: 1px solid #ff4d4d;
-      border-radius: 4px;
-      color: #990000;
-      font-weight: 600;
-    }
-    table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-    td { padding: .3rem; border-bottom: 1px solid #ddd; }
-    td:last-child { text-align: right; }
+    body { font-family: system-ui, sans-serif; max-width: 760px; margin: 1.5rem auto; padding: 0 1rem; color: #222; }
+    h1 { margin-bottom: .2rem; }
+    .hint { color: #666; margin: .2rem 0 1rem; }
+    label { display: block; margin: 0 0 .2rem; font-weight: 600; font-size: .9rem; }
+    input, select, button { font: inherit; padding: .5rem; box-sizing: border-box; }
+    button { cursor: pointer; }
+    .row { display: flex; flex-wrap: wrap; gap: .6rem; align-items: flex-end; margin: .8rem 0; }
+    .row > div { flex: 1; min-width: 130px; }
+    .row select, .row input { width: 100%; }
+    #q { width: 100%; font-size: 1.15rem; padding: .7rem; border: 2px solid #007bff; border-radius: 6px; }
+    #summary { margin: .6rem 0; font-weight: 600; }
+    #msg { margin: .8rem 0; min-height: 1.4em; }
+    .warning-box { margin: .8rem 0; padding: .6rem .9rem; background: #ffe6e6; border: 1px solid #ff4d4d; border-radius: 4px; color: #990000; font-weight: 600; }
+    table { width: 100%; border-collapse: collapse; margin-top: .5rem; }
+    td { padding: .25rem .4rem; border-bottom: 1px solid #e3e3e3; }
+    td.best { color: #666; white-space: nowrap; text-align: right; }
+    td.time { width: 110px; }
+    td.time input { width: 100%; padding: .3rem .4rem; text-align: right; }
+    td.status { width: 34%; font-size: .9rem; }
+    td small { color: #888; }
+    tr.hi { background: #e8f0ff; }
+    tr.add td { color: #007bff; font-weight: 600; cursor: pointer; }
+    .pb { color: #1a7f37; font-weight: 600; }
+    .same { color: #777; }
+    .first { color: #0b5ed7; font-weight: 600; }
+    .check { color: #b35c00; font-weight: 600; }
+    .bad { outline: 2px solid #d00; }
+    .link { border: 0; background: none; color: #007bff; padding: 0 .3rem; font-size: .85rem; }
+    #save { margin-top: 1rem; width: 100%; background: #007bff; color: #fff; border: 0; border-radius: 6px; padding: .8rem; font-weight: 600; }
+    kbd { background: #eee; border: 1px solid #ccc; border-radius: 3px; padding: 0 .3rem; font-size: .85em; }
   </style>
 </head>
 <body>
-<h1>Leaderboard admin</h1>
-<p>This page only runs on your computer. It is not part of the website.</p>
+<h1>Session entry</h1>
+<p class="hint">This page only runs on your computer. It is not part of the website.</p>
 <button id="open">Open times.json</button>
 
 <div id="editor" hidden>
@@ -36,51 +48,328 @@
     <div><label for="year">Year</label><select id="year"></select></div>
     <div><label for="sem">Semester</label>
       <select id="sem"><option value="sem1">Semester 1</option><option value="sem2">Semester 2</option></select></div>
-    <div><button id="newYear">Add year</button></div>
+    <div><label for="date">Session date</label><input id="date" type="date"></div>
+    <div style="flex:0"><button id="newYear">Add year</button></div>
+  </div>
+  <div class="row">
+    <button id="pickSheet">Load this week's signup sheet (optional)</button>
+    <span id="sheetMsg" class="hint"></span>
   </div>
 
-  <label for="name">Name (type a new name to add someone)</label>
-  <input id="name" list="names" autocomplete="off">
-  <datalist id="names"></datalist>
-
-  <label for="time">Lap time (seconds)</label>
-  <input id="time" type="number" step="0.001" min="0">
-
-  <button id="add">Add time</button>
-  <div id="new-member-warning" class="warning-box" hidden>
-    New member, check if they are registered on the Sports and Societies website
-  </div>
-  <div id="msg" role="status"></div>
-  <button id="save">Save times.json</button>
+  <input id="q" autocomplete="off" placeholder="Type a name — or a lap time if you can't read the name">
+  <p class="hint">
+    <b>Name:</b> type a few letters, <kbd>Enter</kbd>, type the time, <kbd>Enter</kbd>.
+    <b>Can't read the name?</b> Type the time (e.g. <kbd>22413</kbd>) and pick from the drivers whose usual pace is closest.
+    <kbd>↑</kbd> <kbd>↓</kbd> move the highlight. Slower times are recorded but never replace a best.
+  </p>
+  <div id="summary"></div>
+  <div id="warn" class="warning-box" hidden></div>
   <table id="list"></table>
+  <button id="save">Save session to times.json</button>
+  <div id="msg" role="status"></div>
 </div>
 
 <script>
   const $ = (id) => document.getElementById(id);
-  let data = {};      // the whole times.json
-  let fileHandle = null; // lets Chrome/Edge save straight back into the file
+  let data = {};            // the whole times.json
+  let fileHandle = null;    // lets Chrome/Edge save straight back into the file
+  let attendees = null;     // [{ name, note }] from the signup sheet, or null
+  let entries = new Map();  // this session: name -> time
+  let rows = [];            // what the table currently shows
+  let hi = 0;               // highlighted row
+  let knownAtOpen = new Set();
+  let pending = null;       // a new name waiting for its first time
 
   const say = (text) => { $("msg").textContent = text; };
+  const fmt = (t) => t.toFixed(3);
+  const norm = (s) => String(s ?? "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z]/g, "");
 
-  // Helper to retrieve all unique names present across all years and semesters
-  function getAllExistingNames() {
+  // "22.413", "22,413" and "22413" all mean 22.413
+  function parseTime(text) {
+    const s = String(text).trim().replace(",", ".");
+    let t = NaN;
+    if (/^\d{4,5}$/.test(s)) t = Number(s.slice(0, 2) + "." + s.slice(2));
+    else if (/^\d{1,2}\.\d{1,3}$/.test(s)) t = Number(s);
+    return t >= 15 && t < 100 ? t : null;
+  }
+
+  function lev(a, b) {
+    const d = Array.from({ length: a.length + 1 }, (_, i) => [i]);
+    for (let j = 1; j <= b.length; j++) d[0][j] = j;
+    for (let i = 1; i <= a.length; i++)
+      for (let j = 1; j <= b.length; j++)
+        d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    return d[a.length][b.length];
+  }
+
+  // ---- looking things up in times.json ----
+  const year = () => $("year").value, sem = () => $("sem").value, date = () => $("date").value;
+  const sessions = () => (data[year()].sessions = data[year()].sessions || []);
+  const savedSession = () => sessions().find((s) => s.date === date() && s.sem === sem());
+
+  function allNames() {
     const names = new Set();
-    for (const yearObj of Object.values(data)) {
-      for (const semObj of Object.values(yearObj)) {
-        for (const name of Object.keys(semObj)) {
-          names.add(name);
-        }
-      }
-    }
+    for (const y of Object.values(data))
+      for (const s of ["sem1", "sem2"]) Object.keys(y[s] || {}).forEach((n) => names.add(n));
     return names;
   }
 
-  // Fallback file picker for browsers without showOpenFilePicker (e.g. Safari)
-  const pickWithInput = () => new Promise((resolve) => {
+  // Best time this semester from every session except the one being edited
+  function priorBest(name) {
+    const laps = sessions().filter((s) => s.sem === sem() && s.date !== date()).map((s) => s.laps[name]).filter((t) => t != null);
+    if (laps.length) return Math.min(...laps);
+    const saved = savedSession();
+    if (saved && saved.laps[name] != null) return null; // their only time is from this session
+    return (data[year()][sem()] || {})[name] ?? null;
+  }
+
+  // Someone's usual pace: best this year, otherwise their best ever
+  function pace(name) {
+    const pick = (y) => ["sem1", "sem2"].map((s) => (y[s] || {})[name]).filter((t) => t != null);
+    let t = pick(data[year()]);
+    if (!t.length) t = Object.values(data).flatMap(pick);
+    return t.length ? Math.min(...t) : null;
+  }
+
+  // ---- signup sheet (same matching as the group builder) ----
+  function match(first, last, lb) {
+    const key = norm(first + last), f = norm(first), l = norm(last);
+    let hit = lb.find((p) => p.key === key);
+    if (hit) return { hit, fuzzy: false };
+    if (!l) {
+      const c = lb.filter((p) => p.key.startsWith(f));
+      return c.length === 1 ? { hit: c[0], fuzzy: true } : {};
+    }
+    hit = lb.find((p) => p.last === l && f.slice(0, 3) === p.first.slice(0, 3));
+    if (hit) return { hit, fuzzy: true };
+    let best = null, bd = 99;
+    lb.forEach((p) => { const d = lev(p.key, key); if (d < bd) { bd = d; best = p; } });
+    return bd <= 2 ? { hit: best, fuzzy: true } : {};
+  }
+
+  async function loadSheet(file) {
+    const wb = XLSX.read(await file.arrayBuffer());
+    const sheetRows = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { header: 1, defval: "" });
+    const head = sheetRows[0].map((h) => String(h).toLowerCase());
+    const col = (re, fallback) => { const i = head.findIndex((h) => re.test(h)); return i >= 0 ? i : fallback; };
+    const f = col(/first/, 0), l = col(/last|surname/, 1);
+    const lb = [...allNames()].map((name) => {
+      const [first, ...rest] = name.split(" ");
+      return { name, key: norm(name), first: norm(first), last: norm(rest.join(" ")) };
+    });
+    const seen = new Set();
+    attendees = [];
+    sheetRows.slice(1).forEach((r) => {
+      const first = String(r[f] ?? "").trim(), last = String(r[l] ?? "").trim();
+      const display = `${first} ${last}`.trim().replace(/\s+/g, " ");
+      if (!display) return;
+      const { hit, fuzzy } = match(first, last, lb);
+      const name = hit ? hit.name : display;
+      if (seen.has(norm(name))) return;
+      seen.add(norm(name));
+      attendees.push({ name, note: fuzzy ? `signed up as "${display}"` : "" });
+    });
+    $("sheetMsg").textContent = `${attendees.length} people on the sheet. They are listed first.`;
+    render();
+  }
+
+  // ---- the list ----
+  function buildRows() {
+    const q = $("q").value.trim();
+    const here = new Set((attendees || []).map((a) => a.name));
+    const base = new Set([
+      ...(attendees ? here : [...Object.keys(data[year()].sem1 || {}), ...Object.keys(data[year()].sem2 || {})]),
+      ...entries.keys(),
+    ]);
+    const byName = (a, b) => a.localeCompare(b);
+    const t = /^\d/.test(q) ? parseTime(q) : null;
+
+    if (!q) {
+      // a brand-new name has no time yet, so keep it on top until one is typed
+      if (pending) base.delete(pending);
+      return [...(pending ? [pending] : []), ...[...base].sort(byName)].map((name) => ({ name }));
+    }
+
+    if (/^\d/.test(q)) {
+      // A time was typed: who is it most likely to be?
+      if (t == null) return [];
+      return [...base].filter((n) => !entries.has(n))
+        .map((name) => ({ name, guess: t, gap: pace(name) == null ? 99 : Math.abs(pace(name) - t) }))
+        .sort((a, b) => a.gap - b.gap || byName(a.name, b.name)).slice(0, 12);
+    }
+
+    // A name was typed: search everyone who has ever been on the leaderboard
+    const k = norm(q);
+    const scored = [];
+    new Set([...allNames(), ...base]).forEach((name) => {
+      const key = norm(name), words = name.split(" ").map(norm);
+      let score = key.startsWith(k) ? 0 : words.some((w) => w.startsWith(k)) ? 1 : key.includes(k) ? 2
+        : k.length >= 4 && lev(key.slice(0, k.length), k) <= 1 ? 3 : null;
+      if (score == null) return;
+      if (!base.has(name)) score += 0.5; // people at this session come first
+      scored.push({ name, score });
+    });
+    const out = scored.sort((a, b) => a.score - b.score || byName(a.name, b.name)).slice(0, 12);
+    if (q.length >= 3 && !out.some((r) => norm(r.name) === k)) out.push({ name: q.replace(/\s+/g, " "), add: true });
+    return out;
+  }
+
+  function statusOf(name) {
+    const t = entries.get(name);
+    if (t == null) return ["", ""];
+    const best = priorBest(name);
+    if (best == null) return [knownAtOpen.has(name) ? "First time this semester" : "NEW MEMBER — first time", "first"];
+    if (t < best) {
+      const gain = best - t;
+      return gain > 1.5 ? [`PB −${fmt(gain)} — big jump, double-check`, "check"] : [`PB −${fmt(gain)}`, "pb"];
+    }
+    return [`No improvement (best ${fmt(best)})`, "same"];
+  }
+
+  function render() {
+    rows = buildRows();
+    hi = Math.min(hi, Math.max(0, rows.length - 1));
+    const notes = new Map((attendees || []).map((a) => [a.name, a.note]));
+    const list = $("list");
+    list.innerHTML = "";
+    rows.forEach((r, i) => {
+      const tr = document.createElement("tr");
+      if (i === hi && $("q").value.trim()) tr.className = "hi";
+      if (r.add) {
+        tr.classList.add("add");
+        const td = document.createElement("td");
+        td.colSpan = 4;
+        td.textContent = `+ Add "${r.name}" as a new driver`;
+        tr.onclick = () => choose(i);
+        tr.appendChild(td);
+        list.appendChild(tr);
+        return;
+      }
+      const name = document.createElement("td");
+      name.textContent = r.name + " ";
+      if (notes.get(r.name)) { const s = document.createElement("small"); s.textContent = notes.get(r.name); name.appendChild(s); }
+      if (!knownAtOpen.has(r.name)) {
+        const b = document.createElement("button");
+        b.className = "link"; b.textContent = "rename";
+        b.onclick = () => rename(r.name);
+        name.appendChild(b);
+      }
+      const best = document.createElement("td");
+      best.className = "best";
+      const p = pace(r.name);
+      best.textContent = p == null ? "no time" : fmt(p);
+      const cell = document.createElement("td");
+      cell.className = "time";
+      if (r.guess != null) {
+        const b = document.createElement("button");
+        b.textContent = `Give ${fmt(r.guess)}`;
+        b.onclick = () => choose(i);
+        cell.appendChild(b);
+      } else {
+        const input = document.createElement("input");
+        input.inputMode = "decimal";
+        input.dataset.name = r.name;
+        input.value = entries.has(r.name) ? fmt(entries.get(r.name)) : "";
+        input.onchange = () => commit(input);
+        input.onkeydown = (e) => {
+          if (e.key === "Enter") { if (commit(input)) backToSearch(); }
+          if (e.key === "Escape") { input.value = entries.has(r.name) ? fmt(entries.get(r.name)) : ""; backToSearch(); }
+        };
+        cell.appendChild(input);
+      }
+      const st = document.createElement("td");
+      const [text, cls] = statusOf(r.name);
+      st.className = "status " + cls;
+      st.textContent = text;
+      tr.append(name, best, cell, st);
+      list.appendChild(tr);
+    });
+    summary();
+  }
+
+  function summary() {
+    let pbs = 0, first = 0, fresh = [];
+    entries.forEach((t, name) => {
+      const cls = statusOf(name)[1];
+      if (cls === "pb" || cls === "check") pbs++;
+      if (cls === "first") first++;
+      if (!knownAtOpen.has(name)) fresh.push(name);
+    });
+    $("summary").textContent = `${entries.size} times entered · ${pbs} personal bests · ${first} first times`
+      + (savedSession() ? " · editing a session already saved for this date" : "");
+    $("warn").hidden = !fresh.length;
+    $("warn").textContent = `New member${fresh.length > 1 ? "s" : ""}, check they are registered on the Sports and Societies website: ${fresh.join(", ")}`;
+    try { localStorage.setItem(draftKey(), JSON.stringify([...entries])); } catch (e) { /* drafts are a convenience */ }
+  }
+
+  // Read a row's time box into the session. Returns false if it is not a valid time.
+  function commit(input) {
+    const name = input.dataset.name, text = input.value.trim();
+    input.classList.remove("bad");
+    if (!text) entries.delete(name);
+    else {
+      const t = parseTime(text);
+      if (t == null) { input.classList.add("bad"); say("That is not a lap time. Use e.g. 22.413 or 22413."); return false; }
+      entries.set(name, t);
+      input.value = fmt(t);
+    }
+    say("");
+    const st = input.closest("tr").lastChild;
+    const [msg, cls] = statusOf(name);
+    st.className = "status " + cls;
+    st.textContent = msg;
+    summary();
+    return true;
+  }
+
+  function backToSearch() {
+    $("q").value = "";
+    hi = 0;
+    render();
+    $("q").focus();
+  }
+
+  // Enter on the highlighted row
+  function choose(i) {
+    const r = rows[i];
+    if (!r) return;
+    if (r.guess != null) { entries.set(r.name, r.guess); return backToSearch(); }
+    if (r.add) {
+      pending = r.name;
+      $("q").value = "";
+      render();
+    }
+    const input = [...document.querySelectorAll("#list input")].find((x) => x.dataset.name === r.name);
+    if (input) { input.focus(); input.select(); }
+  }
+
+  function rename(old) {
+    const next = (prompt("Correct the name", old) || "").trim().replace(/\s+/g, " ");
+    if (!next || next === old) return;
+    if (entries.has(old)) { entries.set(next, entries.get(old)); entries.delete(old); }
+    if (pending === old) pending = next;
+    (attendees || []).forEach((a) => { if (a.name === old) a.name = next; });
+    render();
+  }
+
+  // ---- loading and saving ----
+  const draftKey = () => `karting-draft:${year()}:${sem()}:${date()}`;
+
+  // Start from an unsaved draft if there is one, otherwise from what is saved for this date
+  function loadSession() {
+    let draft = null;
+    try { draft = JSON.parse(localStorage.getItem(draftKey())); } catch (e) { /* ignore */ }
+    const saved = savedSession();
+    entries = new Map(draft && draft.length ? draft : saved ? Object.entries(saved.laps) : []);
+    pending = null;
+    render();
+  }
+
+  const pickWithInput = (accept) => new Promise((resolve) => {
     const input = document.createElement("input");
     input.type = "file";
-    input.accept = ".json";
-    input.onchange = () => input.files[0].text().then(resolve);
+    input.accept = accept;
+    input.onchange = () => resolve(input.files[0]);
     input.click();
   });
 
@@ -90,96 +379,83 @@
       [fileHandle] = await window.showOpenFilePicker({ types: [{ accept: { "application/json": [".json"] } }] });
       text = await (await fileHandle.getFile()).text();
     } else {
-      text = await pickWithInput();
+      text = await (await pickWithInput(".json")).text();
     }
-    data = JSON.parse(text);
-    $("editor").hidden = false;
-    refresh();
+    start(text);
     say(fileHandle ? "Opened. Save will write straight to this file." : "Opened. Save will download a new times.json.");
   }
 
-  // Rebuild the year dropdown, the name suggestions and the table
-  function refresh() {
-    const yearEl = $("year");
-    const selected = yearEl.value;
-
-    yearEl.innerHTML = Object.keys(data).sort().map((y) => `<option>${y}</option>`).join("");
-    if (data[selected]) yearEl.value = selected;
-    else yearEl.value = Object.keys(data).sort().pop();
-
-    const names = getAllExistingNames();
-    $("names").innerHTML = [...names].sort().map((n) => `<option value="${n.replace(/"/g, "&quot;")}">`).join("");
-
-    const current = (data[yearEl.value] || {})[$("sem").value] || {};
-    $("list").innerHTML = Object.entries(current)
-            .sort((a, b) => a[1] - b[1])
-            .map(([n, t]) => `<tr><td></td><td>${t.toFixed(3)}</td></tr>`.replace("<td></td>", `<td>${n.replace(/</g, "&lt;")}</td>`))
-            .join("");
-  }
-
-  function addTime() {
-    const year = $("year").value, sem = $("sem").value;
-    const name = $("name").value.trim(), time = parseFloat($("time").value);
-    if (!name || !(time > 0)) return say("Enter a name and a lap time.");
-
-    // Check if the name exists anywhere in times.json prior to adding
-    const existingNames = getAllExistingNames();
-    const isNewMember = !existingNames.has(name);
-
-    data[year][sem] = data[year][sem] || {};
-    const old = data[year][sem][name];
-
-    if (old !== undefined && time >= old) {
-      // Not faster, so keep the existing time
-      say(`${name} already has ${old.toFixed(3)}, which is faster or equal, so nothing changed.`);
-      $("new-member-warning").hidden = true;
-    } else {
-      data[year][sem][name] = time;
-      say(old === undefined
-              ? `Added ${name}: ${time.toFixed(3)}. Click Save when you are done.`
-              : `Updated ${name}: ${old.toFixed(3)} → ${time.toFixed(3)}. Click Save when you are done.`);
-
-      // Show/hide red warning box based on whether this was a brand-new member
-      $("new-member-warning").hidden = !isNewMember;
-    }
-    $("name").value = "";
-    $("time").value = "";
-    refresh();
-    $("name").focus();
+  // Show the editor for the contents of times.json
+  function start(text) {
+    data = JSON.parse(text);
+    knownAtOpen = allNames();
+    const years = Object.keys(data).sort();
+    $("year").innerHTML = years.map((y) => `<option>${y}</option>`).join("");
+    $("year").value = years[years.length - 1];
+    const now = new Date();
+    $("date").value = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+    $("sem").value = now.getMonth() >= 8 ? "sem1" : "sem2";
+    $("editor").hidden = false;
+    $("open").hidden = true;
+    loadSession();
+    $("q").focus();
   }
 
   async function save() {
+    if (!date()) return say("Choose the session date first.");
+    const y = data[year()], s = sem();
+    y[s] = y[s] || {};
+    const old = savedSession();
+    const touched = new Set([...Object.keys(old ? old.laps : {}), ...entries.keys()]);
+    const laps = Object.fromEntries([...entries].sort((a, b) => a[0].localeCompare(b[0])));
+
+    if (old) old.laps = laps; else sessions().push({ date: date(), sem: s, laps });
+    y.sessions = sessions().filter((x) => Object.keys(x.laps).length).sort((a, b) => a.date.localeCompare(b.date));
+
+    // Each person's best is simply their fastest time in any session this semester
+    touched.forEach((name) => {
+      const all = y.sessions.filter((x) => x.sem === s).map((x) => x.laps[name]).filter((t) => t != null);
+      if (all.length) y[s][name] = Math.min(...all); else delete y[s][name];
+    });
+
     const text = JSON.stringify(data, null, 2) + "\n";
     if (fileHandle) {
       const writable = await fileHandle.createWritable();
       await writable.write(text);
       await writable.close();
-      say("Saved. Now push to GitHub.");
+      say("Saved. To put it on the website, run:  npm run publish-times");
     } else {
       const link = document.createElement("a");
       link.href = URL.createObjectURL(new Blob([text], { type: "application/json" }));
       link.download = "times.json";
       link.click();
-      say("Downloaded times.json. Replace the one in src/data/ with it, then push.");
+      say("Downloaded times.json. Replace the one in src/data/ with it, then run:  npm run publish-times");
     }
+    try { localStorage.removeItem(draftKey()); } catch (e) { /* ignore */ }
+    pending = null;
+    render();
   }
 
   function newYear() {
-    const year = (prompt("Academic year, e.g. 2027-2028") || "").trim();
-    if (!/^\d{4}-\d{4}$/.test(year)) return;
-    data[year] = data[year] || { sem1: {}, sem2: {} };
-    refresh();
-    $("year").value = year;
-    refresh();
+    const y = (prompt("Academic year, e.g. 2027-2028") || "").trim();
+    if (!/^\d{4}-\d{4}$/.test(y)) return;
+    data[y] = data[y] || { sem1: {}, sem2: {}, sessions: [] };
+    $("year").innerHTML = Object.keys(data).sort().map((x) => `<option>${x}</option>`).join("");
+    $("year").value = y;
+    loadSession();
   }
 
   $("open").onclick = () => openFile().catch((e) => say("Could not open file: " + e.message));
-  $("add").onclick = addTime;
   $("save").onclick = () => save().catch((e) => say("Could not save: " + e.message));
   $("newYear").onclick = newYear;
-  $("year").onchange = refresh;
-  $("sem").onchange = refresh;
-  $("time").onkeydown = (e) => { if (e.key === "Enter") addTime(); };
+  $("pickSheet").onclick = () => pickWithInput(".xlsx,.xls").then(loadSheet).catch((e) => say("Could not read sheet: " + e.message));
+  ["year", "sem", "date"].forEach((id) => { $(id).onchange = loadSession; });
+  $("q").oninput = () => { hi = 0; render(); };
+  $("q").onkeydown = (e) => {
+    if (e.key === "ArrowDown") { e.preventDefault(); hi = Math.min(hi + 1, rows.length - 1); render(); }
+    if (e.key === "ArrowUp") { e.preventDefault(); hi = Math.max(hi - 1, 0); render(); }
+    if (e.key === "Enter" && $("q").value.trim()) choose(hi);
+  };
 </script>
 </body>
 </html>

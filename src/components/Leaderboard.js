@@ -1,48 +1,37 @@
-import { useState } from "react";
-import { DataGrid } from "@mui/x-data-grid";
+import { useMemo, useState } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { Tabs, Tab, Box, Typography } from "@mui/material";
-import { academicYears } from "../data/getCurrentYear";
+import { Tabs, Tab, Box } from "@mui/material";
+import Podium from "./Podium";
+import Highlights from "./Highlights";
+import DriverDialog from "./DriverDialog";
+import { currentBoard, allTimeBoard, champions, movement, formatTime } from "../data/stats";
 
-const formatTime = (time) => time.toFixed(3);
+const ALL_TIME = 3; // tabs: 0 = Overall, 1 = Semester 1, 2 = Semester 2, 3 = All-time
 
-const byTime = (list) => [...list].sort((a, b) => a.time - b.time);
-
-// Drivers for the chosen tab (0 = Overall, 1 = Semester 1, 2 = Semester 2), fastest first
-const getDrivers = (yearData, tab) => {
-    const sem1 = yearData?.sem1 ?? [];
-    const sem2 = yearData?.sem2 ?? [];
-
-    if (tab === 1) return byTime(sem1);
-    if (tab === 2) return byTime(sem2);
-
-    // Overall: keep each person's best time across both semesters
-    const best = new Map();
-    [...sem1, ...sem2].forEach((d) => {
-        if (!best.has(d.name) || best.get(d.name).time > d.time) {
-            best.set(d.name, d);
-        }
-    });
-    return byTime([...best.values()]);
+// Places gained or lost since the latest session
+const Mover = ({ move }) => {
+    if (!move) return null;
+    if (move.kind === "new") return <span className="mover mover-new">NEW</span>;
+    if (move.change > 0) return <span className="mover mover-up">▲{move.change}</span>;
+    if (move.change < 0) return <span className="mover mover-down">▼{-move.change}</span>;
+    return null;
 };
 
-// Shared look for a centred cell
-const cellSx = (isMobile, extra = {}) => ({
-    width: "100%",
-    height: "100%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    fontSize: isMobile ? "0.85em" : "1em",
-    color: "#000000",
-    ...extra,
-});
-
-const Leaderboard = ({ showGroups, setSelectedStudents, selectedYear }) => {
+const Leaderboard = ({ selectedYear }) => {
     const isMobile = useMediaQuery("(max-width:600px)");
     const [tab, setTab] = useState(0);
+    const [query, setQuery] = useState("");
+    const [openDriver, setOpenDriver] = useState(null);
+    const allTime = tab === ALL_TIME;
 
-    const drivers = getDrivers(academicYears[selectedYear], tab);
+    const drivers = useMemo(
+        () => (allTime ? allTimeBoard() : currentBoard(selectedYear, tab)),
+        [allTime, selectedYear, tab]
+    );
+    const moves = useMemo(
+        () => (allTime ? {} : movement(selectedYear, tab)),
+        [allTime, selectedYear, tab]
+    );
     const bestTime = drivers.length > 0 ? drivers[0].time : 0;
 
     // Rows are already sorted, so rank is just the position in the list
@@ -51,98 +40,12 @@ const Leaderboard = ({ showGroups, setSelectedStudents, selectedYear }) => {
         rank: index + 1,
         name: driver.name,
         lapTime: formatTime(driver.time),
-        gap:
-            driver.time - bestTime > 0.001
-                ? `+${formatTime(driver.time - bestTime)}`
-                : "",
+        gap: driver.time - bestTime > 0.0005 ? `+${formatTime(driver.time - bestTime)}` : "",
+        season: driver.season,
     }));
-    const formattedBestTime = rows.length > 0 ? rows[0].lapTime : "";
 
-    const handleSelection = (selection) => {
-        if (!showGroups) return;
-        setSelectedStudents(drivers.filter((d) => selection.includes(d.name)));
-    };
-
-    const columns = [
-        {
-            field: "rank",
-            headerName: "Pos",
-            width: isMobile ? 40 : 60,
-            sortable: false,
-            headerAlign: "center",
-            align: "center",
-            renderCell: (params) => (
-                <Typography
-                    variant="body2"
-                    className={`pos-cell pos-${params.value}`}
-                    sx={cellSx(isMobile, {
-                        fontWeight: "bold",
-                        backgroundColor: "#2b2e3a",
-                    })}
-                >
-                    {params.value}
-                </Typography>
-            ),
-        },
-        {
-            field: "name",
-            headerName: "Driver Name",
-            width: isMobile ? 170 : 400,
-            flex: isMobile ? null : 1,
-            sortable: false,
-            renderCell: (params) => (
-                <Typography
-                    variant="body2"
-                    sx={{
-                        color: "#000000",
-                        fontSize: isMobile ? "0.85em" : "1em",
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                        whiteSpace: "nowrap",
-                        paddingLeft: "8px",
-                    }}
-                >
-                    {params.value}
-                </Typography>
-            ),
-        },
-        {
-            field: "lapTime",
-            headerName: "Time",
-            width: isMobile ? 75 : 120,
-            sortable: false,
-            headerAlign: "center",
-            align: "center",
-            renderCell: (params) => (
-                <Typography
-                    variant="body2"
-                    className={params.value === formattedBestTime ? "best-lap" : ""}
-                    sx={cellSx(isMobile, { fontWeight: "bold" })}
-                >
-                    {params.value}
-                </Typography>
-            ),
-        },
-        {
-            field: "gap",
-            headerName: "Gap",
-            width: isMobile ? 65 : 120,
-            sortable: false,
-            headerAlign: "center",
-            align: "center",
-            renderCell: (params) => (
-                <Typography
-                    variant="body2"
-                    sx={cellSx(isMobile, {
-                        fontSize: isMobile ? "0.8em" : "0.9em",
-                        color: params.value === "" ? "#6c757d" : "#000000",
-                    })}
-                >
-                    {params.value === "" ? "--" : params.value}
-                </Typography>
-            ),
-        },
-    ];
+    const search = query.trim().toLowerCase();
+    const shown = search ? rows.filter((r) => r.name.toLowerCase().includes(search)) : rows;
 
     return (
         <Box sx={{ p: isMobile ? 0 : 3 }}>
@@ -150,28 +53,111 @@ const Leaderboard = ({ showGroups, setSelectedStudents, selectedYear }) => {
                 <Tabs
                     value={tab}
                     onChange={(event, newValue) => setTab(newValue)}
-                    variant={isMobile ? "scrollable" : "fullWidth"}
-                    scrollButtons="auto"
+                    variant="fullWidth"
                     TabIndicatorProps={{ className: "f1-indicator" }}
                 >
                     <Tab label="OVERALL" className="f1-tab" />
-                    <Tab label="SEMESTER 1" className="f1-tab" />
-                    <Tab label="SEMESTER 2" className="f1-tab" />
+                    <Tab label={isMobile ? "SEM 1" : "SEMESTER 1"} className="f1-tab" />
+                    <Tab label={isMobile ? "SEM 2" : "SEMESTER 2"} className="f1-tab" />
+                    <Tab label="ALL-TIME" className="f1-tab" />
                 </Tabs>
             </Box>
 
-            <DataGrid
-                autoHeight
-                rows={rows}
-                columns={columns}
-                rowHeight={isMobile ? 35 : 50}
-                className="f1-datagrid-minimal"
-                checkboxSelection={showGroups}
-                onRowSelectionModelChange={handleSelection}
-                disableColumnMenu
-                disableColumnSelector
-                disableDensitySelector
-            />
+            {allTime ? (
+                <section className="highlights">
+                    <h2>Season champions</h2>
+                    <div className="highlights-grid">
+                        {champions().map((c) => (
+                            <button
+                                key={c.year}
+                                type="button"
+                                className="highlight"
+                                onClick={() => setOpenDriver(c.name)}
+                            >
+                                <span className="highlight-label">{c.year}</span>
+                                <span className="highlight-value">{c.name}</span>
+                                <span className="highlight-detail">{formatTime(c.time)}</span>
+                            </button>
+                        ))}
+                    </div>
+                </section>
+            ) : (
+                <Highlights year={selectedYear} onSelect={setOpenDriver} />
+            )}
+
+            {drivers.length === 0 ? (
+                <p className="empty">No times yet. Check back after the first session.</p>
+            ) : (
+                <>
+                    <Podium drivers={drivers} onSelect={setOpenDriver} />
+
+                    <div className="search">
+                        <input
+                            type="search"
+                            value={query}
+                            onChange={(e) => setQuery(e.target.value)}
+                            placeholder="Find a driver"
+                            aria-label="Find a driver"
+                        />
+                        {!allTime && (
+                            <span className="legend">
+                                <span className="pb-lap">Green</span> = improved at the latest session
+                            </span>
+                        )}
+                    </div>
+
+                    <table className={`board${isMobile ? " board-mobile" : ""}`}>
+                        <thead>
+                            <tr>
+                                <th className="board-pos">Pos</th>
+                                <th className="board-name">Driver Name</th>
+                                <th className="board-time">Time</th>
+                                <th className="board-gap">{allTime ? "Season" : "Gap"}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {shown.map((row) => (
+                                <tr
+                                    key={row.id}
+                                    tabIndex={0}
+                                    onClick={() => setOpenDriver(row.name)}
+                                    onKeyDown={(e) => e.key === "Enter" && setOpenDriver(row.name)}
+                                >
+                                    <td className="board-pos">{row.rank}</td>
+                                    <td className="board-name">
+                                        <span className="name-cell">
+                                            <span className="name-text">{row.name}</span>
+                                            <Mover move={moves[row.name]} />
+                                        </span>
+                                    </td>
+                                    <td
+                                        className={
+                                            "board-time " +
+                                            (row.rank === 1
+                                                ? "best-lap"
+                                                : moves[row.name]?.kind === "pb"
+                                                ? "pb-lap"
+                                                : "")
+                                        }
+                                    >
+                                        {row.lapTime}
+                                    </td>
+                                    <td className={`board-gap${row.gap === "" && !allTime ? " board-muted" : ""}`}>
+                                        {allTime ? row.season : row.gap === "" ? "--" : row.gap}
+                                    </td>
+                                </tr>
+                            ))}
+                            {shown.length === 0 && (
+                                <tr className="board-none">
+                                    <td colSpan={4}>No driver matches that name</td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                </>
+            )}
+
+            <DriverDialog name={openDriver} year={selectedYear} onClose={() => setOpenDriver(null)} />
         </Box>
     );
 };
