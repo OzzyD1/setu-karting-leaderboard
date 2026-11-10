@@ -116,7 +116,493 @@
       "Conor Nolan": 22.245,
       "Liam Walsh": 22.475,
       "Eric Butler": 22.436
-    }
+    },
+    "sessions": [
+      {
+        "date": "2024-09-19",
+        "sem": "sem1",
+        "laps": {
+          "Ozzy Domarkas": 22.569,
+          "Jamie Doyle": 22.399,
+          "Rian Doyle": 22.616,
+          "Peter Stanev": 22.794,
+          "Jamie Tobin": 23.259,
+          "Nathan McNamara": 24.325,
+          "Justin Malins": 23.539,
+          "Eoghan Dowling": 23.566,
+          "Darragh Whitney": 23.586,
+          "Dylan Shupe": 24.072,
+          "Ronan Duggan": 25.846,
+          "Sam Boyle": 23.426,
+          "Ben Power": 23.416,
+          "Ryan Sexton": 23.356,
+          "Laura Moroso": 26.104,
+          "Hannah O'Connor": 23.371
+        }
+      },
+      {
+        "date": "2024-09-26",
+        "sem": "sem1",
+        "laps": {
+          "Ozzy Domarkas": 22.53,
+          "Rian Doyle": 22.54,
+          "Peter Stanev": 22.531,
+          "Jamie Tobin": 22.929,
+          "Justin Malins": 22.87,
+          "Darragh Whitney": 22.961,
+          "Dylan Shupe": 23.243,
+          "Ronan Duggan": 23.794,
+          "Sam Boyle": 22.729,
+          "Ben Power": 23.072,
+          "Ellen Donnelly": 22.275,
+          "Jamie Halloran": 23.235,
+          "Dylan Rockett": 23.417,
+          "Dean Horgan": 25.29,
+          "Jack Gear": 24.144,
+          "Ryan Price": 24.694,
+          "Patryk Pawlak": 26.945,
+          "Niko Wisniewski": 24.109,
+          "Laura Moroso": 25.416,
+          "Harry Watkin": 24.989,
+          "Adam Raher": 25.925,
+          "Hannah O'Connor": 23.2
+        }
+      },
+      {
+        "date": "2024-10-04",
+        "sem": "sem1",
+        "laps": {
+          "Ozzy Domarkas": 22.353,
+          "Rian Doyle": 22.249,
+          "Peter Stanev": 22.341,
+          "Jamie Tobin": 22.757,
+          "Hannah O'Connor": 22.827,
+          "Justin Malins": 22.574,
+          "Dylan Shupe": 22.992,
+          "Ronan Duggan": 23.162,
+          "Ben Power": 22.572,
+          "Ryan Sexton": 23.008,
+          "Ellen Donnelly": 22.249,
+          "Jack Gear": 22.712,
+          "Ryan Price": 23.282,
+          "Cillian O'Connor": 22.482,
+          "Simon Harte": 23.004,
+          "Leon Wallis": 23.139,
+          "Josh Murphy": 23.842,
+          "Niko Wisniewski": 22.938,
+          "Evan O'Neill": 22.998,
+          "Nathan Fitzgerald": 23.426
+        }
+      },
+      {
+        "date": "2024-10-12",
+        "sem": "sem1",
+        "laps": {
+          "Ozzy Domarkas": 22.204,
+          "Jamie Doyle": 22.332,
+          "Jamie Tobin": 22.733,
+          "Hannah O'Connor": 22.395,
+          "Sam Boyle": 22.546,
+          "Jamie Halloran": 22.875,
+          "Dylan Rockett": 23.035,
+          "Jack Gear": 22.531,
+          "Patryk Pawlak": 24.576,
+          "Ryan Hodge": 24.159,
+          "Adam Raher": 24.553,
+          "Harry Watkin": 23.51
+        }
+      },
+      {
+        "date": "2024-10-19",
+        "sem": "sem1",
+        "laps": {
+          "Darragh Whitney": 22.667,
+          "Ronan Duggan": 23.029,
+          "Sam Boyle": 22.382,
+          "Ben Power": 22.562,
+          "Ryan Sexton": 22.806,
+          "Jamie Halloran": 22.764,
+          "Simon Harte": 22.772,
+          "Leon Wallis": 22.989,
+          "Tomas Guiney": 24.942,
+          "Sarah Niedermayr": 26.236,
+          "Lydia Crotty": 26.836,
+          "Buse Hoggoren": 29.796
+        }
+      },
+      {
+        "date": "2024-10-25",
+        "sem": "sem1",
+        "laps": {
+          "Darragh Whitney": 22.464,
+          "Dylan Shupe": 22.827,
+          "Ronan Duggan": 23.008,
+          "Ben Power": 22.361,
+          "Jack Gear": 22.375,
+          "Cillian O'Connor": 22.395,
+          "Nathan Fitzgerald": 23.168,
+          "Tomas Guiney": 23.807,
+          "Jack Downey": 23.242,
+          "Ciara Lennox": 25.035,
+          "Simone": 29.588,
+          "Adam Raher": 23.979
+        }
+      },
+      {
+        "date": "2024-10-31",
+        "sem": "sem1",
+        "laps": {
+          "Dylan Shupe": 22.755,
+          "Niko Wisniewski": 22.912,
+          "James Walker": 23.849,
+          "Adam Raher": 23.323
+        }
+      },
+      {
+        "date": "2024-11-09",
+        "sem": "sem1",
+        "laps": {
+          "Jamie Doyle": 22.174,
+          "Rian Doyle": 22.168,
+          "Darragh Whitney": 22.406,
+          "Dylan Shupe": 22.351,
+          "Ronan Duggan": 22.762,
+          "Sam Boyle": 22.071,
+          "Niko Wisniewski": 22.863,
+          "Jack Gear": 22.078,
+          "Harry Watkin": 22.941,
+          "Patryk Pawlak": 23.795,
+          "Simon Harte": 22.752,
+          "Nathan Fitzgerald": 22.921,
+          "Josh Murphy": 22.561,
+          "Tomas Guiney": 23.465
+        }
+      },
+      {
+        "date": "2024-11-15",
+        "sem": "sem1",
+        "laps": {
+          "Jack Gear": 21.953,
+          "Jamie Doyle": 22.094,
+          "Darragh Whitney": 22.33,
+          "Ronan Duggan": 22.536,
+          "Jamie Halloran": 22.413,
+          "Niko Wisniewski": 22.591,
+          "Simon Harte": 22.482,
+          "Nathan Fitzgerald": 22.736,
+          "Evan O'Neill": 22.985,
+          "Cillian O'Brien": 23.962,
+          "Noah Gibbons": 23.584,
+          "Liam Kenny": 24.886,
+          "Jack Mackey": 25.131,
+          "Marcus Wearen": 26.827,
+          "Rosanne Coe": 28.554,
+          "Archy Sergefjs": 22.525
+        }
+      },
+      {
+        "date": "2024-11-21",
+        "sem": "sem1",
+        "laps": {
+          "Usama Khan": 30.062,
+          "Grzegorz Brzeczyszczykiewicz": 25.832,
+          "Namra Fatima": 25.641,
+          "Rostyslav Norman": 25.178,
+          "Chris Bolger": 24.384,
+          "Haziq Khurshid": 27.732,
+          "Simon Harte": 22.452,
+          "Evan O'Neill": 22.981,
+          "Noah Gibbons": 23.385,
+          "Taras": 26.603,
+          "Maks": 24.09,
+          "Kieran O'Neill": 23.661
+        }
+      },
+      {
+        "date": "2024-11-29",
+        "sem": "sem1",
+        "laps": {
+          "Jamie Doyle": 22.059,
+          "Dylan Shupe": 22.233,
+          "Ronan Duggan": 22.453,
+          "Ben Power": 22.192,
+          "Rosanne Coe": 26.605
+        }
+      },
+      {
+        "date": "2024-12-06",
+        "sem": "sem1",
+        "laps": {
+          "Evan O'Neill": 22.811,
+          "Namra Fatima": 24.527,
+          "Xavier": 24.93
+        }
+      },
+      {
+        "date": "2025-01-23",
+        "sem": "sem2",
+        "laps": {
+          "Colm Power Pierce": 22.95
+        }
+      },
+      {
+        "date": "2025-01-31",
+        "sem": "sem2",
+        "laps": {
+          "Hannah O'Connor": 22.351,
+          "Sam Boyle": 21.906,
+          "Ryan Sexton": 22.781,
+          "Cillian O'Connor": 22.195,
+          "Simon Harte": 22.359,
+          "Nathan Fitzgerald": 22.45,
+          "Evan O'Neill": 22.615,
+          "Colm Power Pierce": 22.589,
+          "Jamie Malone": 23.554,
+          "Jessica Flynn": 23.849,
+          "Niamh O'Keeffe": 25.166,
+          "Shannon Bennett": 26.823,
+          "Ayo": 27.507,
+          "Taisce Ryan": 32.283,
+          "Patrick Whelan": 22.822,
+          "Niall Doherty": 23.157,
+          "Scott Bowdren": 23.183,
+          "Ryan Kelly": 23.385,
+          "Jack Murphy": 23.394,
+          "Peter Murphy": 24.147,
+          "Justin Whelan": 24.555
+        }
+      },
+      {
+        "date": "2025-02-01",
+        "sem": "sem2",
+        "laps": {
+          "Ryan Sexton": 22.781,
+          "Ellen Donnelly": 22.476,
+          "Cillian O'Connor": 22.195,
+          "Simon Harte": 22.359,
+          "Nathan Fitzgerald": 22.45,
+          "Evan O'Neill": 22.615,
+          "Jamie Malone": 23.554,
+          "Patrick Whelan": 22.822,
+          "Niall Doherty": 23.157,
+          "Scott Bowdren": 23.183,
+          "Ryan Kelly": 23.385,
+          "Jack Murphy": 23.394,
+          "Peter Murphy": 24.147,
+          "Justin Whelan": 24.555
+        }
+      },
+      {
+        "date": "2025-02-03",
+        "sem": "sem2",
+        "laps": {
+          "Jessica Flynn": 23.849,
+          "Niamh O'Keeffe": 25.166,
+          "Shannon Bennett": 26.823,
+          "Ayo": 27.507,
+          "Taisce Ryan": 32.283
+        }
+      },
+      {
+        "date": "2025-02-07",
+        "sem": "sem2",
+        "laps": {
+          "Jack Gear": 21.859,
+          "Colm Power Pierce": 22.42,
+          "Jamie Malone": 23.358,
+          "Jessica Flynn": 23.648,
+          "Shannon Bennett": 24.842,
+          "Taisce Ryan": 28.901,
+          "Niall Doherty": 23.157,
+          "Scott Bowdren": 22.748,
+          "Megan": 25.688,
+          "Becky": 27.321,
+          "Shane Nolan": 27.888,
+          "Aine Whelan": 31.742,
+          "Jasmine O'Shea Rush": 35.658,
+          "Adam Raher": 23.762,
+          "Darragh Whitney": 22.314,
+          "Ronan Duggan": 22.492,
+          "Colin Kelly": 22.203,
+          "Ozzy Domarkas": 22.283,
+          "Niall O'Brien": 22.604,
+          "Richard Murphy": 21.804
+        }
+      },
+      {
+        "date": "2025-02-13",
+        "sem": "sem2",
+        "laps": {
+          "Niall Doherty": 22.812,
+          "Colm Power Pierce": 22.228,
+          "Jamie Malone": 23.234,
+          "Jessica Flynn": 22.795,
+          "Leah O'Donoghue": 23.952,
+          "Ayo": 25.317,
+          "Jack Murphy": 23.387,
+          "Shane Nolan": 25.692,
+          "Aine Whelan": 29.172,
+          "Jasmine O'Shea Rush": 29.676,
+          "Daniel Greany": 27.179,
+          "Ronan Duggan": 22.372,
+          "Ozzy Domarkas": 22.185,
+          "Stephan Price": 26.898,
+          "Ciara Burke": 27.172,
+          "Ava Carr": 32.217,
+          "Rosanne Coe": 25.642,
+          "Nathan McNamara": 25.742,
+          "Michael Corr": 24.545,
+          "Richard Murphy": 21.797
+        }
+      },
+      {
+        "date": "2025-02-28",
+        "sem": "sem2",
+        "laps": {
+          "Jamie Doyle": 22.017,
+          "Rian Doyle": 22.177,
+          "Ryan Sexton": 22.529,
+          "Cillian O'Connor": 21.917,
+          "Simon Harte": 22.178,
+          "Nathan Fitzgerald": 22.314,
+          "Colm Power Pierce": 22.137,
+          "Jessica Flynn": 22.627,
+          "Leah O'Donoghue": 23.866,
+          "Niall Doherty": 22.554,
+          "Scott Bowdren": 22.409,
+          "Jack Murphy": 22.599,
+          "Shane Nolan": 23.781,
+          "Aine Whelan": 26.048,
+          "Jasmine O'Shea Rush": 26.049,
+          "Daniel Greany": 27.179,
+          "Colin Kelly": 22.14,
+          "Ozzy Domarkas": 22.123,
+          "Daniel Sevenster": 25.103,
+          "Richard Murphy": 21.787
+        }
+      },
+      {
+        "date": "2025-03-09",
+        "sem": "sem2",
+        "laps": {
+          "Hannah O'Connor": 22.311,
+          "Jack Gear": 21.857,
+          "Colm Power Pierce": 22.108,
+          "Aine Whelan": 25.652,
+          "Jasmine O'Shea Rush": 25.052,
+          "Ciara Burke": 24.762,
+          "Rosanne Coe": 24.97,
+          "Jamie Halloran": 22.294,
+          "Ben Cheal": 22.61,
+          "Harry Watkin": 23.199,
+          "Patryk Pawlak": 24.336,
+          "Stefan Price": 25.238,
+          "Caragh Mackey": 24.536,
+          "Richard Murphy": 21.763
+        }
+      },
+      {
+        "date": "2025-03-19",
+        "sem": "sem2",
+        "laps": {
+          "Daniel Sevenster": 24.56,
+          "Shane Nolan": 23.593,
+          "Jasmine O'Shea Rush": 24.858,
+          "Ciara Burke": 24.413,
+          "Ava Carr": 25.875,
+          "Stefan Price": 25.092,
+          "Conor Nolan": 22.44
+        }
+      },
+      {
+        "date": "2025-03-21",
+        "sem": "sem2",
+        "laps": {
+          "Ellen Donnelly": 22.115,
+          "Evan O'Neill": 22.609,
+          "Jamie Malone": 22.878,
+          "Leah O'Donoghue": 23.597,
+          "Scott Bowdren": 22.05,
+          "Shane Nolan": 23.537,
+          "Aine Whelan": 25.349,
+          "Jasmine O'Shea Rush": 24.46,
+          "Ava Carr": 24.676,
+          "Nathan McNamara": 24.36,
+          "Ben Cheal": 22.349,
+          "Caragh Mackey": 23.128
+        }
+      },
+      {
+        "date": "2025-03-28",
+        "sem": "sem2",
+        "laps": {
+          "Ellen Donnelly": 22.012,
+          "Jack Gear": 21.764,
+          "Colm Power Pierce": 22.037,
+          "Jamie Malone": 22.63,
+          "Ayo": 24.325,
+          "Scott Bowdren": 22.021,
+          "Aine Whelan": 24.686,
+          "Jasmine O'Shea Rush": 23.993,
+          "Ciara Burke": 23.482,
+          "Nathan McNamara": 24.251,
+          "Liam Walsh": 22.475
+        }
+      },
+      {
+        "date": "2025-04-04",
+        "sem": "sem2",
+        "laps": {
+          "Hannah O'Connor": 22.282,
+          "Colm Power Pierce": 21.996,
+          "Jasmine O'Shea Rush": 23.704,
+          "Conor Nolan": 22.355,
+          "Eric Butler": 22.436
+        }
+      },
+      {
+        "date": "2025-04-11",
+        "sem": "sem2",
+        "laps": {
+          "Richard Murphy": 21.719,
+          "Shane Nolan": 23.353,
+          "Aine Whelan": 24.331,
+          "Stephan Price": 24.324,
+          "Ciara Burke": 23.438,
+          "Ava Carr": 23.48,
+          "Rosanne Coe": 24.53,
+          "Ben Cheal": 22.102
+        }
+      },
+      {
+        "date": "2025-04-18",
+        "sem": "sem2",
+        "laps": {
+          "Colm Power Pierce": 21.979,
+          "Conor Nolan": 22.245
+        }
+      },
+      {
+        "date": "2025-05-02",
+        "sem": "sem2",
+        "laps": {
+          "Rian Doyle": 22.176,
+          "Hannah O'Connor": 22.244,
+          "Sam Boyle": 21.878,
+          "Aine Whelan": 23.988,
+          "Jasmine O'Shea Rush": 23.507,
+          "Ozzy Domarkas": 21.941
+        }
+      },
+      {
+        "date": "2025-05-09",
+        "sem": "sem2",
+        "laps": {
+          "Rian Doyle": 21.982,
+          "Shane Nolan": 23.147
+        }
+      }
+    ]
   },
   "2025-2026": {
     "sem1": {
@@ -251,7 +737,352 @@
       "Oliwia Spolnik": 31.233,
       "Shanmuga Priya Vijaya Baskar": 31.774,
       "Arianna Kaleniuk": 33.012
-    }
+    },
+    "sessions": [
+      {
+        "date": "2025-09-19",
+        "sem": "sem1",
+        "laps": {
+          "Ozzy Domarkas": 22.052,
+          "Jamie Doyle": 22.449,
+          "Rian Doyle": 22.684,
+          "Hannah O'Connor": 22.864,
+          "Sam Boyle": 22.608,
+          "Ellen Donnelly": 22.078,
+          "Jack Gear": 21.852,
+          "Simon Harte": 22.572,
+          "Evan O'Neill": 22.813,
+          "Colm Power Pierce": 21.92,
+          "Scott Bowdren": 22.428,
+          "Shane Nolan": 22.726,
+          "Aine Whelan": 24.522,
+          "Jasmine O'Shea Rush": 23.926,
+          "Rosanne Coe": 24.947,
+          "Harry Watkin": 23.016,
+          "Caragh Mackey": 23.813,
+          "Patryk Pawlak": 23.42,
+          "Jason Walsh": 22.552,
+          "Hayden English": 23.121,
+          "Alex Dunne": 23.36,
+          "Dylan Agnew": 23.153,
+          "Dan Fagan": 24.212,
+          "Luke Kenny": 25.665,
+          "Henry Thompson": 23.848,
+          "Hazel English": 26.709,
+          "Brenda Gallachoir": 27.304,
+          "Kash Khan": 29.241,
+          "Ciara O'Riordan": 30.515
+        }
+      },
+      {
+        "date": "2025-09-26",
+        "sem": "sem1",
+        "laps": {
+          "Ozzy Domarkas": 22.026,
+          "Jamie Doyle": 22.118,
+          "Rian Doyle": 22.32,
+          "Hannah O'Connor": 22.171,
+          "Sam Boyle": 21.845,
+          "Jack Gear": 21.76,
+          "Cillian O'Connor": 21.983,
+          "Simon Harte": 22.065,
+          "Nathan Fitzgerald": 22.644,
+          "Evan O'Neill": 22.644,
+          "Ryan Hodge": 24.486,
+          "Colm Power Pierce": 21.787,
+          "Scott Bowdren": 22.017,
+          "Aine Whelan": 23.806,
+          "Jasmine O'Shea Rush": 23.295,
+          "Ciara Burke": 23.304,
+          "Rosanne Coe": 24.117,
+          "Nathan McNamara": 24.657,
+          "Ben Cheal": 22.102,
+          "Caragh Mackey": 23.644,
+          "Jason Walsh": 22.184,
+          "Hayden English": 22.351,
+          "Alex Dunne": 23.301,
+          "Dylan Agnew": 22.657,
+          "Luke Kenny": 24.686,
+          "Hazel English": 25.301,
+          "Kash Khan": 27.303,
+          "Ciara O'Riordan": 26.547,
+          "Ruben Barrasa": 22.847,
+          "James Martin": 23.768,
+          "Szymon Kondratowicz": 24.034,
+          "Anna Tupalska": 24.215,
+          "Berkay Eren": 24.225,
+          "Josh Maher": 24.336,
+          "Olivier Grzywaczewski": 24.763,
+          "Joshua Fourie": 23.037,
+          "Umar Usman": 25.192,
+          "Lee Flynn": 22.289,
+          "Maciej Pawlak": 23.921,
+          "Richard Murphy": 21.763
+        }
+      },
+      {
+        "date": "2025-10-03",
+        "sem": "sem1",
+        "laps": {
+          "Jamie Doyle": 22.097,
+          "Rian Doyle": 22.01,
+          "Hannah O'Connor": 22.023,
+          "Jack Gear": 21.736,
+          "Colm Power Pierce": 21.783,
+          "Scott Bowdren": 21.88,
+          "Shane Nolan": 22.716,
+          "Nathan McNamara": 24.103,
+          "Caragh Mackey": 23.404,
+          "Jason Walsh": 22.023,
+          "Hayden English": 22.28,
+          "Dylan Agnew": 22.275,
+          "Ruben Barrasa": 22.368,
+          "James Martin": 23.189,
+          "Anna Tupalska": 23.895,
+          "Josh Maher": 23.721,
+          "Olivier Grzywaczewski": 23.069,
+          "Joshua Fourie": 22.555,
+          "Lee Flynn": 21.946,
+          "Lucas Pessin": 22.979,
+          "Clara Becq": 23.228,
+          "Eimear Curtin": 23.315,
+          "Mahdi Mahdi": 23.411,
+          "Rupien O'Leary": 23.56,
+          "Cody Doran": 23.568,
+          "Darragh O'Grady": 24.026,
+          "James O'Leary": 24.21,
+          "Matthew O'Connel": 24.57,
+          "Mark Kennedy": 24.57,
+          "Conor O'Sullivan": 25.231,
+          "Paddy Walsh": 26.368,
+          "John Wade": 26.677,
+          "Richard Murphy": 21.658
+        }
+      },
+      {
+        "date": "2025-10-05",
+        "sem": "sem1",
+        "laps": {
+          "Nathan Fitzgerald": 22.45
+        }
+      },
+      {
+        "date": "2025-10-12",
+        "sem": "sem1",
+        "laps": {
+          "Jamie Doyle": 21.971,
+          "Rian Doyle": 21.849,
+          "Hannah O'Connor": 21.898,
+          "Dylan Rockett": 22.739,
+          "Colm Power Pierce": 21.674,
+          "Scott Bowdren": 21.809,
+          "Shane Nolan": 22.275,
+          "Aine Whelan": 23.394,
+          "Nathan McNamara": 23.657,
+          "Ben Cheal": 21.781,
+          "Harry Watkin": 22.749,
+          "Patryk Pawlak": 23.284,
+          "Hayden English": 22.107,
+          "Dan Fagan": 23.392,
+          "Ruben Barrasa": 21.842,
+          "James Martin": 22.452,
+          "Olivier Grzywaczewski": 22.478,
+          "Joshua Fourie": 21.918,
+          "Lee Flynn": 21.661,
+          "Maciej Pawlak": 23.324,
+          "Lucas Pessin": 22.643,
+          "Clara Becq": 22.638,
+          "Cody Doran": 23.115,
+          "Tiarnan Malone": 23.312,
+          "Dillon Huberty": 23.552,
+          "Luke Corcoran": 26.305,
+          "Maksim Karakulin": 23.709
+        }
+      },
+      {
+        "date": "2025-10-16",
+        "sem": "sem1",
+        "laps": {
+          "Harry Watkin": 22.746,
+          "Patryk Pawlak": 23.15,
+          "Jasmine O'Shea Rush": 23.22,
+          "Ronan Dove": 22.462,
+          "Clara Becq": 22.564,
+          "Tiarnan Malone": 22.67,
+          "Thomas Carlier": 23.771,
+          "Simon Wally": 24.2,
+          "Emile Binet": 24.603,
+          "Ashir Jehangir": 24.63,
+          "Serine Louai": 26.038
+        }
+      },
+      {
+        "date": "2025-11-08",
+        "sem": "sem1",
+        "laps": {
+          "Rian Doyle": 21.836,
+          "Darragh Whitney": 22.369,
+          "Ronan Duggan": 22.651,
+          "Patryk Pawlak": 22.838,
+          "Evan O'Neill": 22.603,
+          "Jasmine O'Shea Rush": 23.167,
+          "Caragh Mackey": 23.378,
+          "Alex Dunne": 22.53,
+          "Luke Kenny": 23.994,
+          "Berkay Eren": 22.756,
+          "Joshua Fourie": 21.906,
+          "Lucas Pessin": 22.427,
+          "Cody Doran": 22.638,
+          "Dillon Huberty": 23.477,
+          "Ashir Jehangir": 24.32,
+          "Luke McGrath": 24.32,
+          "Dawid Sumera": 25.193,
+          "George-Cristoph Burghelea": 26.287,
+          "Annabel Allenden": 24.994,
+          "Finley Power": 22.614,
+          "Florian Nizon": 22.813,
+          "Victor Idowu": 28.889
+        }
+      },
+      {
+        "date": "2025-11-18",
+        "sem": "sem1",
+        "laps": {
+          "Nathan McNamara": 23.428,
+          "Harry Watkin": 22.561,
+          "Luke Kenny": 23.697,
+          "Clara Becq": 22.539,
+          "Dillon Huberty": 23.179,
+          "Ashir Jehangir": 23.437,
+          "George-Cristoph Burghelea": 24.217,
+          "Annabel Allenden": 24.335,
+          "Amandine Carlier": 23.267
+        }
+      },
+      {
+        "date": "2025-11-27",
+        "sem": "sem1",
+        "laps": {
+          "Jamie Doyle": 21.971,
+          "Rian Doyle": 21.812,
+          "Jack Gear": 21.699,
+          "Jason Walsh": 21.994,
+          "Lucas Pessin": 22.351,
+          "Clara Becq": 21.959,
+          "Dillon Huberty": 22.724,
+          "Ozzy Domarkas": 21.862
+        }
+      },
+      {
+        "date": "2025-12-04",
+        "sem": "sem1",
+        "laps": {
+          "Colm Power Pierce": 21.653,
+          "Jasmine O'Shea Rush": 23.045,
+          "Jason Walsh": 21.955,
+          "Ben O'Gorman": 22.697,
+          "Jake Kirwan": 23.379
+        }
+      },
+      {
+        "date": "2026-01-23",
+        "sem": "sem2",
+        "laps": {
+          "Jamie Doyle": 22.533,
+          "Rian Doyle": 21.755,
+          "Sam Boyle": 21.96,
+          "Jack Gear": 22.243,
+          "Evan O'Neill": 23.253,
+          "Rosanne Coe": 24.756,
+          "Colm Power Pierce": 21.79,
+          "Scott Bowdren": 22.192,
+          "Jason Walsh": 22.213,
+          "Alex Dunne": 22.749,
+          "Luke Kenny": 23.502,
+          "Ruben Barrasa": 22.21,
+          "James Martin": 22.203,
+          "Joshua Fourie": 22.533,
+          "Lee Flynn": 21.679,
+          "Lucas Pessin": 22.576,
+          "Clara Becq": 22.259,
+          "Luke McGrath": 23.638
+        }
+      },
+      {
+        "date": "2026-01-29",
+        "sem": "sem2",
+        "laps": {
+          "Rian Doyle": 21.745,
+          "Hannah O'Connor": 22.862,
+          "Jack Gear": 21.797,
+          "Alex Dunne": 22.685,
+          "Ben O'Gorman": 23.187,
+          "Jake Kirwan": 22.995,
+          "Kieran Macaraeg": 26.734
+        }
+      },
+      {
+        "date": "2026-02-07",
+        "sem": "sem2",
+        "laps": {
+          "Nathan McNamara": 23.214,
+          "Richard Murphy": 22.14,
+          "Harry Watkin": 22.923,
+          "Patryk Pawlak": 22.998,
+          "Scott Bowdren": 22.175,
+          "Hayden English": 22.291,
+          "Joshua Fourie": 22.381,
+          "Kieran Macaraeg": 24.537
+        }
+      },
+      {
+        "date": "2026-02-19",
+        "sem": "sem2",
+        "laps": {
+          "Jamie Doyle": 22.345,
+          "Jack Gear": 21.667,
+          "Scott Bowdren": 21.782,
+          "Ben Cheal": 22.315,
+          "Alex Dunne": 22.453,
+          "Dylan Agnew": 22.787,
+          "Joshua Fourie": 22.176,
+          "Dillon Huberty": 22.928,
+          "Kieran Macaraeg": 24.302,
+          "Szymon Magulla": 23.87,
+          "Adam O'Connor": 24.109
+        }
+      },
+      {
+        "date": "2026-04-30",
+        "sem": "sem2",
+        "laps": {
+          "Jamie Doyle": 22.055,
+          "Nathan McNamara": 22.967,
+          "Sam Boyle": 21.813,
+          "Richard Murphy": 21.667,
+          "Evan O'Neill": 23.094,
+          "Colm Power Pierce": 21.642,
+          "Caragh Mackey": 23.274,
+          "Ruben Barrasa": 22.101,
+          "Joshua Fourie": 22.064,
+          "Szymon Magulla": 23.131,
+          "Adam O'Connor": 22.845,
+          "Luke Maher": 23.335,
+          "Joseph Fennin": 22.971,
+          "Gustaw Tarka": 23.863,
+          "Desislava Pencheva": 26.218,
+          "Hadi Ramadan": 26.811,
+          "Donal Doherty": 23.614,
+          "Patrick Walsh": 23.659,
+          "Sean Kelly": 24.706,
+          "Pahim Segundo Amador": 23.367,
+          "Dutkiewicz Igor": 28.235,
+          "Oliwia Spolnik": 31.233,
+          "Shanmuga Priya Vijaya Baskar": 31.774,
+          "Arianna Kaleniuk": 33.012
+        }
+      }
+    ]
   },
   "2026-2027": {
     "sem1": {
@@ -360,8 +1191,209 @@
       "Killian Windsor": 24.486,
       "Javier Caceres Polo": 25.705,
       "David Perez Borrero": 26.527,
-      "August Hoolmaa" : 24.423
+      "August Hoolmaa": 24.423
     },
-    "sem2": {}
+    "sem2": {},
+    "sessions": [
+      {
+        "date": "2026-09-16",
+        "sem": "sem1",
+        "laps": {
+          "Rian Doyle": 22.108,
+          "Sam Boyle": 22.231,
+          "Jack Gear": 22.462,
+          "Colm Power Pierce": 21.945,
+          "Scott Bowdren": 22.207,
+          "Gustaw Tarka": 22.768
+        }
+      },
+      {
+        "date": "2026-09-22",
+        "sem": "sem1",
+        "laps": {
+          "Jamie Doyle": 22.549,
+          "Nathan McNamara": 23.22,
+          "Sam Boyle": 21.903,
+          "Richard Murphy": 21.743,
+          "Jack Gear": 21.819,
+          "Cillian O'Connor": 21.981,
+          "Simon Harte": 22.173,
+          "Nathan Fitzgerald": 22.622,
+          "Rosanne Coe": 24.717,
+          "Colm Power Pierce": 21.868,
+          "Scott Bowdren": 21.888,
+          "Hayden English": 22.819,
+          "Josh Maher": 23.749,
+          "Joshua Fourie": 22.114,
+          "Ronan Dove": 22.595,
+          "Cody Doran": 22.355,
+          "Szymon Magulla": 23.04,
+          "Adam O'Connor": 23.765,
+          "Gustaw Tarka": 22.272,
+          "Warren Russell": 22.551,
+          "Luke Kelly": 23.106,
+          "Vicky Novytska": 26.03,
+          "Jevon Somers": 22.543,
+          "Conor Kwinkelenberg": 22.768,
+          "Conor Kelly": 22.959,
+          "Caleb Walsh": 22.991,
+          "Valentin Martin": 23.586,
+          "Darragh Clewes": 24.045,
+          "Shaun Maaliw": 26.227,
+          "Muireann Reardon": 23.378,
+          "John Brunnock": 23.611,
+          "Max McInerney": 24.225,
+          "Robbert O'Brien": 24.317,
+          "Daragh Blackmore": 28.479,
+          "Hassan Khan": 23.485,
+          "Isaac Da Silva": 23.555,
+          "Shane Harkin": 24.737,
+          "Fred Power": 25.961,
+          "Andreja Kasperaviciute": 26.923,
+          "Patryk Geppert": 28.406
+        }
+      },
+      {
+        "date": "2026-10-06",
+        "sem": "sem1",
+        "laps": {
+          "Jamie Doyle": 22.258,
+          "Hannah O'Connor": 22.221,
+          "Jason Walsh": 22.268,
+          "Hayden English": 22.207,
+          "James Martin": 22.656,
+          "Joshua Fourie": 21.989,
+          "Annabel Allenden": 24.187,
+          "Szymon Magulla": 22.86,
+          "Adam O'Connor": 23.409,
+          "Warren Russell": 21.951,
+          "Conor Kelly": 22.648,
+          "Valentin Martin": 22.549,
+          "Shaun Maaliw": 23.309,
+          "Muireann Reardon": 23.15,
+          "John Brunnock": 23.067,
+          "Max McInerney": 23.777,
+          "Robbert O'Brien": 23.829,
+          "Daragh Blackmore": 25.225,
+          "Hassan Khan": 22.553,
+          "Shane Harkin": 23.693,
+          "Fred Power": 25.12,
+          "Jake Farragher": 24.409,
+          "Keelan Veerasoo": 23.507,
+          "Ciaran Duggan": 25.299,
+          "Shayla Crotty": 25.611,
+          "Willow Kearney": 28.036,
+          "Molly Walsh": 28.345,
+          "Cody Heffernan": 23.85,
+          "Éanna Power": 23.954,
+          "Dawid Reyer": 24.994,
+          "Zoe Brady": 25.174,
+          "Roksana Oszynska": 26.362,
+          "Suzuto Sakamoto": 25.057,
+          "Gallo de la Corte": 25.302,
+          "Fionn Mac Cann": 23.904,
+          "Kajetan Kuczek": 24.015,
+          "Kenneth Barnes": 24.019,
+          "Roman Pankowski": 25.022,
+          "Donnie Sibbald": 27.4,
+          "Zoe Ward": 28.056
+        }
+      },
+      {
+        "date": "2026-10-09",
+        "sem": "sem1",
+        "laps": {
+          "Colm Power Pierce": 21.83,
+          "Joshua Fourie": 21.921,
+          "Conor Kwinkelenberg": 22.473,
+          "Caleb Walsh": 22.976,
+          "Shaun Maaliw": 22.871,
+          "Shayla Crotty": 25.09,
+          "Willow Kearney": 25.629,
+          "Molly Walsh": 28.33,
+          "Cody Heffernan": 23.441,
+          "Suzuto Sakamoto": 24.03,
+          "Kenneth Barnes": 23.471,
+          "Adam Kearney": 22.896,
+          "Harry Roche": 25.968,
+          "Amelia Lewin": 24.169,
+          "Tara Schnittler": 24.478,
+          "Adam White": 24.886,
+          "issac silva": 22.835,
+          "Anthony O'Keeffe": 23.322,
+          "Anne-lise Boulay": 25.269,
+          "Giulia Manzana": 25.855,
+          "Katharina Brandt": 26.985,
+          "Bela Emilio Tetzlaff": 27.4,
+          "Jeanne Quarez": 28.25,
+          "William Coley Tveiten": 26.318,
+          "Ludwig Matt": 23.428,
+          "Klaus Koppensteiner": 23.574,
+          "Luca Letizia": 23.976,
+          "Eduardo Debelian": 24.053,
+          "Vincent Roux": 24.787,
+          "Enrico Piaggesi": 25.767,
+          "Martin Carnevale": 26.418,
+          "Bertrand Clement": 22.986,
+          "Yu Kojima": 26.78,
+          "Arda Becanim": 29.206,
+          "Lee Flynn": 21.932,
+          "Baptise Schifano": 25.109,
+          "Berenice Sommelet": 25.604,
+          "Tomasz Lewinski": 22.456
+        }
+      },
+      {
+        "date": "2026-11-05",
+        "sem": "sem1",
+        "laps": {
+          "Colm Power Pierce": 21.633,
+          "Hayden English": 22.185,
+          "Adam O'Connor": 22.737,
+          "Caleb Walsh": 22.699,
+          "Willow Kearney": 24.656,
+          "Cody Heffernan": 22.812,
+          "Roman Pankowski": 23.988,
+          "Adam Kearney": 22.549,
+          "Amelia Lewin": 23.54,
+          "Adam White": 24.017,
+          "Sam Boyle": 21.861,
+          "Jack Gear": 21.779,
+          "James Martin": 22.385,
+          "Warren Russell": 21.882,
+          "Conor Kelly": 22.122,
+          "Darragh Clewes": 23.486,
+          "Shaun Maaliw": 22.639,
+          "Muireann Reardon": 22.522,
+          "John Brunnock": 22.861,
+          "Hassan Khan": 22.368,
+          "Shayla Crotty": 24.389,
+          "Molly Walsh": 26.44,
+          "Dawid Reyer": 23.327,
+          "Roksana Oszynska": 24.369,
+          "Fionn Mac Cann": 23.185,
+          "Kajetan Kuczek": 22.747,
+          "Kenneth Barnes": 23.386,
+          "Donnie Sibbald": 26.435,
+          "Zoe Ward": 26.154,
+          "Lee Flynn": 21.842,
+          "Aurimas Rimkus": 24.037,
+          "Keira Simoes Alves": 24.135,
+          "Jonas Gehlhaar": 24.161,
+          "Will Gusackova": 24.897,
+          "Leon Ozarowski": 26.261,
+          "Eanna Power": 23.914,
+          "Mijo Doroda": 24.793,
+          "Augusto Gallo de la Corte": 22.429,
+          "Bridget McCarthy": 25.517,
+          "Doireann Keating": 26.376,
+          "John Elmore": 23.038,
+          "Killian Windsor": 24.486,
+          "Javier Caceres Polo": 25.705,
+          "David Perez Borrero": 26.527,
+          "August Hoolmaa": 24.423
+        }
+      }
+    ]
   }
 }
